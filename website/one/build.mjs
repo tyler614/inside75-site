@@ -155,10 +155,10 @@ const QA = [
 ];
 
 const COURSES = [
-  { img: 'course-benttree', name: 'Tree-Lined Parkland Greens', meta: '18 holes · Undulating Midwest slopes & bunkers' },
-  { img: 'course-benttree1', name: 'Guarded Approach Complexes', meta: 'Deep greenside bunkers & tight fringe lies' },
-  { img: 'course-foxfire', name: 'Championship Putting Surfaces', meta: 'Multi-tier greens mapped from USGS LiDAR' },
-  { img: 'course-royal', name: 'Rolling Fairway Approaches', meta: 'Every chip and pitch from 3 to 75 yards' },
+  { img: 'course-benttree', name: '18-Hole Parkland Layouts', meta: 'Real USGS LiDAR contours, guarded greens, and sloped tiers' },
+  { img: 'course-foxfire3', name: 'Greenside Chip & Pitch Approaches', meta: 'Fringe, fairway, and rough lies from 10 to 75 yards' },
+  { img: 'course-range', name: 'Dedicated Wedge Practice Range', meta: '25, 50 & 75 yd targets plus exact +/- yardage stepping' },
+  { img: 'course-royal', name: 'Championship Putting Greens', meta: 'Soft 9.5, Standard 10.5, and Tour 12.0 green speeds' },
 ];
 
 // ---------- shared chrome ----------
@@ -481,30 +481,33 @@ ${header('home', true)}
 
 <section class="sec white" id="gameplay"><div class="in play-grid">
   <div>
-    <div class="eyebrow">Actual in-app gameplay</div>
-    <h2>Pick a putt. Watch it roll across real contours.</h2>
-    <p class="lead">Every video below was captured straight from the Inside 75 app. You stand over the ball in first person, make your real stroke, and follow the ball to the cup.</p>
-    <div class="clip-tabs" role="group" aria-label="Choose gameplay clip">
-      <button type="button" class="clip-tab" data-clip="putt-4" data-meta="4 ft · Flat Green · Standard 10.5" aria-pressed="false">
-        <div><b>4-Foot Knee-Knocker</b><span>Clean straight stroke from address to drop</span></div><em>4 ft</em>
+    <div class="eyebrow">Inside the app</div>
+    <h2>Real practice. Real rounds. Zero arcade feel.</h2>
+    <p class="lead">Built for golfers who want to keep their touch sharp between tee times, without settling for a toy golf game or waiting for a four-hour weekend slot.</p>
+    <div class="clip-tabs" role="group" aria-label="Explore Inside 75 game modes">
+      <button type="button" class="clip-tab" data-clip="reel-putting" data-meta="Real 4 ft, 10 ft &amp; 25 ft putts · Soft 9.5 / Standard 10.5 / Tour 12.0" data-tag="Live App Footage" aria-pressed="true">
+        <div><b>Putting &amp; Green Reading</b><span>First-person stroke, real slope &amp; break, pace control from 3 to 40 ft</span></div><em>3 to 40 ft</em>
       </button>
-      <button type="button" class="clip-tab" data-clip="putt-10" data-meta="10 ft · Uphill 2 in · Left-to-Right Break" aria-pressed="true">
-        <div><b>10-Foot Breaking Putt</b><span>Read the slope, start it left, watch it curl home</span></div><em>10 ft</em>
+      <button type="button" class="clip-tab" data-clip="reel-chipping" data-meta="Fringe, rough &amp; fairway lies · Carry, apex, landing angle &amp; rollout" data-tag="Around the Green" aria-pressed="false">
+        <div><b>Chipping &amp; Pitching</b><span>Hit your own wedges over bunkers and tight lies out to 75 yards</span></div><em>Up to 75 yd</em>
       </button>
-      <button type="button" class="clip-tab" data-clip="putt-25" data-meta="25 ft · Uphill Lag · Right-to-Left Break" aria-pressed="false">
-        <div><b>25-Foot Lag Putt</b><span>Real pace control across rolling green contours</span></div><em>25 ft</em>
+      <button type="button" class="clip-tab" data-clip="reel-practice" data-meta="Pick any exact distance (+/- stepping) · 25 / 50 / 75 yd targets · Strokes Gained" data-tag="Practice Range" aria-pressed="false">
+        <div><b>Dialed-In Practice Range</b><span>Lock in specific wedge numbers and putting distances in 15 minutes</span></div><em>Any Yardage</em>
+      </button>
+      <button type="button" class="clip-tab" data-clip="reel-courses" data-meta="USGS 3DEP LiDAR terrain · 3, 9, or 18 up-and-down holes · 1 to 4 players" data-tag="Real Courses" aria-pressed="false">
+        <div><b>18-Hole Short Game Courses</b><span>Scramble up-and-down across real elevation-mapped courses at home</span></div><em>18 Holes</em>
       </button>
     </div>
-    <p style="font-size:14.5px;color:var(--ink-2)">Play 3, 9, or 18 holes across four modes: <strong>Short Game</strong> (wedge + putter), <strong>Putting</strong>, <strong>Closest to the Pin</strong>, and <strong>Practice</strong>.</p>
+    <p style="font-size:14.5px;color:var(--ink-2)">Every session tracks <strong>clubhead speed, face angle, swing path, and Strokes Gained</strong> so 15 minutes on a Tuesday night actually shows up on your Saturday scorecard.</p>
   </div>
   <div>
     <div class="ipad-shell">
       <div class="ipad-screen">
-        <video id="gameVid" src="assets/putt-10.mp4" poster="assets/putt-10.jpg" data-auto muted loop playsinline preload="metadata" aria-label="Real putting gameplay recorded inside the Inside 75 tablet app"></video>
+        <video id="gameVid" src="assets/reel-putting.mp4" poster="assets/reel-putting.jpg" data-auto muted loop playsinline preload="metadata" aria-label="Real gameplay inside the Inside 75 tablet app"></video>
       </div>
       <div class="ipad-bar">
-        <span id="gameMeta">10 ft · Uphill 2 in · Left-to-Right Break</span>
-        <strong>60 FPS · iPad &amp; Android</strong>
+        <span id="gameMeta">Real 4 ft, 10 ft &amp; 25 ft putts · Soft 9.5 / Standard 10.5 / Tour 12.0</span>
+        <strong id="gameTag">Live App Footage</strong>
       </div>
     </div>
   </div>
@@ -587,14 +590,14 @@ ${header('home', true)}
   <div class="banner-split">
     ${pic('lifestyle-friends', 'Two friends enjoying an Inside 75 putting match in a sunlit living room with a real putter, V2 clip, and iPad showing a golf green')}
     <div class="banner-copy">
-      <div class="eyebrow">Solo practice or 4-player match play</div>
-      <h3>Turn weeknights into 18-hole living room matches.</h3>
-      <p>Grind 10-footers on your own after work, or pass your putter and wedge around with up to four friends taking turns on one tablet over 3, 9, or 18 holes.</p>
+      <div class="eyebrow">Stay sharp between tee times</div>
+      <h3>15 minutes on a weeknight. 18 holes with friends on Friday.</h3>
+      <p>No time to sneak out to the range three times a week? Groove your 35-yard pitch and 10-foot start line after work, then pass the putter around with up to four friends on one tablet.</p>
       <div class="pill-row">
         <span>Short Game (18 Holes)</span>
         <span>Putting</span>
         <span>Closest to the Pin</span>
-        <span>Practice Mode</span>
+        <span>Exact-Yardage Practice</span>
       </div>
     </div>
   </div>
@@ -762,13 +765,14 @@ ${cartDrawer}
 ${coreJs}
 (function(){
   // Gameplay video switcher
-  var gv=document.getElementById('gameVid'),gm=document.getElementById('gameMeta');
+  var gv=document.getElementById('gameVid'),gm=document.getElementById('gameMeta'),gt=document.getElementById('gameTag');
   document.querySelectorAll('[data-clip]').forEach(function(b){
     b.addEventListener('click',function(){
       document.querySelectorAll('[data-clip]').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});
       var c=b.getAttribute('data-clip');
       if(gv){gv.poster='assets/'+c+'.jpg';gv.src='assets/'+c+'.mp4';gv.load();i75playVid(gv);}
       if(gm)gm.textContent=b.getAttribute('data-meta')||'';
+      if(gt)gt.textContent=b.getAttribute('data-tag')||'';
     });
   });
 
