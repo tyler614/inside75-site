@@ -784,33 +784,39 @@ ${header('home', true)}
     <h2>Why even scratch golfers trust the feedback.</h2>
     <p class="lead">Weighted swing toys flatter every stroke, and indoor ball radars struggle on soft chips and short putts. Because Inside 75 sits right on your club, tiny changes in speed, face angle, and path show up on screen immediately.</p>
   </div>
-  <div class="tel-box">
-    <div class="tel-tabs" role="group" aria-label="Select shot type">
-      <button type="button" data-shot="putt" aria-pressed="true">Putt (3 to 40 ft)</button>
-      <button type="button" data-shot="chip" aria-pressed="false">Chip (Fringe &amp; Rough)</button>
-      <button type="button" data-shot="pitch" aria-pressed="false">Pitch (Up to 75 yd)</button>
-    </div>
-    <div class="tel-cols">
-      <div class="tel-panel">
-        <div class="tel-label">1. Read right off your clubhead</div>
-        <div class="tel-metrics">
-          <div class="tel-m"><span>Club Speed</span><strong id="tm1">5.8 mph</strong></div>
-          <div class="tel-m"><span>Face Angle</span><strong id="tm2">0.4° Open</strong></div>
-          <div class="tel-m"><span>Swing Path</span><strong id="tm3">0.6° In-Out</strong></div>
-        </div>
-      </div>
-      <div class="tel-arrow" aria-hidden="true">&#8594;</div>
-      <div class="tel-panel out">
-        <div class="tel-label">2. Plays out instantly on your tablet</div>
-        <div class="tel-metrics">
-          <div class="tel-m"><span id="tl4">Start Line</span><strong id="tm4">1.2° Right</strong></div>
-          <div class="tel-m"><span id="tl5">Green Speed</span><strong id="tm5">10.5 Stimp</strong></div>
-          <div class="tel-m"><span id="tl6">Result</span><strong id="tm6">Holed · 10 ft</strong></div>
-        </div>
+  <div class="tel-stage">
+    <img id="telBg" class="tel-bg" src="assets/course-benttree.jpg?v=${ASSET_V}" alt="Sunlit breaking golf green inside the Inside 75 app" loading="lazy" decoding="async">
+    <div class="tel-scrim" aria-hidden="true"></div>
+    <div class="tel-top">
+      <div class="tel-tabs" role="group" aria-label="Select shot type">
+        <button type="button" data-shot="putt" aria-pressed="true">Putt (3 to 40 ft)</button>
+        <button type="button" data-shot="chip" aria-pressed="false">Chip (Fringe &amp; Rough)</button>
+        <button type="button" data-shot="pitch" aria-pressed="false">Pitch (Up to 75 yd)</button>
       </div>
     </div>
-    <p class="tel-note" id="telNote"><strong>Why it feels immediate:</strong> Inside 75 reads your club through impact instead of waiting to track a flying ball across a room. The shot launches on screen right away and reads honestly whether you hit a real ball or take a practice swing.</p>
+    <div class="tel-hud">
+      <div class="tel-cols">
+        <div class="tel-panel">
+          <div class="tel-label">Read off your clubhead</div>
+          <div class="tel-metrics">
+            <div class="tel-m"><span>Club Speed</span><strong id="tm1">5.8 mph</strong></div>
+            <div class="tel-m"><span>Face Angle</span><strong id="tm2">0.4° Open</strong></div>
+            <div class="tel-m"><span>Swing Path</span><strong id="tm3">0.6° In-Out</strong></div>
+          </div>
+        </div>
+        <div class="tel-arrow" aria-hidden="true">&#8594;</div>
+        <div class="tel-panel out">
+          <div class="tel-label">Live on your tablet</div>
+          <div class="tel-metrics">
+            <div class="tel-m"><span id="tl4">Start Line</span><strong id="tm4">1.2° Right</strong></div>
+            <div class="tel-m"><span id="tl5">Green Speed</span><strong id="tm5">10.5 Stimp</strong></div>
+            <div class="tel-m"><span id="tl6">Result</span><strong id="tm6">Holed · 10 ft</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+  <p class="tel-note" id="telNote"><strong>Why it feels immediate:</strong> Inside 75 reads your club through impact instead of waiting to track a flying ball across a room. The shot launches on screen right away and reads honestly whether you hit a real ball or take a practice swing.</p>
 </div></section>
 
 <section class="sec white" id="courses"><div class="in">
@@ -1046,12 +1052,13 @@ ${coreJs}
     });
   });
 
-  // Interactive telemetry shot switcher
+  // Interactive telemetry shot switcher (updates broadcast stats + real course backdrop)
   var SHOTS={
-    putt:['5.8 mph','0.4\u00b0 Open','0.6\u00b0 In-Out','Start Line','1.2\u00b0 Right','Green Speed','10.5 Stimp','Result','Holed · 10 ft'],
-    chip:['24.5 mph','1.1\u00b0 Open','1.8\u00b0 Out-In','Carry','9 yd','Rollout','6 yd','Result','2 ft 4 in'],
-    pitch:['52.0 mph','0.5\u00b0 Closed','0.8\u00b0 In-Out','Carry','58 yd','Apex','44 ft','Result','6 ft 2 in']
+    putt:['5.8 mph','0.4\u00b0 Open','0.6\u00b0 In-Out','Start Line','1.2\u00b0 Right','Green Speed','10.5 Stimp','Result','Holed · 10 ft','course-benttree'],
+    chip:['24.5 mph','1.1\u00b0 Open','1.8\u00b0 Out-In','Carry','9 yd','Rollout','6 yd','Result','2 ft 4 in','course-foxfire3'],
+    pitch:['52.0 mph','0.5\u00b0 Closed','0.8\u00b0 In-Out','Carry','58 yd','Apex','44 ft','Result','6 ft 2 in','reel-chipping']
   };
+  var tbg=document.getElementById('telBg');
   document.querySelectorAll('[data-shot]').forEach(function(b){
     b.addEventListener('click',function(){
       document.querySelectorAll('[data-shot]').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});
@@ -1062,6 +1069,7 @@ ${coreJs}
       document.getElementById('tl4').textContent=s[3];document.getElementById('tm4').textContent=s[4];
       document.getElementById('tl5').textContent=s[5];document.getElementById('tm5').textContent=s[6];
       document.getElementById('tl6').textContent=s[7];document.getElementById('tm6').textContent=s[8];
+      if(tbg&&s[9])tbg.src='assets/'+s[9]+'.jpg?v=${ASSET_V}';
     });
   });
 })();

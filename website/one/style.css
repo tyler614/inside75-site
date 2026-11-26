@@ -506,54 +506,117 @@ h3 { font-size: clamp(20px, 1.9vw, 24px); line-height: 1.2; letter-spacing: -0.0
 .feat-list b { display: block; font-family: Archivo, sans-serif; font-size: 16px; margin-bottom: 3px; }
 .feat-list span { font-size: 14.5px; color: var(--ink-2); display: block; line-height: 1.48; }
 
-/* Interactive Telemetry Explainer */
-.tel-box {
-  background: var(--surface);
-  border: 1px solid var(--line);
+/* Interactive Fairway Broadcast Telemetry */
+.tel-stage {
+  position: relative;
   border-radius: var(--radius-lg);
-  padding: clamp(22px, 3.5vw, 40px);
-  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  min-height: clamp(360px, 44vw, 500px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(18px, 2.8vw, 28px);
+  background: #142818;
+  box-shadow: 0 28px 60px -24px rgba(11, 26, 51, 0.35);
+}
+.tel-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 52%;
+  z-index: 0;
+  transition: opacity 0.28s ease;
+}
+.tel-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(8, 17, 30, 0.34) 0%, rgba(8, 17, 30, 0.08) 42%, rgba(8, 17, 30, 0.72) 78%, rgba(8, 17, 30, 0.90) 100%);
+  pointer-events: none;
+}
+.tel-top {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 .tel-tabs {
   display: inline-flex;
   padding: 4px;
   border-radius: 10px;
-  background: var(--stone);
+  background: rgba(9, 18, 34, 0.68);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(12px);
   gap: 4px;
-  margin-bottom: 26px;
 }
 .tel-tabs button {
-  min-height: 40px;
-  padding: 0 20px;
-  border-radius: 8px;
+  min-height: 38px;
+  padding: 0 18px;
+  border-radius: 7px;
   border: 0;
   background: transparent;
-  color: var(--ink-2);
-  font: 600 14.5px Archivo, sans-serif;
+  color: rgba(255, 255, 255, 0.82);
+  font: 600 14px Archivo, sans-serif;
   cursor: pointer;
+  transition: background 0.15s, color 0.15s;
 }
-.tel-tabs button[aria-pressed="true"] { background: var(--surface); color: var(--navy); box-shadow: var(--shadow-sm); }
+.tel-tabs button:hover { color: #fff; }
+.tel-tabs button[aria-pressed="true"] { background: #fff; color: var(--navy); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18); }
+.tel-hud {
+  position: relative;
+  z-index: 2;
+  background: rgba(9, 18, 34, 0.76);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 16px;
+  padding: clamp(16px, 2.2vw, 22px) clamp(18px, 2.5vw, 26px);
+  backdrop-filter: blur(16px);
+  color: #fff;
+}
 .tel-cols {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-  gap: 20px;
-  align-items: stretch;
+  gap: 18px;
+  align-items: center;
 }
-.tel-panel {
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  padding: 22px;
-  background: var(--bg);
+.tel-label {
+  font: 600 11px Archivo, "Public Sans", system-ui, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.10em;
+  color: rgba(255, 255, 255, 0.62);
+  margin-bottom: 10px;
 }
-.tel-panel.out { background: #F1F6F3; border-color: rgba(31, 94, 59, 0.22); }
-.tel-label { font: 500 12px Archivo, "Public Sans", system-ui, sans-serif; text-transform: uppercase; letter-spacing: 0.08em; color: var(--blue); margin-bottom: 14px; }
-.tel-panel.out .tel-label { color: var(--pine); }
-.tel-metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
-.tel-m { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 14px 12px; }
-.tel-m span { display: block; font-size: 12.5px; color: var(--ink-2); margin-bottom: 6px; }
-.tel-m strong { display: block; font: 600 20px Archivo, "Public Sans", system-ui, sans-serif; color: var(--navy); }
-.tel-arrow { display: grid; place-items: center; color: var(--blue); font-size: 24px; font-weight: 700; }
-.tel-note { margin-top: 18px; font-size: 15px; color: var(--ink-2); padding-top: 16px; border-top: 1px solid var(--line); }
+.tel-panel.out .tel-label { color: var(--mint); }
+.tel-metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.tel-m {
+  padding-right: 12px;
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+}
+.tel-m:last-child { border-right: 0; padding-right: 0; }
+.tel-m span { display: block; font-size: 12px; color: rgba(255, 255, 255, 0.66); margin-bottom: 4px; }
+.tel-m strong {
+  display: block;
+  font: 600 clamp(17px, 1.7vw, 22px)/1.15 Archivo, "Public Sans", system-ui, sans-serif;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+}
+.tel-panel.out .tel-m:last-child strong { color: var(--mint); }
+.tel-arrow {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.10);
+  color: var(--mint);
+  font-size: 18px;
+  font-weight: 700;
+}
+.tel-note { margin: 16px 2px 0; font-size: 15px; color: var(--ink-2); max-width: 68ch; }
 
 /* Course Showcase & Lifestyle Banner */
 .courses-grid {
@@ -1129,8 +1192,9 @@ h3 { font-size: clamp(20px, 1.9vw, 24px); line-height: 1.2; letter-spacing: -0.0
   .hw-row.flip .hw-pic { order: 0; }
   .proof-grid, .guarantee-bar, .courses-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .steps-grid { grid-template-columns: minmax(0, 1fr); }
-  .tel-cols { grid-template-columns: minmax(0, 1fr); }
-  .tel-arrow { transform: rotate(90deg); padding: 4px 0; }
+  .tel-cols { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .tel-arrow { display: none; }
+  .tel-panel.out { padding-top: 14px; border-top: 1px solid rgba(255, 255, 255, 0.14); }
   .gal { position: static; grid-template-columns: minmax(0, 1fr); }
   .thumbs { flex-direction: row; order: 2; overflow-x: auto; padding-bottom: 4px; }
   .thumbs button { flex: none; width: 68px; }
@@ -1151,7 +1215,9 @@ h3 { font-size: clamp(20px, 1.9vw, 24px); line-height: 1.2; letter-spacing: -0.0
   .hero h1 { font-size: 34px; }
   .tel-tabs { display: flex; flex-wrap: wrap; width: 100%; }
   .tel-tabs button { flex: 1 1 auto; padding: 0 12px; font-size: 13.5px; }
-  .proof-grid, .guarantee-bar, .courses-grid, .tel-metrics, .field-grid, .fgrid { grid-template-columns: minmax(0, 1fr); }
+  .proof-grid, .guarantee-bar, .courses-grid, .field-grid, .fgrid { grid-template-columns: minmax(0, 1fr); }
+  .tel-metrics { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .tel-m { border-right: 0; padding-right: 0; }
   .hero-ctas .btn, .kit-acts .btn, .form .btn { width: 100%; }
   .spec-table div { grid-template-columns: minmax(0, 1fr); gap: 4px; }
 }
