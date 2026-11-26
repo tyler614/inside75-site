@@ -77,6 +77,57 @@ function mintCodesFallback(seed, count, env) {
   return out;
 }
 
+const DEFAULT_NOTIFY_TO = 'helveytr@gmail.com';
+const DEFAULT_NOTIFY_FROM = 'Inside 75 <alerts@75golf.com>';
+const SB_DASH_BASE = 'https://supabase.com/dashboard/project/fmyjsfixxmobdrhefuzl/editor';
+
+function escHtml(s) {
+  return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+async function sendAlertEmail({ subject, html, text, replyTo }, env) {
+  const apiKey = env.RESEND_API_KEY;
+  if (!apiKey) return { sent: false, reason: 'no_key' };
+  const to = (env.NOTIFY_EMAIL || DEFAULT_NOTIFY_TO).split(',').map(s => s.trim()).filter(Boolean);
+  const from = env.NOTIFY_FROM || DEFAULT_NOTIFY_FROM;
+  try {
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from,
+        to,
+        subject,
+        html,
+        text,
+        ...(replyTo ? { reply_to: replyTo } : {}),
+      }),
+    });
+    return { sent: res.ok, status: res.status };
+  } catch {
+    return { sent: false, reason: 'network_error' };
+  }
+}
+
+async function sbInsertSignup(email, source, env) {
+  const base = (env.SUPABASE_URL || DEFAULT_SB_URL).replace(/\/$/, '');
+  const key = env.SUPABASE_KEY || DEFAULT_SB_KEY;
+  const res = await fetch(`${base}/rest/v1/site_signups`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      apikey: key,
+      Authorization: `Bearer ${key}`,
+      Prefer: 'return=minimal',
+    },
+    body: JSON.stringify({ email, source }),
+  });
+  return { ok: res.ok || res.status === 409, duplicate: res.status === 409, status: res.status };
+}
+
 async function sbRpc(fnName, payload, env) {
   const base = (env.SUPABASE_URL || DEFAULT_SB_URL).replace(/\/$/, '');
   const key = env.SUPABASE_KEY || DEFAULT_SB_KEY;
@@ -120,13 +171,49 @@ function encodeForm(obj, prefix = '') {
 }
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
     // Canonical 301 redirect www.75golf.com -> 75golf.com for clean SEO
     if (url.hostname === 'www.75golf.com') {
       url.hostname = '75golf.com';
       return Response.redirect(url.toString(), 301);
+    }
+
+    if (url.pathname === '/api/signup' && request.method === 'POST') {
+      try {
+        const body = await request.json();
+        const email = String(body?.email || '').trim().toLowerCase();
+        const source = String(body?.source || '75golf.com').trim().slice(0, 64);
+        const kit = String(body?.kit || '').trim().slice(0, 32);
+        if (!email || !email.includes('@')) {
+          return json({ ok: false, error: 'invalid_email' }, 400);
+        }
+        const db = await sbInsertSignup(email, source, env);
+        if (!db.ok) {
+          return json({ ok: false, error: 'db_error' }, 502);
+        }
+        const kitLabel = kit === 'two' ? 'Two-Clip Kit ($229)' : kit === 'one' ? 'One-Clip Kit ($119)' : (source.includes(':two') ? 'Two-Clip Kit ($229)' : source.includes(':one') ? 'One-Clip Kit ($119)' : 'General updates / waitlist');
+        const subject = `[Inside 75] New waitlist signup: ${email}`;
+        const text = `New Inside 75 waitlist signup on 75golf.com\n\nEmail: ${email}\nInterest: ${kitLabel}\nSource: ${source}${db.duplicate ? ' (already on list)' : ''}\n\nView all signups in Supabase:\n${SB_DASH_BASE}`;
+        const html = `<div style="font-family:-apple-system,Segoe UI,Roboto,sans-serif;max-width:560px;color:#0B1A33">
+          <h2 style="margin:0 0 12px">New Inside 75 Waitlist Signup</h2>
+          <table style="border-collapse:collapse;width:100%;font-size:15px">
+            <tr><td style="padding:6px 0;color:#5A6475;width:110px">Email</td><td style="padding:6px 0"><strong>${escHtml(email)}</strong></td></tr>
+            <tr><td style="padding:6px 0;color:#5A6475">Kit interest</td><td style="padding:6px 0">${escHtml(kitLabel)}</td></tr>
+            <tr><td style="padding:6px 0;color:#5A6475">Source</td><td style="padding:6px 0">${escHtml(source)}${db.duplicate ? ' (repeat signup)' : ''}</td></tr>
+          </table>
+          <p style="margin:18px 0 0"><a href="${SB_DASH_BASE}" style="display:inline-block;background:#0B1A33;color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:600">Open Supabase Signups Table</a></p>
+        </div>`;
+        if (ctx && typeof ctx.waitUntil === 'function') {
+          ctx.waitUntil(sendAlertEmail({ subject, html, text, replyTo: email }, env));
+        } else {
+          await sendAlertEmail({ subject, html, text, replyTo: email }, env);
+        }
+        return json({ ok: true, duplicate: db.duplicate });
+      } catch {
+        return json({ ok: false, error: 'invalid_request' }, 400);
+      }
     }
 
     if (url.pathname === '/api/invite/verify' && request.method === 'POST') {
@@ -153,6 +240,14 @@ export default {
         const usedCode = String(body?.usedCode || '').trim().toUpperCase();
         const kit = String(body?.kit || '').slice(0, 120);
         const state = String(body?.state || '').slice(0, 24);
+        const name = String(body?.name || '').trim().slice(0, 120);
+        const address = String(body?.address || '').trim().slice(0, 200);
+        const city = String(body?.city || '').trim().slice(0, 80);
+        const zip = String(body?.zip || '').trim().slice(0, 20);
+        const tablet = String(body?.tablet || '').trim().slice(0, 40);
+
+        let codes = [];
+        let source = 'edge';
         if (email && usedCode) {
           const dbRes = await sbRpc('complete_early_access_order', {
             p_used_code: usedCode,
@@ -162,14 +257,42 @@ export default {
             p_shipping_state: state,
           }, env).catch(() => null);
           if (dbRes && dbRes.ok && Array.isArray(dbRes.codes)) {
-            return json({ codes: dbRes.codes, source: 'supabase' });
-          }
-          if (dbRes && dbRes.error === 'invalid_or_used_code') {
+            codes = dbRes.codes;
+            source = 'supabase';
+          } else if (dbRes && dbRes.error === 'invalid_or_used_code') {
             return json({ error: 'invalid_or_used_code', codes: [] }, 409);
           }
         }
-        const codes = mintCodesFallback(ref, 5, env);
-        return json({ codes, source: 'edge' });
+        if (!codes.length) {
+          codes = mintCodesFallback(ref, 5, env);
+        }
+
+        if (email) {
+          const shipLine = [address, [city, state].filter(Boolean).join(', '), zip].filter(Boolean).join(' · ');
+          const linksList = codes.map(c => `https://75golf.com/?invite=${c}`).join('\n');
+          const subject = `[Inside 75] New Early Access Order ${ref}: ${name || email}`;
+          const text = `New Inside 75 Early Access order reserved!\n\nOrder Ref: ${ref}\nBuyer: ${name || '(not provided)'}\nEmail: ${email}\nKit: ${kit || '(see details)'}\nCode Used: ${usedCode || '(none)'}\nTablet: ${tablet || '(unspecified)'}\nShipping: ${shipLine || state || '(unspecified)'}\n\n5 Share Links Minted:\n${linksList}\n\nView orders in Supabase:\n${SB_DASH_BASE}`;
+          const html = `<div style="font-family:-apple-system,Segoe UI,Roboto,sans-serif;max-width:580px;color:#0B1A33">
+            <h2 style="margin:0 0 12px">New Early Access Order: ${escHtml(ref)}</h2>
+            <table style="border-collapse:collapse;width:100%;font-size:15px">
+              <tr><td style="padding:6px 0;color:#5A6475;width:120px">Buyer</td><td style="padding:6px 0"><strong>${escHtml(name || email)}</strong> (${escHtml(email)})</td></tr>
+              <tr><td style="padding:6px 0;color:#5A6475">Kit</td><td style="padding:6px 0"><strong>${escHtml(kit)}</strong></td></tr>
+              <tr><td style="padding:6px 0;color:#5A6475">Code Used</td><td style="padding:6px 0"><code>${escHtml(usedCode)}</code></td></tr>
+              <tr><td style="padding:6px 0;color:#5A6475">Tablet</td><td style="padding:6px 0">${escHtml(tablet || 'Unspecified')}</td></tr>
+              <tr><td style="padding:6px 0;color:#5A6475">Shipping</td><td style="padding:6px 0">${escHtml(shipLine || state || 'Unspecified')}</td></tr>
+            </table>
+            <p style="margin:16px 0 6px;font-weight:600">5 Early Access links minted for this buyer:</p>
+            <pre style="background:#F5F5F2;padding:12px;border-radius:8px;font-size:13px;margin:0">${escHtml(linksList)}</pre>
+            <p style="margin:18px 0 0"><a href="${SB_DASH_BASE}" style="display:inline-block;background:#0B1A33;color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:600">Open Supabase Orders Table</a></p>
+          </div>`;
+          if (ctx && typeof ctx.waitUntil === 'function') {
+            ctx.waitUntil(sendAlertEmail({ subject, html, text, replyTo: email }, env));
+          } else {
+            await sendAlertEmail({ subject, html, text, replyTo: email }, env);
+          }
+        }
+
+        return json({ codes, source });
       } catch {
         return json({ codes: [] }, 400);
       }

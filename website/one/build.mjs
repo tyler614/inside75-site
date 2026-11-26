@@ -152,7 +152,7 @@ const FACTS = [
 
 const QA = [
   ['What exactly is Inside 75?', 'Inside 75 is an at-home short-game golf system built around a tiny wireless sensor that clamps onto your own putter and wedge. Take a real stroke on your living room rug or into a practice net, and the free tablet app plays your putt, chip, or pitch right away across real elevation-mapped greens.'],
-  ['How does Early Access work?', 'We build Inside 75 in controlled small batches in Ohio so every kit ships on time and gets real support. Join the Early Access waitlist to claim a spot in the next batch, or use a link from anyone who already owns Inside 75 to skip the waitlist and order today. Every buyer receives 5 Early Access links to share with friends.'],
+  ['How does Early Access work?', 'We build Inside 75 in controlled small batches so every kit ships on time and gets real support. Join the Early Access waitlist to claim a spot in the next batch, or use a link from anyone who already owns Inside 75 to skip the waitlist and order today. Every buyer receives 5 Early Access links to share with friends.'],
   ['How is Inside 75 different from a golf simulator or launch monitor?', 'Launch monitors cost $2,000 to $15,000+, track a flying golf ball with cameras or radar, and usually require a dedicated room, hitting bay, and screen. Inside 75 reads your club instead of the ball, so you get accurate, instant shot feedback for putts, chips, and pitches inside 75 yards right in your living room for $119 to $229, with or without a real golf ball.'],
   ['Do I need to hit a real golf ball?', 'No, either way works naturally. Putt real golf balls across your rug, chip real balls into a net, or take practice swings with no ball at all without changing a single setting.'],
   ['Do I use my own real putter and wedge?', 'Yes. Unlike toy swing sticks, Inside 75 clamps directly onto the steel shaft of the putter or wedge already in your bag, just above the clubhead. Putting and chipping with your own clubs builds real feel that transfers straight to the course.'],
@@ -224,7 +224,7 @@ const footer = `<footer class="foot"><div class="in">
   <div class="fgrid">
     <div>
       ${BRAND_SVG}
-      <p style="margin-top:14px;max-width:26em">Real short-game golf at home with your own putter and wedge. Designed and built in Ohio.</p>
+      <p style="margin-top:14px;max-width:26em">Real short-game golf at home with your own putter and wedge.</p>
       <p style="margin-top:12px"><a href="mailto:${MAIL}" style="color:#fff;font-weight:600">${MAIL}</a></p>
     </div>
     <div>
@@ -256,7 +256,7 @@ const footer = `<footer class="foot"><div class="in">
   </div>
   <div class="foot-bot">
     <span>&copy; 2026 75 Golf LLC. All rights reserved.</span>
-    <span>Columbus, Ohio</span>
+    <span>75golf.com</span>
   </div>
 </div></footer>`;
 
@@ -265,7 +265,7 @@ const eaModal = EA_ON ? `<div class="ea-modal-bg" id="eaModal" hidden role="dial
     <button type="button" class="x" data-ea-close aria-label="Close Early Access dialog">&times;</button>
     <div class="eyebrow">Early Access · ${esc(EA.batchLabel || 'Batch 2')}</div>
     <h3 id="eaModalTitle">Join Early Access</h3>
-    <p class="ea-sub" id="eaModalSub">We ship Inside 75 in small batches from Ohio. Join the waitlist for the next drop, or enter a friend's Early Access code to order today.</p>
+    <p class="ea-sub" id="eaModalSub">We ship Inside 75 in small batches. Join the waitlist for the next drop, or enter a friend's Early Access code to order today.</p>
     <div class="ea-tabs" role="group" aria-label="Early Access options">
       <button type="button" id="eaTabWait" aria-pressed="true">Join Waitlist</button>
       <button type="button" id="eaTabCode" aria-pressed="false">Have a Code</button>
@@ -445,8 +445,8 @@ document.querySelectorAll('form[data-signup]').forEach(function(f){
     function win(){f.hidden=true;say('You are on the list. We will send updates when new batches and app drops go live.',true);i75track('generate_lead',{source:src});}
     function lose(){if(b)b.disabled=false;say('Could not save your email right now. Please try again or email ${MAIL}.',false);}
     if(!C.signupEndpoint){win();return;}
-    fetch(C.signupEndpoint,{method:'POST',headers:{'Content-Type':'application/json',apikey:C.signupKey,Prefer:'return=minimal'},body:JSON.stringify({email:v,source:src})})
-      .then(function(r){if(r.ok||r.status===409)win();else lose();}).catch(lose);
+    fetch('/api/signup',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:v,source:src})})
+      .then(function(r){if(r.ok)win();else return fetch(C.signupEndpoint,{method:'POST',headers:{'Content-Type':'application/json',apikey:C.signupKey,Prefer:'return=minimal'},body:JSON.stringify({email:v,source:src})}).then(function(r2){if(r2.ok||r2.status===409)win();else lose();});}).catch(lose);
   });
 });
 
@@ -526,7 +526,7 @@ function syncEarlyAccessUI(){
       pb.textContent='Order Your Kit';
       pb.setAttribute('data-ea-go-kit','1');
     }else{
-      pt.innerHTML='<strong>Early Access · Small-Batch Release:</strong> Limited Ohio batches · Free US shipping on Two-Clip Kits.';
+      pt.innerHTML='<strong>Early Access · Small-Batch Release:</strong> Limited batches · Free US shipping on Two-Clip Kits.';
       pb.textContent='Have an Early Access code?';
       pb.removeAttribute('data-ea-go-kit');
     }
@@ -552,7 +552,7 @@ function setEaTab(tab){
   if(eaMT)eaMT.textContent=isCode?'Enter Early Access Code':'Join Early Access';
   if(eaMS)eaMS.textContent=isCode
     ?'Enter a code from a friend who owns Inside 75 (or your batch invite) to unlock ordering right now.'
-    :'We ship Inside 75 in small batches from Ohio. Join the list for the next drop, or ask any owner for one of their 5 Early Access links to skip the line.';
+    :'We ship Inside 75 in small batches. Join the list for the next drop, or ask any owner for one of their 5 Early Access links to skip the line.';
 }
 function openEaModal(tab,kit){
   if(!eaM)return;
@@ -593,8 +593,8 @@ if(eaWF){
       if(msg){msg.textContent='Could not save right now. Please try again or email ${MAIL}.';msg.className='msg bad';msg.hidden=false;}
     }
     if(!C.signupEndpoint){ok();return;}
-    fetch(C.signupEndpoint,{method:'POST',headers:{'Content-Type':'application/json',apikey:C.signupKey,Prefer:'return=minimal'},body:JSON.stringify({email:em,source:src})})
-      .then(function(r){if(r.ok||r.status===409)ok();else fail();}).catch(fail);
+    fetch('/api/signup',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,source:src,kit:kt})})
+      .then(function(r){if(r.ok)ok();else return fetch(C.signupEndpoint,{method:'POST',headers:{'Content-Type':'application/json',apikey:C.signupKey,Prefer:'return=minimal'},body:JSON.stringify({email:em,source:src})}).then(function(r2){if(r2.ok||r2.status===409)ok();else fail();});}).catch(fail);
   });
 }
 
@@ -893,7 +893,7 @@ ${header('home', true)}
     <p class="lead">Every kit includes assembled V2 hardware, the hex key, free tablet app access, and a 30-day home trial. Every buyer also gets 5 Early Access links to share with friends.</p>
   </div>
   ${EA_ON ? `<div class="ea-strip" data-ea-locked>
-    <div class="ea-strip-copy"><b>Small-Batch Early Access</b><span>Join the waitlist for our next Ohio batch, or enter an owner's code to skip the line and order today.</span></div>
+    <div class="ea-strip-copy"><b>Small-Batch Early Access</b><span>Join the waitlist for the next batch, or enter an owner's code to skip the line and order today.</span></div>
     <form class="ea-code-form" data-ea-inline data-msg="homeEaMsg">
       <label for="homeEaIn" class="sr">Early Access code</label>
       <input id="homeEaIn" type="text" placeholder="Access code" autocomplete="off">
@@ -1016,7 +1016,7 @@ ${header('home', true)}
   <div class="notify-card">
     <div>
       <div class="eyebrow">${EA_ON ? 'Early Access · ' + esc(EA.batchLabel || 'Batch 2') : 'Course &amp; drop updates'}</div>
-      <h2 style="font-size:clamp(26px,3.2vw,38px)">${EA_ON ? 'Want in on the next Ohio batch?' : 'Get new course &amp; drop updates.'}</h2>
+      <h2 style="font-size:clamp(26px,3.2vw,38px)">${EA_ON ? 'Want in on the next batch?' : 'Get new course &amp; drop updates.'}</h2>
       <p style="color:var(--ink-2);margin:0">${EA_ON ? 'Join the waitlist for upcoming shipping batches, new course releases, and left-handed club announcements. No spam, unsubscribe anytime.' : 'Drop your email for new course releases, batch dates, and left-handed club announcements. No spam, unsubscribe anytime.'}</p>
     </div>
     <div>
@@ -1138,7 +1138,7 @@ ${header('kit', false)}
     </div>
     ${EA_ON ? `<div class="ea-pdp-box" data-ea-locked>
       <b>Early Access · ${esc(EA.batchLabel || 'Batch 2')}</b>
-      <p>We ship in small batches from Ohio. Join the waitlist for the next drop, or enter a friend's Early Access code to skip the line and order today.</p>
+      <p>We ship in small batches. Join the waitlist for the next drop, or enter a friend's Early Access code to skip the line and order today.</p>
       <button type="button" class="btn primary" id="pWait" style="width:100%;margin-bottom:12px">Join Early Access Waitlist</button>
       <form class="ea-code-form" data-ea-inline data-msg="pdpEaMsg" style="width:100%">
         <label for="pdpEaIn" class="sr">Early Access code</label>
@@ -1265,7 +1265,7 @@ ${header('how', true)}
     <div><dt>iPad Local Network</dt><dd>On iPad, open Settings &gt; Inside 75 and confirm Local Network permission is enabled.</dd></div>
     <div><dt>Auto Sleep &amp; Wake</dt><dd>Unplugged, the clip rests after a few minutes of stillness. Pick up your club to wake it automatically. While plugged into USB-C, it stays awake.</dd></div>
     <div><dt>Firmware Updates</dt><dd>The app delivers wireless clip updates under Settings &gt; Clip software.</dd></div>
-    <div><dt>Still Stuck?</dt><dd>Email <a href="mailto:${MAIL}">${MAIL}</a> and our team in Ohio will help get you rolling.</dd></div>
+    <div><dt>Still Stuck?</dt><dd>Email <a href="mailto:${MAIL}">${MAIL}</a> and we will help get you rolling.</dd></div>
   </dl>
   <p style="margin-top:28px"><a class="btn primary" href="${page('/kit')}" data-ea-cta>${EA_ON ? 'Get Early Access &#8594;' : 'Shop the Clip Kit &#8594;'}</a></p>
 </div></section>
@@ -1352,7 +1352,7 @@ ${header('checkout', false)}
   <div id="chkGate" class="chk-card" hidden style="text-align:center;padding:48px 24px;max-width:560px;margin:0 auto">
     <div class="eyebrow" style="margin-bottom:8px">Early Access · ${esc(EA.batchLabel || 'Batch 2')}</div>
     <h2 style="margin-bottom:10px">Enter your Early Access code to order</h2>
-    <p style="color:var(--ink-2);margin:0 auto 22px;max-width:34em">We ship Inside 75 in small batches from Ohio. Enter an Early Access code from a friend to unlock checkout right away, or join the waitlist for our next drop.</p>
+    <p style="color:var(--ink-2);margin:0 auto 22px;max-width:34em">We ship Inside 75 in small batches. Enter an Early Access code from a friend to unlock checkout right away, or join the waitlist for our next drop.</p>
     <form class="ea-code-form" data-ea-inline data-msg="chkGateMsg" style="justify-content:center;margin-bottom:14px">
       <label for="chkGateIn" class="sr">Early Access code</label>
       <input id="chkGateIn" type="text" placeholder="Enter code" autocomplete="off">
@@ -1547,7 +1547,12 @@ ${coreJs}
       var dae=document.getElementById('doneAppEmail');if(dae&&email)dae.textContent=email;
       var kitStr=s.items.map(function(i){return i.sku+'x'+i.qty;}).join('+');
       var stStr=document.getElementById('cState')?document.getElementById('cState').value.trim().toUpperCase():'';
-      showShareLinks(ref,{email:email,usedCode:window.i75eaCode?window.i75eaCode():'',kit:kitStr,state:stStr});
+      var nmStr=((document.getElementById('cFirst')?document.getElementById('cFirst').value.trim():'')+' '+(document.getElementById('cLast')?document.getElementById('cLast').value.trim():'')).trim();
+      var addrStr=document.getElementById('cAddr')?document.getElementById('cAddr').value.trim():'';
+      var cityStr=document.getElementById('cCity')?document.getElementById('cCity').value.trim():'';
+      var zipStr=document.getElementById('cZip')?document.getElementById('cZip').value.trim():'';
+      var tabStr=document.getElementById('cTablet')?document.getElementById('cTablet').value:'';
+      showShareLinks(ref,{email:email,usedCode:window.i75eaCode?window.i75eaCode():'',kit:kitStr,state:stStr,name:nmStr,address:addrStr,city:cityStr,zip:zipStr,tablet:tabStr});
     }
     if(!C.signupEndpoint){finish();return;}
     fetch(C.signupEndpoint,{method:'POST',headers:{'Content-Type':'application/json',apikey:C.signupKey,Prefer:'return=minimal'},body:JSON.stringify({email:email,source:skuTag})})
@@ -1613,7 +1618,7 @@ const shippingHtml = `
 <ul>
   <li><strong>Two-Clip Kit ($229):</strong> Free US Ground Shipping (continental United States).</li>
   <li><strong>One-Clip Kit ($119):</strong> Flat $9 US Ground Shipping (free on any order of $150 or more).</li>
-  <li><strong>Tracking:</strong> Every order receives tracking by email the moment it leaves Ohio.</li>
+  <li><strong>Tracking:</strong> Every order receives tracking by email the moment it ships.</li>
   <li><strong>International Shipping:</strong> Currently shipping within the United States only. Email <a href="mailto:${MAIL}">${MAIL}</a> to request international availability.</li>
 </ul>
 <h2>30-Day Home Trial &amp; Returns</h2>
