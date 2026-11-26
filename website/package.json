@@ -1,0 +1,7 @@
+{
+  "name": "75golf-site-preview",
+  "private": true,
+  "type": "module",
+  "scripts": { "build": "node build.mjs" },
+  "dependencies": { "marked": "18.3.0" }
+}

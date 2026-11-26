@@ -1,0 +1,28 @@
+<svg viewBox="0 0 560 520" role="img" aria-label="Yardage plate of a green with rings at 25, 50 and 75 yards">
+      <defs><pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(35)"><line x1="0" y1="0" x2="0" y2="7" stroke="#2F6B47" stroke-width="1" opacity=".35"/></pattern></defs>
+      <!-- fairway approach -->
+      <path d="M210 520 C 200 430 170 360 190 290 C 205 240 250 215 280 214 C 318 214 360 240 372 290 C 392 360 360 430 350 520 Z" fill="#14295A" opacity=".05"/>
+      <!-- distance rings from the pin -->
+      <g fill="none" stroke="#14295A" stroke-width="1" stroke-dasharray="3 5" opacity=".5">
+        <circle cx="280" cy="128" r="118"/><circle cx="280" cy="128" r="236"/><circle cx="280" cy="128" r="354"/>
+      </g>
+      <!-- green -->
+      <path d="M180 120 C 175 70 230 34 290 38 C 352 42 392 84 384 132 C 376 182 330 214 276 212 C 220 210 186 172 180 120 Z" fill="url(#hatch)" stroke="#14295A" stroke-width="1.4"/>
+      <!-- bunker -->
+      <path d="M392 180 C 410 168 440 176 444 198 C 448 220 420 232 402 222 C 388 214 382 192 392 180 Z" fill="#EEEEEA" stroke="#14295A" stroke-width="1.1"/>
+      <g fill="#14295A" opacity=".35"><circle cx="410" cy="196" r="1.2"/><circle cx="422" cy="205" r="1.2"/><circle cx="430" cy="192" r="1.2"/><circle cx="416" cy="212" r="1.2"/></g>
+      <!-- pin -->
+      <line x1="280" y1="128" x2="280" y2="78" stroke="#0B1A33" stroke-width="1.6"/>
+      <path d="M280 78 L 308 87 L 280 96 Z" fill="#2F6B47"/>
+      <circle cx="280" cy="128" r="4" fill="#0B1A33"/>
+      <!-- shot lines -->
+      <path d="M280 480 Q 250 300 272 140" fill="none" stroke="#14295A" stroke-width="1.6"/>
+      <circle cx="280" cy="480" r="5" fill="#FFFFFF" stroke="#14295A" stroke-width="1.6"/>
+      <path d="M170 236 Q 210 200 268 136" fill="none" stroke="#14295A" stroke-width="1.6" stroke-dasharray="1 0"/>
+      <circle cx="170" cy="236" r="5" fill="#FFFFFF" stroke="#14295A" stroke-width="1.6"/>
+      <!-- ring labels -->
+      <text class="tn" x="292" y="272">25</text><text class="tn" x="292" y="392">50</text><text class="tn" x="292" y="512">75</text>
+      <text class="t" x="70" y="262">Chip</text>
+      <text class="t" x="300" y="462">Approach</text>
+      <text class="t" x="316" y="70">Putt</text>
+    </svg>

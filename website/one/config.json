@@ -1,0 +1,8 @@
+{
+  "buyTwo": "",
+  "buyOne": "",
+  "appStore": "",
+  "googlePlay": "",
+  "signupEndpoint": "https://fmyjsfixxmobdrhefuzl.supabase.co/rest/v1/site_signups",
+  "signupKey": "sb_publishable_k5FHWqVaVCwED6W7FDxMxA_I4YvqQx5"
+}

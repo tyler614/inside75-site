@@ -1,0 +1,386 @@
+<title>Inside 75 brand sample</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+/* VOICE everyday premium: crafted sporting goods, not a tech gadget, not a golf cliche
+   IDEA a yardage book: the scoring zone inside 75 yards, drawn like a caddie's notes
+   PICTURE the real holed putt full bleed under navy, then a drawn yardage plate of the green
+   COLOUR matte white ground, navy and deep navy, green only on the flag and the green itself
+   TYPE Archivo display + Public Sans text + IBM Plex Mono for yardages
+   LAYOUT full-bleed hero with copy bottom left; plate beside modes; navy product band; direction notes */
+:root{--white:#F4F4F1;--white2:#E9EAE6;--navy:#14295A;--deep:#0B1A33;--ink:#0E1B33;--ink2:#4B5670;--green:#2F6B47;--green2:#E2EBE2;--line:rgba(14,27,51,.14);--g:max(5vw,16px,env(safe-area-inset-left,0px))}
+:root{color-scheme:light}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--white);color:var(--ink);font:400 17px/1.6 "Public Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.in{max-width:1240px;margin:0 auto;padding-left:var(--g);padding-right:max(5vw,16px,env(safe-area-inset-right,0px))}
+h1,h2,h3,h4{font-family:Archivo,"Public Sans",system-ui,sans-serif;font-weight:700;letter-spacing:-.025em}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-weight:500}
+a{color:inherit}
+.btn{display:inline-flex;align-items:center;min-height:48px;padding:0 24px;border-radius:6px;font-family:Archivo,system-ui,sans-serif;font-weight:600;font-size:16px;text-decoration:none;white-space:nowrap}
+.btn.light{background:var(--white);color:var(--deep)}
+.btn.ghost{border:1px solid rgba(244,244,241,.45);color:var(--white)}
+.btn.dark{background:var(--navy);color:var(--white)}
+.eyebrow{font-family:"IBM Plex Mono",ui-monospace,monospace;font-weight:500;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+
+/* nav sits on the hero */
+nav{position:absolute;top:0;left:0;right:0;z-index:3;padding-top:calc(env(safe-area-inset-top,0px) + 18px)}
+nav .in{display:flex;align-items:center;justify-content:space-between;gap:16px}
+nav img{height:22px;width:auto;filter:brightness(0) invert(1)}
+nav .links{display:flex;gap:28px;align-items:center;color:var(--white);font-size:15px;font-weight:500}
+nav .links a{text-decoration:none;opacity:.85}
+nav .btn{min-height:40px;padding:0 18px;font-size:15px}
+
+.hero{position:relative;height:min(100svh,920px);min-height:620px;overflow:hidden;background:var(--deep);color:var(--white)}
+.hero video,.hero .still{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 55%}
+.hero .shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,26,51,.6) 0,rgba(11,26,51,.08) 62%),linear-gradient(180deg,rgba(11,26,51,.45) 0,rgba(11,26,51,0) 24%,rgba(11,26,51,0) 44%,rgba(11,26,51,.88) 100%),rgba(20,41,90,.42)}
+@media (max-width:640px){.hero .shade{background:linear-gradient(180deg,rgba(11,26,51,.45) 0,rgba(11,26,51,.12) 34%,rgba(11,26,51,.9) 100%),rgba(20,41,90,.44)}}
+.hero .copy{position:absolute;left:0;right:0;bottom:0;padding-bottom:clamp(28px,5vw,56px)}
+.hero h1{font-size:clamp(48px,7.6vw,104px);line-height:.96;margin:14px 0 18px;max-width:13.5ch}
+.hero h1 span{color:rgba(244,244,241,.66)}
+.hero p.sub{max-width:34em;margin:0 0 28px;color:rgba(244,244,241,.82)}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+.yard{display:flex;align-items:flex-end;margin-top:clamp(28px,4vw,48px);border-top:1px solid rgba(244,244,241,.35);font-size:13px;color:rgba(244,244,241,.72)}
+.yard span{flex:1;padding-top:10px;position:relative}
+.yard span::before{content:"";position:absolute;left:0;top:-7px;height:7px;border-left:1px solid rgba(244,244,241,.6)}
+.yard b{display:block;font-family:"IBM Plex Mono",ui-monospace,monospace;font-weight:500;font-size:24px;line-height:1;color:var(--white);margin-bottom:6px}
+.yard b i{font-style:normal;color:#8FC29E}
+
+/* scoring zone */
+.zone{padding-block:clamp(64px,9vw,128px)}
+.zone-in{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(32px,6vw,88px);align-items:center}
+.zone h2{font-size:clamp(36px,4.8vw,64px);line-height:1.02;margin:14px 0 20px}
+.zone .lead{color:var(--ink2);max-width:30em;margin:0 0 32px}
+.modes{display:grid;border-top:1px solid var(--line);margin:0}
+.modes div{display:grid;grid-template-columns:6.5em minmax(0,1fr);gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+.modes dt{font-family:Archivo,system-ui,sans-serif;font-weight:600;font-size:19px;line-height:1.3;color:var(--navy)}
+.modes dd{margin:0;color:var(--ink2);font-size:16px}
+.modes dd .mono{color:var(--ink);font-size:14px}
+.plate{background:#fff;border:1px solid var(--line);border-radius:4px;padding:clamp(16px,3vw,28px)}
+.plate svg{display:block;width:100%;height:auto}
+.plate .cap{display:flex;justify-content:space-between;font-size:12px;color:var(--ink2);margin-top:10px;gap:12px;letter-spacing:.06em;text-transform:uppercase}
+.t{font:500 20px Archivo,system-ui,sans-serif;fill:#4B5670}
+.tn{font:500 26px "IBM Plex Mono",ui-monospace,monospace;fill:#14295A}
+
+
+/* store */
+.store{padding-block:clamp(64px,8vw,112px);border-top:1px solid var(--line)}
+.shead{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+.shead h2{font-size:clamp(34px,4.2vw,54px);line-height:1;margin:10px 0 0}
+.shead p{margin:0;color:var(--ink2);font-size:15px}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;min-width:0;transition:box-shadow .2s,transform .2s}
+.card:hover{box-shadow:0 14px 36px -18px rgba(11,26,51,.35);transform:translateY(-2px)}
+.card .ph{position:relative;background:#E9EAE6;aspect-ratio:4/3;overflow:hidden}
+.card .ph img{width:100%;height:100%;object-fit:cover;display:block}
+.tag{position:absolute;top:12px;left:12px;background:var(--navy);color:#fff;font:500 12px "IBM Plex Mono",monospace;letter-spacing:.04em;padding:5px 9px;border-radius:4px}
+.tag.g{background:var(--green)}
+.card .bd{padding:18px 18px 20px;display:flex;flex-direction:column;gap:4px;flex:1}
+.card h3{margin:0;font-size:20px;letter-spacing:-.015em}
+.card .sub{color:var(--ink2);font-size:15px;margin:0}
+.card .row{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:14px 0 16px}
+.card .pr{font:500 24px "IBM Plex Mono",monospace;color:var(--ink);white-space:nowrap}
+.card .pr s{font-size:15px;color:var(--ink2);margin-left:6px}
+.card .note{font-size:13px;color:var(--ink2);text-align:right}
+.card .acts{display:flex;gap:8px;margin-top:auto}
+.add{flex:1;justify-content:center;border:0;cursor:pointer;background:var(--navy);color:#fff}
+.add:hover{background:var(--deep)}
+.add.done{background:var(--green)}
+.more{border:1px solid var(--line);color:var(--ink);background:#fff}
+.card.plus{background:var(--deep);color:var(--white);border-color:var(--deep)}
+.card.plus .ph{background:linear-gradient(160deg,#14295A,#0B1A33);display:grid;place-items:center}
+.card.plus .ph img{width:34%;height:auto;object-fit:contain}
+.card.plus .sub,.card.plus .note{color:rgba(244,244,241,.7)}
+.card.plus .pr{color:var(--white)}
+.card.plus .more{background:transparent;color:var(--white);border-color:rgba(244,244,241,.3)}
+.perks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:20px;padding:18px 0 0;border-top:1px solid var(--line)}
+.perks div{font-size:14px;color:var(--ink2);display:flex;gap:10px;align-items:flex-start}
+.perks b{display:block;color:var(--ink);font-weight:600}
+.perks svg{flex:none;margin-top:2px}
+
+/* product detail */
+.pdp{padding-block:clamp(56px,7vw,96px);background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.pdp-in{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(28px,5vw,72px);align-items:start}
+.gal{display:grid;grid-template-columns:76px minmax(0,1fr);gap:12px;position:sticky;top:20px}
+.thumbs{display:flex;flex-direction:column;gap:10px}
+.thumbs button{padding:0;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:#E9EAE6;cursor:pointer;aspect-ratio:1;width:76px}
+.thumbs button[aria-pressed="true"]{outline:2px solid var(--navy);outline-offset:1px}
+.thumbs img{width:100%;height:100%;object-fit:cover;display:block}
+.gmain{background:#E9EAE6;border-radius:10px;overflow:hidden;aspect-ratio:1/1}
+.gmain img{width:100%;height:100%;object-fit:cover;display:block}
+.crumb{font-size:13px;color:var(--ink2);margin:0 0 10px}
+.buy h2{font-size:clamp(32px,3.6vw,46px);line-height:1.02;margin:0 0 8px}
+.buy .blurb{color:var(--ink2);margin:0 0 18px}
+.buy .bigp{font:500 34px "IBM Plex Mono",monospace;margin:0 0 20px;display:flex;align-items:baseline;gap:12px}
+.buy .bigp small{font-size:14px;color:var(--green)}
+.opts{display:grid;gap:10px;margin:0 0 18px;border:0;padding:0}
+.opts legend{font-size:13px;color:var(--ink2);margin-bottom:8px;padding:0}
+.opt{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;border:1px solid var(--line);border-radius:8px;padding:14px 16px;cursor:pointer;background:#fff}
+.opt:has(input:checked){border-color:var(--navy);box-shadow:inset 0 0 0 1px var(--navy)}
+.opt input{accent-color:var(--navy);width:18px;height:18px;margin:0}
+.opt b{display:block;font-family:Archivo,sans-serif;font-weight:600}
+.opt span{font-size:14px;color:var(--ink2)}
+.opt em{font:500 16px "IBM Plex Mono",monospace;font-style:normal;white-space:nowrap}
+.qrow{display:flex;gap:10px;margin-bottom:12px}
+.qty{display:flex;align-items:center;border:1px solid var(--line);border-radius:6px;background:#fff}
+.qty button{width:44px;height:48px;border:0;background:none;font-size:20px;cursor:pointer;color:var(--ink)}
+.qty output{width:28px;text-align:center;font:500 16px "IBM Plex Mono",monospace}
+.qrow .add{min-height:50px}
+.assure{display:grid;gap:10px;margin:18px 0 22px;font-size:14px;color:var(--ink2)}
+.assure div{display:flex;gap:10px;align-items:flex-start}
+.buy details{border-top:1px solid var(--line);padding:14px 0}
+.buy details:last-of-type{border-bottom:1px solid var(--line)}
+.buy summary{cursor:pointer;font-family:Archivo,sans-serif;font-weight:600;list-style:none;display:flex;justify-content:space-between}
+.buy summary::after{content:"+";font-family:"IBM Plex Mono",monospace;color:var(--ink2)}
+.buy details[open] summary::after{content:"\2212"}
+.buy details p{margin:8px 0 0;color:var(--ink2);font-size:15px}
+
+/* cart drawer */
+.cartbtn{display:inline-flex;align-items:center;gap:8px;background:var(--white);color:var(--deep);border:0;cursor:pointer}
+.cartbtn i{font-style:normal;font:500 13px "IBM Plex Mono",monospace;background:var(--navy);color:#fff;border-radius:999px;min-width:22px;height:22px;display:inline-grid;place-items:center;padding:0 6px}
+.scrim{position:fixed;inset:0;background:rgba(11,26,51,.45);z-index:20}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);background:var(--white);z-index:21;display:flex;flex-direction:column;box-shadow:-20px 0 60px -30px rgba(11,26,51,.5);padding:calc(env(safe-area-inset-top,0px) + 20px) max(20px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 20px) 20px}
+.drawer header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.drawer h3{margin:0;font-size:22px}
+.x{border:0;background:none;font-size:26px;width:44px;height:44px;cursor:pointer;color:var(--ink)}
+.lines{flex:1;overflow:auto}
+.line{display:grid;grid-template-columns:72px minmax(0,1fr) auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.line img{width:72px;height:72px;object-fit:cover;border-radius:6px;background:#E9EAE6}
+.line b{font-family:Archivo,sans-serif;font-weight:600;display:block}
+.line span{font-size:13px;color:var(--ink2)}
+.line em{font:500 15px "IBM Plex Mono",monospace;font-style:normal}
+.line button{border:0;background:none;color:var(--ink2);text-decoration:underline;font-size:13px;cursor:pointer;padding:0}
+.empty{color:var(--ink2);padding:24px 0}
+.tot{border-top:1px solid var(--line);padding-top:16px}
+.tot div{display:flex;justify-content:space-between;font-size:15px;margin-bottom:6px}
+.tot b{font:500 20px "IBM Plex Mono",monospace}
+.tot .btn{width:100%;justify-content:center;margin-top:12px}
+.tot small{display:block;color:var(--ink2);font-size:13px;margin-top:10px;text-align:center}
+
+@media (max-width:960px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.card.plus{grid-column:1/-1}.card.plus .ph{aspect-ratio:16/6}.card.plus .ph img{width:16%}.perks{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:860px){.pdp-in{grid-template-columns:minmax(0,1fr)}.gal{position:static;grid-template-columns:minmax(0,1fr)}.thumbs{flex-direction:row;order:2;overflow-x:auto}.thumbs button{width:64px;flex:none}}
+@media (max-width:600px){.cards{grid-template-columns:minmax(0,1fr)}.card.plus .ph{aspect-ratio:16/7}.card.plus .ph img{width:22%}.perks{grid-template-columns:minmax(0,1fr)}}
+
+/* direction notes, for Tyler only */
+.notes{padding-block:clamp(56px,7vw,96px)}
+.notes h3{font-size:clamp(28px,3.2vw,40px);margin:10px 0 24px;line-height:1.08}
+.sw{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.sw div{border-radius:4px;padding:72px 14px 12px;font-size:13px;line-height:1.35;font-weight:500}
+.sw small{display:block;opacity:.7;font-family:"IBM Plex Mono",ui-monospace,monospace}
+.types{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:12px}
+.types div{background:#fff;border:1px solid var(--line);border-radius:4px;padding:16px 14px}
+.types b{display:block;font-size:28px;line-height:1.1;color:var(--navy);margin-bottom:6px}
+.types small{font-size:13px;color:var(--ink2)}
+.lessons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin-top:40px;border-top:1px solid var(--line);padding-top:28px}
+.lessons h4{margin:0 0 6px;font-size:17px;font-weight:600;letter-spacing:-.01em}
+.lessons p{margin:0;color:var(--ink2);font-size:15px}
+
+@media (max-width:860px){
+  .zone-in{grid-template-columns:minmax(0,1fr)}
+  .lessons,.types{grid-template-columns:minmax(0,1fr)}
+  .sw{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (max-width:640px){
+  nav .links a:not(.btn){display:none}
+  .hero{height:min(100svh,880px);min-height:600px}
+  .yard span:nth-child(2){display:none}
+  .sw{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+</style>
+
+<nav><div class="in">
+  <img src="assets/logo.svg" alt="Inside 75">
+  <div class="links"><a href="#zone">Play</a><a href="#shop">Shop</a><button class="btn cartbtn" id="cartbtn" aria-label="Open cart">Cart <i id="cc">0</i></button></div>
+</div></nav>
+
+<header class="hero">
+  <video id="hv" src="assets/hero.mp4" poster="assets/hero-poster.jpg" autoplay muted playsinline webkit-playsinline disablepictureinpicture preload="auto" aria-hidden="true"></video>
+  <div class="shade"></div>
+  <div class="copy"><div class="in">
+    <div class="eyebrow">Inside 75 yards</div>
+    <h1>The short game, <span>at home.</span></h1>
+    <p class="sub">Clip Inside 75 to the putter or wedge you already own and play real greens, with real break, on your tablet after the kids are down.</p>
+    <div class="cta"><a class="btn light" href="#shop">Shop the kit, from $119</a><a class="btn ghost" href="#zone">How it plays</a></div>
+    <div class="yard"><span><b>75<i> yd</i></b>approach</span><span><b>CHIP</b>just off the green</span><span><b>40<i> ft</i></b>putt</span></div>
+  </div></div>
+</header>
+
+<section class="zone" id="zone"><div class="in zone-in">
+  <div>
+    <div class="eyebrow" style="color:var(--green)">The scoring zone</div>
+    <h2>Where rounds are won, in your living room.</h2>
+    <p class="lead">Your real club, your real stroke, a real green on the screen. Every shot from 75 yards in, without the drive to the course.</p>
+    <dl class="modes">
+      <div><dt>Approach</dt><dd>Hit wedges onto the green from <span class="mono">30 to 75 yd</span>.</dd></div>
+      <div><dt>Chip</dt><dd>Chip from just off the green to the nearest hole.</dd></div>
+      <div><dt>Putt</dt><dd>Read the break and putt from <span class="mono">3 to 40 ft</span> on three green speeds.</dd></div>
+    </dl>
+  </div>
+  <figure class="plate" style="margin:0">
+    <svg viewBox="0 0 560 520" role="img" aria-label="Yardage plate of a green with rings at 25, 50 and 75 yards">
+      <defs><pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(35)"><line x1="0" y1="0" x2="0" y2="7" stroke="#2F6B47" stroke-width="1" opacity=".35"/></pattern></defs>
+      <!-- fairway approach -->
+      <path d="M210 520 C 200 430 170 360 190 290 C 205 240 250 215 280 214 C 318 214 360 240 372 290 C 392 360 360 430 350 520 Z" fill="#14295A" opacity=".05"/>
+      <!-- distance rings from the pin -->
+      <g fill="none" stroke="#14295A" stroke-width="1" stroke-dasharray="3 5" opacity=".5">
+        <circle cx="280" cy="128" r="118"/><circle cx="280" cy="128" r="236"/><circle cx="280" cy="128" r="354"/>
+      </g>
+      <!-- green -->
+      <path d="M180 120 C 175 70 230 34 290 38 C 352 42 392 84 384 132 C 376 182 330 214 276 212 C 220 210 186 172 180 120 Z" fill="url(#hatch)" stroke="#14295A" stroke-width="1.4"/>
+      <!-- bunker -->
+      <path d="M392 180 C 410 168 440 176 444 198 C 448 220 420 232 402 222 C 388 214 382 192 392 180 Z" fill="#EEEEEA" stroke="#14295A" stroke-width="1.1"/>
+      <g fill="#14295A" opacity=".35"><circle cx="410" cy="196" r="1.2"/><circle cx="422" cy="205" r="1.2"/><circle cx="430" cy="192" r="1.2"/><circle cx="416" cy="212" r="1.2"/></g>
+      <!-- pin -->
+      <line x1="280" y1="128" x2="280" y2="78" stroke="#0B1A33" stroke-width="1.6"/>
+      <path d="M280 78 L 308 87 L 280 96 Z" fill="#2F6B47"/>
+      <circle cx="280" cy="128" r="4" fill="#0B1A33"/>
+      <!-- shot lines -->
+      <path d="M280 480 Q 250 300 272 140" fill="none" stroke="#14295A" stroke-width="1.6"/>
+      <circle cx="280" cy="480" r="5" fill="#FFFFFF" stroke="#14295A" stroke-width="1.6"/>
+      <path d="M170 236 Q 210 200 268 136" fill="none" stroke="#14295A" stroke-width="1.6" stroke-dasharray="1 0"/>
+      <circle cx="170" cy="236" r="5" fill="#FFFFFF" stroke="#14295A" stroke-width="1.6"/>
+      <!-- ring labels -->
+      <text class="tn" x="292" y="272">25</text><text class="tn" x="292" y="392">50</text><text class="tn" x="292" y="512">75</text>
+      <text class="t" x="70" y="262">Chip</text>
+      <text class="t" x="300" y="462">Approach</text>
+      <text class="t" x="316" y="70">Putt</text>
+    </svg>
+    <figcaption class="cap"><span>Hole 1, the practice green</span><span>Yards to the pin</span></figcaption>
+  </figure>
+</div></section>
+
+<section class="store" id="shop"><div class="in">
+  <div class="shead">
+    <div><div class="eyebrow" style="color:var(--green)">Shop</div><h2>Your own putter and wedge, inside 75 yards.</h2></div>
+    <p>No yearly fee to play. Every kit comes with the free app.</p>
+  </div>
+  <div class="cards">
+    <article class="card">
+      <a class="ph" href="#kit" data-pick="two"><span class="tag">Save $9</span><img src="assets/kit-two-tile.jpg" alt="Two Inside 75 clips in their tray"></a>
+      <div class="bd">
+        <h3>Clip Kit, two pack</h3><p class="sub">One for your putter, one for your wedge.</p>
+        <div class="row"><span class="pr">$229<s>$238</s></span><span class="note">Approach, chip and putt</span></div>
+        <div class="acts"><button class="btn add" data-add="two">Add to cart</button><a class="btn more" href="#kit" data-pick="two">Details</a></div>
+      </div>
+    </article>
+    <article class="card">
+      <a class="ph" href="#kit" data-pick="one"><img src="assets/kit-one-tile.jpg" alt="One Inside 75 clip in its tray"></a>
+      <div class="bd">
+        <h3>Clip Kit, single</h3><p class="sub">One clip you can move between clubs.</p>
+        <div class="row"><span class="pr">$119</span><span class="note">Putter or wedge</span></div>
+        <div class="acts"><button class="btn add" data-add="one">Add to cart</button><a class="btn more" href="#kit" data-pick="one">Details</a></div>
+      </div>
+    </article>
+    <article class="card plus">
+      <div class="ph"><span class="tag g">Optional</span><img src="assets/icon.svg" alt=""></div>
+      <div class="bd">
+        <h3>Inside 75 Plus</h3><p class="sub">The free app has one full course and every mode. Plus opens every course.</p>
+        <div class="row"><span class="pr">$49.99</span><span class="note">per year</span></div>
+        <div class="acts"><a class="btn more" href="#kit">Add after you play</a></div>
+      </div>
+    </article>
+  </div>
+  <div class="perks">
+    <div><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#14295A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 2v11.5l-3 3.5h8"/><rect x="8.5" y="5" width="5" height="4.5" rx="1"/></svg><span><b>Fits your club</b>Screws and key in the box</span></div>
+    <div><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#14295A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8a10 10 0 0 1 14 0M6 11a6 6 0 0 1 8 0M9 14a2 2 0 0 1 2 0"/></svg><span><b>Connects on its own</b>Wi-Fi to your tablet</span></div>
+    <div><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#14295A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 2 5 11h5l-1 7 6-9h-5z"/></svg><span><b>USB-C charging</b>A light shows when it charges</span></div>
+    <div><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#14295A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="10" height="16" rx="2"/><path d="M9 15h2"/></svg><span><b>Free app</b>iPad and Android tablets</span></div>
+  </div>
+</div></section>
+
+<section class="pdp" id="kit"><div class="in pdp-in">
+  <div class="gal">
+    <div class="thumbs" role="group" aria-label="Product photos">
+      <button aria-pressed="true" data-img="assets/kit-two-tile.jpg"><img src="assets/kit-two-tile.jpg" alt="Two clips in the tray"></button>
+      <button aria-pressed="false" data-img="assets/product.jpg"><img src="assets/product.jpg" alt="Clip on a club shaft"></button>
+      <button aria-pressed="false" data-img="assets/closeup.jpg"><img src="assets/closeup.jpg" alt="Clip close up"></button>
+      <button aria-pressed="false" data-img="assets/hero-tall.jpg"><img src="assets/hero-tall.jpg" alt="Clip on a wedge"></button>
+      <button aria-pressed="false" data-img="assets/kit-one-tile.jpg"><img src="assets/kit-one-tile.jpg" alt="Single clip in its tray"></button>
+    </div>
+    <div class="gmain"><img id="gimg" src="assets/kit-two-tile.jpg" alt="Inside 75 Clip Kit"></div>
+  </div>
+  <div class="buy">
+    <p class="crumb">Shop / Clip Kit</p>
+    <h2>Inside 75 Clip Kit</h2>
+    <p class="blurb">Clip it to the putter or wedge you already own and play real greens with real break on your tablet, in minutes, not rounds.</p>
+    <p class="bigp"><span id="bp">$229</span><small id="bsave">You save $9</small></p>
+    <fieldset class="opts"><legend>Choose your kit</legend>
+      <label class="opt"><input type="radio" name="v" value="two" checked><span><b>Two pack</b><span>Putter and wedge</span></span><em>$229</em></label>
+      <label class="opt"><input type="radio" name="v" value="one"><span><b>Single clip</b><span>Move it between clubs</span></span><em>$119</em></label>
+    </fieldset>
+    <div class="qrow">
+      <div class="qty"><button type="button" id="qm" aria-label="One fewer">&minus;</button><output id="qv">1</output><button type="button" id="qp" aria-label="One more">+</button></div>
+      <button class="btn add" id="padd">Add to cart, $229</button>
+    </div>
+    <div class="assure">
+      <div><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#14295A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="10" height="16" rx="2"/><path d="M9 15h2"/></svg><span>Free app with one full course and every mode. No yearly fee to play.</span></div>
+      <div><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#14295A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5 10 3l7 3.5v7L10 17l-7-3.5z M3 6.5l7 3.5 7-3.5M10 10v7"/></svg><span id="kbox">Two Inside 75 clips, with the small screws and the key to fit each one.</span></div>
+    </div>
+    <details open><summary>Plays on</summary><p>iPad with an A12 chip or newer on iPadOS 16.3 or later, and Android tablets. iPhone and left-handed play are coming.</p></details>
+    <details><summary>How it fits</summary><p>The clip rides low on the shaft. Two small screws and the key are in the box, and no special putter is needed.</p></details>
+    <details><summary>Connects and charges</summary><p>Wi-Fi to your tablet. Set it up once and it connects on its own. USB-C charging, with a light that shows when it's charging, and free updates over the air.</p></details>
+  </div>
+</div></section>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" hidden aria-label="Cart">
+  <header><h3>Your cart</h3><button class="x" id="cx" aria-label="Close cart">&times;</button></header>
+  <div class="lines" id="lines"></div>
+  <div class="tot"><div><span>Subtotal</span><b id="sub">$0</b></div><a class="btn dark" href="#shop">Check out</a><small>Sample only. Checkout connects once payments are set up.</small></div>
+</aside>
+
+<section class="notes"><div class="in">
+  <div class="eyebrow" style="color:var(--green)">Direction notes, not part of the site</div>
+  <h3>Matte white and navy, built around a yardage book.</h3>
+  <div class="sw">
+    <div style="background:#F4F4F1;color:#0E1B33;box-shadow:inset 0 0 0 1px var(--line)">Matte white<small>#F4F4F1</small></div>
+    <div style="background:#14295A;color:#F4F4F1">Logo navy<small>#14295A</small></div>
+    <div style="background:#0B1A33;color:#F4F4F1">Deep navy<small>#0B1A33</small></div>
+    <div style="background:#4B5670;color:#F4F4F1">Slate<small>#4B5670</small></div>
+    <div style="background:#2F6B47;color:#F4F4F1">Flag green, sparingly<small>#2F6B47</small></div>
+  </div>
+  <div class="types">
+    <div><b style="font-family:Archivo;font-weight:700;letter-spacing:-.025em">Archivo</b><small>Headlines and buttons</small></div>
+    <div><b style="font-family:'Public Sans';font-weight:500">Public Sans</b><small>Body text</small></div>
+    <div><b class="mono" style="font-size:24px">75 YD</b><small>IBM Plex Mono for yardages, prices and labels</small></div>
+  </div>
+  <div class="lessons">
+    <div><h4>Same type as the parent company</h4><p>Archivo, Public Sans and Plex Mono match the sister brand exactly, so the link is there for anyone who looks, and never spelled out.</p></div>
+    <div><h4>Navy, not another green app</h4><p>Matte white and navy set it apart from the cream and green every golf app uses. Green shows up only where it means something: the flag and the green itself.</p></div>
+    <div><h4>Crafted, not techy</h4><p>The yardage book rings, tick marks and mono numbers read like a caddie's notes, so the clean palette still feels made by golfers.</p></div>
+  </div>
+</div></section>
+
+<script>
+(function(){var v=document.getElementById('hv');if(!v)return;var done=0,st=null;
+function still(){if(st||!v.poster)return;st=document.createElement('img');st.src=v.poster;st.alt='';st.className='still';v.parentNode.insertBefore(st,v.nextSibling);v.style.visibility='hidden';}
+function live(){if(st){st.remove();st=null;}v.style.visibility='';}
+function go(){if(done)return;v.muted=true;v.playsInline=true;var p;try{p=v.play();}catch(e){return;}if(p&&p.then)p.then(live,function(e){if(e&&e.name==='NotAllowedError')still();});}
+['loadeddata','canplay'].forEach(function(e){v.addEventListener(e,function(){if(v.paused)go();});});
+v.addEventListener('playing',live);v.addEventListener('ended',function(){done=1;live();});
+go();['touchend','click','scroll'].forEach(function(e){window.addEventListener(e,function(){if(v.paused)go();},{passive:true});});
+})();
+</script>
+<script>
+(function(){
+var V={two:{n:'Clip Kit, two pack',d:'Putter and wedge',p:229,img:'assets/kit-two-tile.jpg',box:'Two Inside 75 clips, with the small screws and the key to fit each one.'},one:{n:'Clip Kit, single',d:'Move it between clubs',p:119,img:'assets/kit-one-tile.jpg',box:'One Inside 75 clip, with the small screws and the key to fit it.'}};
+var cart={},q=1,cur='two',$=function(i){return document.getElementById(i)};
+function fmt(n){return '$'+n.toLocaleString('en-US')}
+function img(src){$('gimg').src=src;[].forEach.call(document.querySelectorAll('.thumbs button'),function(b){b.setAttribute('aria-pressed',b.dataset.img===src?'true':'false')})}
+function sync(){var v=V[cur];$('bp').textContent=fmt(v.p*q);$('bsave').hidden=cur!=='two';$('bsave').textContent='You save '+fmt(9*q);$('padd').textContent='Add to cart, '+fmt(v.p*q);$('qv').textContent=q;$('kbox').textContent=v.box}
+function pick(k){cur=k;var r=document.querySelector('input[name=v][value='+k+']');if(r)r.checked=true;img(V[k].img);sync()}
+function render(){var L=$('lines'),t=0,c=0;L.textContent='';Object.keys(cart).forEach(function(k){var n=cart[k];if(!n)return;t+=n*V[k].p;c+=n;var r=document.createElement('div');r.className='line';var im=document.createElement('img');im.src=V[k].img;im.alt='';var m=document.createElement('div');var b=document.createElement('b');b.textContent=V[k].n;var s=document.createElement('span');s.textContent=V[k].d+', qty '+n+' ';var x=document.createElement('button');x.textContent='Remove';x.onclick=function(){delete cart[k];render()};s.appendChild(x);m.appendChild(b);m.appendChild(s);var e=document.createElement('em');e.textContent=fmt(n*V[k].p);r.appendChild(im);r.appendChild(m);r.appendChild(e);L.appendChild(r)});if(!c){var p=document.createElement('p');p.className='empty';p.textContent='Your cart is empty.';L.appendChild(p)}$('sub').textContent=fmt(t);$('cc').textContent=c}
+function open(o){$('drawer').hidden=!o;$('scrim').hidden=!o}
+function add(k,n,btn){cart[k]=(cart[k]||0)+n;render();if(btn){var t=btn.textContent;btn.classList.add('done');btn.textContent='Added';setTimeout(function(){btn.classList.remove('done');btn.textContent=t},1200)}open(true)}
+[].forEach.call(document.querySelectorAll('[data-add]'),function(b){b.onclick=function(){add(b.dataset.add,1,b)}});
+[].forEach.call(document.querySelectorAll('[data-pick]'),function(a){a.addEventListener('click',function(){pick(a.dataset.pick)})});
+[].forEach.call(document.querySelectorAll('input[name=v]'),function(r){r.onchange=function(){pick(r.value)}});
+[].forEach.call(document.querySelectorAll('.thumbs button'),function(b){b.onclick=function(){img(b.dataset.img)}});
+$('qm').onclick=function(){if(q>1){q--;sync()}};$('qp').onclick=function(){if(q<9){q++;sync()}};
+$('padd').onclick=function(){add(cur,q,$('padd'))};
+$('cartbtn').onclick=function(){open(true)};$('cx').onclick=function(){open(false)};$('scrim').onclick=function(){open(false)};
+document.addEventListener('keydown',function(e){if(e.key==='Escape')open(false)});
+render();sync();
+})();
+</script>
