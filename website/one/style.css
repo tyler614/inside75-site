@@ -324,11 +324,11 @@ h3 { font-size: clamp(20px, 1.9vw, 24px); line-height: 1.2; letter-spacing: -0.0
 .sec-head.center .lead { margin-inline: auto; }
 .sec-head.split { max-width: none; display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
 
-/* 3-step cards */
+/* Setup / Real Home Spaces cards */
 .steps-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(18px, 2.4vw, 28px);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
 }
 .step-card {
   background: var(--surface);
@@ -1308,7 +1308,7 @@ a.store-btn:hover { transform: translateY(-1px); border-color: rgba(255, 255, 25
 
 /* Responsive */
 @media (max-width: 1120px) {
-  .courses-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .courses-grid, .steps-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 1020px) {
   .hero-grid, .banner-split, .needs-grid, .verdict-grid, .app-grid, .notify-card, .pdp-grid, .chk-grid, .hw-row {
@@ -1334,8 +1334,7 @@ a.store-btn:hover { transform: translateY(-1px); border-color: rgba(255, 255, 25
   }
   .chk-summary { order: -1; }
   .hw-row.flip .hw-pic { order: 0; }
-  .guarantee-bar, .courses-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .steps-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .guarantee-bar, .courses-grid, .steps-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .tel-cols { grid-template-columns: minmax(0, 1fr); gap: 14px; }
   .tel-arrow { display: none; }
   .tel-panel.out { padding-top: 14px; border-top: 1px solid rgba(255, 255, 255, 0.14); }

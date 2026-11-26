@@ -38,7 +38,7 @@ function dims(f) {
   }
   return [1200, 800];
 }
-const ASSET_V = 'v2h';
+const ASSET_V = 'v2i';
 const file = name => ['jpg', 'png'].map(e => `${name}.${e}`).find(has);
 function pic(name, alt, { cls = '', eager = false, root = false } = {}) {
   const f = file(name);
@@ -695,7 +695,7 @@ ${header('home', true)}
   </div>
   <div class="hero-media">
     <div class="hero-frame">
-      ${pic('hero-living', 'Golfer putting on a living room rug with their own blade putter wearing the sleek Inside 75 V2 clip, with an iPad ahead showing a sunlit 3D golf green', { eager: true })}
+      ${pic('hero-living', 'Golfer taking a ball-free putting stroke on a sunlit living room rug with their own blade putter fitted with the Inside 75 V2 clip, glancing ahead at an iPad angled toward them showing a 3D golf green', { eager: true })}
       <div class="hero-hud" aria-hidden="true">
         <div class="hero-hud-title">Inside 75 V2 Clip + Tablet App</div>
         <div class="hero-hud-stats"><span>Instant Response</span><span>3 to 75 yd</span><strong>Real-Slope Greens</strong></div>
@@ -845,32 +845,39 @@ ${header('home', true)}
 <section class="sec" id="steps"><div class="in">
   <div class="sec-head split">
     <div>
-      <div class="eyebrow">2-Minute Setup</div>
-      <h2>Clamps on once. Ready every time you pick up your club.</h2>
+      <div class="eyebrow">Real Home Setups</div>
+      <h2>Clamp on in 2 minutes. Play in any room you already have.</h2>
     </div>
     <a class="btn line" href="${page('/how-it-works')}">Full Setup Guide &#8594;</a>
   </div>
-  <p class="swipe-hint" aria-hidden="true">Swipe steps &#8594;</p>
+  <p class="swipe-hint" aria-hidden="true">Swipe setups &#8594;</p>
   <div class="steps-grid">
     <article class="step-card">
       <div class="step-img">${pic('mount-hands', 'Hands tightening the Inside 75 V2 sensor clip onto a chrome putter shaft with the included hex key')}</div>
       <div class="step-body">
-        <h3>Clip it onto your club</h3>
-        <p>Clamp the sensor right above the clubhead with the included hex key and connect to home Wi-Fi once in under five minutes.</p>
+        <h3>2-minute club clamp</h3>
+        <p>Snug two screws right above the ferrule with the included hex key and join home Wi-Fi once.</p>
       </div>
     </article>
     <article class="step-card">
-      <div class="step-img">${pic('lifestyle-wedge', 'Golfer in a sunlit garage studio chipping a golf ball into a net with a steel wedge fitted with the Inside 75 V2 clip, and an iPad resting safely across from the golfer stance')}</div>
+      <div class="step-img">${pic('setup-garage', 'Golfer chipping off a small 2x3 ft turf pad into a pop-up net in a suburban 2-car garage with an iPad on a tripod angled toward them')}</div>
       <div class="step-body">
-        <h3>Swing your own clubs, ball or no ball</h3>
-        <p>Putt on your living room rug or chip into a garage net. Hit real golf balls when you have a net, or take practice swings anytime.</p>
+        <h3>Garage turf pad &amp; net</h3>
+        <p>A compact 2x3 ft turf pad, any pop-up net, and an iPad on a tripod or folding chair.</p>
       </div>
     </article>
     <article class="step-card">
-      <div class="step-img">${pic('course-benttree', 'Real 3D golf green and flagstick in the Inside 75 tablet app built from real elevation scans')}</div>
+      <div class="step-img">${pic('setup-basement', 'Golfer chipping off a compact 1x2 ft turf strip into a pop-up chipping net in a carpeted basement with an iPad on an ottoman angled toward them')}</div>
       <div class="step-body">
-        <h3>Watch the shot react right away</h3>
-        <p>The ball launches on screen the moment you swing, with real break and pace from 3-foot putts to 75-yard pitches.</p>
+        <h3>Finished basement</h3>
+        <p>Drop a 1x2 ft chipping strip on basement carpet and prop your tablet on an ottoman.</p>
+      </div>
+    </article>
+    <article class="step-card">
+      <div class="step-img">${pic('setup-yard', 'Golfer chipping off a portable turf mat into a backyard pop-up net with an iPad propped on a folding camp chair angled toward them')}</div>
+      <div class="step-body">
+        <h3>Backyard lawn</h3>
+        <p>Take your wedge and a pop-up net outside, or swing dry on a rug or office floor with zero ball.</p>
       </div>
     </article>
   </div>
@@ -1123,12 +1130,12 @@ ${coreJs}
 const pdpGallery = [
   { id: 'kit-two', type: 'img', label: 'Two-Clip Kit', alt: P.two.alt },
   { id: 'clip-360', type: '3d', label: 'Interactive 3D', alt: 'Interactive 3D model of the Inside 75 V2 clip' },
+  { id: 'lifestyle-unbox', type: 'img', label: 'Kit at Home', alt: 'Inside 75 Two-Clip presentation tray on an oak table beside an iPad, blade putter, sand wedge, and golf bag' },
   { id: 'clubs-pair', type: 'img', label: 'Putter & Wedge', alt: 'Inside 75 V2 clips mounted on both a putter and a sand wedge' },
-  { id: 'hero-living', type: 'img', label: 'At Home', alt: 'Putting at home with the Inside 75 V2 clip and iPad' },
-  { id: 'kit-one', type: 'img', label: 'One-Clip Kit', alt: P.one.alt },
+  { id: 'hero-living', type: 'img', label: 'Living Room', alt: 'Taking a ball-free putting stroke at home with the Inside 75 V2 clip and an iPad angled toward the golfer' },
+  { id: 'setup-garage', type: 'img', label: 'Garage Net', alt: 'Chipping off a small turf pad into a pop-up net in a 2-car garage with an iPad on a tripod' },
+  { id: 'setup-basement', type: 'img', label: 'Basement Setup', alt: 'Chipping off a compact turf strip into a pop-up net in a carpeted basement with an iPad on an ottoman' },
   { id: 'mount-hands', type: 'img', label: '2-Min Install', alt: 'Tightening the Inside 75 V2 clip onto a putter shaft with a hex key' },
-  { id: 'clip-charge', type: 'img', label: 'USB-C Charge', alt: 'Inside 75 V2 clip charging with a USB-C cable' },
-  { id: 'v2-back34', type: 'img', label: 'Back Clamp', alt: 'Close-up of the Inside 75 V2 two-bolt shaft clamp' },
 ];
 
 const kitBody = `
@@ -1289,10 +1296,37 @@ ${header('how', true)}
     <p>Because the V2 sensor reads your clubhead speed, face angle, and swing path right through impact, the ball reacts immediately on screen whether you strike a real ball or take a practice swing.</p>
     <p style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap"><a class="btn primary" href="${page('/kit')}" data-ea-cta>${EA_ON ? 'Get Early Access' : 'Shop Clip Kits'}</a><a class="btn line" href="${home('#gameplay')}">Watch Gameplay</a></p>
   </div>
-  <figure class="hw-fig"><div class="hw-pic">${pic('lifestyle-wedge', 'Golfer chipping with a steel wedge wearing the Inside 75 V2 clip into a hitting net with an iPad resting safely across from the golfer stance')}</div><figcaption>Always set your tablet across from your stance out of the swing arc, check ceiling clearance, and use a hitting net when striking real balls with a wedge.</figcaption></figure>
+  <figure class="hw-fig"><div class="hw-pic">${pic('setup-garage', 'Golfer chipping off a small 2x3 ft turf pad into a pop-up net in a 2-car garage with an iPad on a tripod safely across from their stance')}</div><figcaption>Always set your tablet across from your stance out of the swing arc, check ceiling clearance, and use a pop-up hitting net when striking real balls with a wedge.</figcaption></figure>
 </div></section>
 
-<section class="sec white" id="troubleshoot"><div class="in">
+<section class="sec white"><div class="in">
+  <div class="sec-head">
+    <div class="eyebrow">Real Ways Golfers Set It Up</div>
+    <h2>No simulator buildout needed. Use the space you already have.</h2>
+    <p class="lead">Take ball-free strokes on any rug or patio, or pair a small turf pad with a pop-up net in your garage, basement, or yard.</p>
+  </div>
+  <p class="swipe-hint" aria-hidden="true">Swipe setups &#8594;</p>
+  <div class="steps-grid">
+    <article class="step-card">
+      <div class="step-img">${pic('setup-garage', 'Suburban 2-car garage setup with 2x3 ft turf pad, pop-up net, and iPad on a tripod')}</div>
+      <div class="step-body"><h3>2-car garage</h3><p>Small 2x3 ft turf pad, pop-up net, and an iPad on a lightweight tripod.</p></div>
+    </article>
+    <article class="step-card">
+      <div class="step-img">${pic('setup-basement', 'Finished basement setup with 1x2 ft turf chipping strip on carpet, pop-up net, and iPad on an ottoman')}</div>
+      <div class="step-body"><h3>Finished basement</h3><p>Compact 1x2 ft chipping strip on carpet with your tablet propped on an ottoman.</p></div>
+    </article>
+    <article class="step-card">
+      <div class="step-img">${pic('setup-yard', 'Suburban backyard setup with portable turf mat on grass, pop-up net, and iPad on a folding camp chair')}</div>
+      <div class="step-body"><h3>Backyard lawn</h3><p>Portable hitting mat on the grass, pop-up net, and an iPad on a camp chair.</p></div>
+    </article>
+    <article class="step-card">
+      <div class="step-img">${pic('lifestyle-office', 'Home office ball-free putting break on a flat rug with an iPad on a walnut desk')}</div>
+      <div class="step-body"><h3>Home office or living room</h3><p>Zero ball and zero mat. Grab five minutes of putting reps right off your rug.</p></div>
+    </article>
+  </div>
+</div></section>
+
+<section class="sec" id="troubleshoot"><div class="in">
   <div class="sec-head">
     <div class="eyebrow">Quick troubleshooting</div>
     <h2>Wi-Fi, charging, and wake checklist.</h2>
@@ -1351,7 +1385,7 @@ ${header('compare', true)}
 
   <div class="verdict-grid">
     <article class="verdict-card primary">
-      <div class="verdict-media">${pic('clubs-pair', 'Inside 75 V2 clips mounted on a stainless blade putter and forged sand wedge')}</div>
+      <div class="verdict-media">${pic('lifestyle-unbox', 'Inside 75 Two-Clip presentation tray beside an iPad, real putter and wedge, and golf bag in a sunlit room')}</div>
       <div class="verdict-body">
         <div class="verdict-kicker">Inside 75 · $119 to $229</div>
         <h3>Built for golfers who care about real feel</h3>
