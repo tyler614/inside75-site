@@ -48,14 +48,14 @@ function pic(name, alt, { cls = '', eager = false, root = false } = {}) {
   return has(`${name}.webp`) ? `<picture><source srcset="${pre}${name}.webp" type="image/webp">${im}</picture>` : im;
 }
 
-// Inline brand lockup using solid navy Inside 75 grid mark (white on dark surfaces) + crisp wordmark
+// Inline brand lockup using solid navy Inside 75 grid mark + crisp wordmark (footer gets subtle pin-square accent on dark navy)
 const BRAND_SVG = `<svg class="brand-svg" viewBox="0 0 132 28" role="img" aria-label="Inside 75">
   <g class="brand-mark" fill="#0B1A33">
     <rect x="0" y="2" width="6.5" height="6.5" rx="1.6"/>
     <rect x="8.5" y="2" width="6.5" height="6.5" rx="1.6"/>
     <rect x="17" y="2" width="6.5" height="6.5" rx="1.6"/>
     <rect x="0" y="10.5" width="6.5" height="6.5" rx="1.6"/>
-    <rect x="8.5" y="10.5" width="6.5" height="6.5" rx="1.6"/>
+    <rect class="pin-sq" x="8.5" y="10.5" width="6.5" height="6.5" rx="1.6"/>
     <rect x="17" y="10.5" width="6.5" height="6.5" rx="1.6"/>
     <rect x="0" y="19" width="6.5" height="6.5" rx="1.6"/>
     <rect x="8.5" y="19" width="6.5" height="6.5" rx="1.6"/>
@@ -178,8 +178,8 @@ const analyticsSnippet = () => {
 
 const promoBar = `<div class="promo"><strong>Now Open:</strong> ${esc(cfg.shippingNote || 'Free US shipping on the Two-Clip Kit.')} <a href="${page('/kit')}">Shop Kits</a></div>`;
 
-const header = (here, dark = false) => `${promoBar}
-<header class="bar${dark ? ' dark' : ''}"><div class="in bar-in">
+const header = (here) => `${promoBar}
+<header class="bar"><div class="in bar-in">
   <a class="brand-link" href="${page('/')}" aria-label="Inside 75 Home">${BRAND_SVG}</a>
   <nav class="nav-links" aria-label="Main navigation">
     <a href="${page('/how-it-works')}"${here === 'how' ? ' aria-current="page"' : ''}>How It Works</a>
@@ -957,9 +957,8 @@ ${header('how', true)}
     <h2>Swing with real balls or no ball at all.</h2>
     <p>Set your tablet safely out of your swing path, stand over the ball, and make your normal stroke. Putt across your living room rug, chip real golf balls into a net, or take dry swings in an office or den.</p>
     <p>Because the V2 sensor reads your clubhead speed, face angle, and swing path directly at 1,920 Hz, there is no mode to switch between real balls and dry swings.</p>
-    <p style="border-left:3px solid var(--pine);padding-left:14px;color:var(--ink);font-size:15px"><strong>Safety reminder:</strong> Whenever swinging a real golf club indoors, verify ceiling clearance, keep people, pets, and your tablet safely out of your swing arc, and use a proper net when hitting real balls with a wedge.</p>
   </div>
-  <div class="hw-pic">${pic('lifestyle-wedge', 'Golfer chipping with a steel wedge wearing the Inside 75 V2 clip into a hitting net with an iPad safely positioned to the side')}</div>
+  <figure class="hw-fig"><div class="hw-pic">${pic('lifestyle-wedge', 'Golfer chipping with a steel wedge wearing the Inside 75 V2 clip into a hitting net with an iPad safely positioned to the side')}</div><figcaption>Always check ceiling clearance, keep people, pets, and your tablet out of the swing arc, and use a hitting net when striking real balls with a wedge.</figcaption></figure>
 </div></section>
 
 <section class="sec white" id="troubleshoot"><div class="in">
@@ -1014,26 +1013,33 @@ ${header('compare', true)}
     </table>
   </div>
 
-  <div class="needs-grid">
-    <div class="need-card">
-      <h3>Choose Inside 75 if...</h3>
-      <ul class="need-list yes">
-        <li>${I.check}<span>You want to lower scores where 60%+ of strokes happen: inside 75 yards.</span></li>
-        <li>${I.check}<span>You want to practice with your own real putter and wedge, not a toy stick.</span></li>
-        <li>${I.check}<span>You want to play real breaking greens in a normal room without spending $3,000+.</span></li>
-        <li>${I.check}<span>You want competitive multiplayer with friends on one iPad without setup hassle.</span></li>
-      </ul>
-    </div>
-    <div class="need-card">
-      <h3>Choose a Full Launch Monitor if...</h3>
-      <ul class="need-list no">
-        <li>${I.check}<span>Your main goal is hitting full-speed drivers and measuring exact ball spin axis off the clubface.</span></li>
-        <li>${I.check}<span>You already have a 9+ foot ceiling, hitting bay, enclosure, and $2,500+ budget.</span></li>
-      </ul>
-    </div>
-  </div>
-  <div style="text-align:center;margin-top:42px">
-    <a class="btn primary" href="${page('/kit')}">Shop Inside 75 Clip Kits, From $${P.one.price}</a>
+  <div class="verdict-grid">
+    <article class="verdict-card primary">
+      <div class="verdict-media">${pic('clubs-pair', 'Inside 75 V2 clips mounted on a stainless blade putter and forged sand wedge')}</div>
+      <div class="verdict-body">
+        <div class="verdict-kicker">Inside 75 · $119 to $229</div>
+        <h3>Built for the scoring zone</h3>
+        <ul class="verdict-list">
+          <li>${I.check}<span>Lower scores where 60%+ of strokes happen, from 3-foot putts out to 75-yard pitches.</span></li>
+          <li>${I.check}<span>Practice with your own real putter and wedge instead of a short weighted stick.</span></li>
+          <li>${I.check}<span>Play real breaking USGS greens in any living room with real balls or dry swings.</span></li>
+          <li>${I.check}<span>Pass clubs around with up to four friends on one tablet, with zero subscription required.</span></li>
+        </ul>
+        <div class="verdict-cta"><a class="btn light" href="${page('/kit')}">Shop Clip Kits, From $${P.one.price}</a></div>
+      </div>
+    </article>
+    <article class="verdict-card secondary">
+      <div class="verdict-body">
+        <div class="verdict-kicker">Full Launch Monitor · $2,000 to $15,000+</div>
+        <h3>When a full hitting bay fits better</h3>
+        <p style="color:var(--ink-2);margin:10px 0 18px">Inside 75 is purpose-built for short game. A radar or photometric launch monitor is still the right tool if your priority is full-speed ball flight.</p>
+        <ul class="verdict-list">
+          <li>${I.check}<span>Your main goal is hitting full drivers and long irons and measuring exact ball spin axis off the face.</span></li>
+          <li>${I.check}<span>You already have a 9+ foot ceiling, hitting enclosure, impact screen, and a $2,500+ hardware budget.</span></li>
+          <li>${I.check}<span>You only want to hit real golf balls and do not mind annual simulator software fees.</span></li>
+        </ul>
+      </div>
+    </article>
   </div>
 </div></section>
 </main>
@@ -1374,7 +1380,7 @@ const crumbs = (name, p) => ({
 
 function head({ title, desc, p, ogTitle, lds = [], root = false, noindex = false, lead = '' }) {
   const a = root ? '/assets/' : 'assets/';
-  const fonts = `@font-face{font-family:Archivo;src:url(${a}fonts/archivo.woff2) format("woff2");font-weight:500 700;font-style:normal;font-display:swap}@font-face{font-family:"Public Sans";src:url(${a}fonts/public-sans.woff2) format("woff2");font-weight:400 600;font-style:normal;font-display:swap}@font-face{font-family:"IBM Plex Mono";src:url(${a}fonts/ibm-plex-mono-500.woff2) format("woff2");font-weight:500;font-style:normal;font-display:swap}`;
+  const fonts = `@font-face{font-family:Archivo;src:url(${a}fonts/archivo.woff2) format("woff2");font-weight:500 700;font-style:normal;font-display:swap}@font-face{font-family:"Public Sans";src:url(${a}fonts/public-sans.woff2) format("woff2");font-weight:400 700;font-style:normal;font-display:swap}`;
   return `<title>${esc(title)}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="${esc(desc)}">
