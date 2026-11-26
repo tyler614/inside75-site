@@ -1,4 +1,6 @@
 node_modules/
 website/one/dist/
 75golf-dist.zip
+.env.cloudflare
+website/.env.cloudflare
 .DS_Store

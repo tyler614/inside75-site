@@ -5,7 +5,8 @@
   "scripts": {
     "build": "node one/build.mjs",
     "check": "node one/build.mjs --strict",
-    "preview": "node one/build.mjs --strict && node serve.mjs"
+    "preview": "node one/build.mjs --strict && node serve.mjs",
+    "deploy": "node one/build.mjs --strict && node deploy.mjs"
   },
   "dependencies": {
     "marked": "18.3.0"
