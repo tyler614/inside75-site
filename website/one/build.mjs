@@ -140,7 +140,7 @@ const FACTS = [
 const QA = [
   ['What exactly is Inside 75?', 'Inside 75 is an at-home short-game golf system built around a tiny wireless sensor that clamps onto your own putter and wedge. Take a real stroke on your living room rug or into a practice net, and the free tablet app plays your putt, chip, or pitch live across real greens built from U.S. Geological Survey elevation data.'],
   ['How is Inside 75 different from a golf simulator or launch monitor?', 'Launch monitors cost $2,000 to $15,000+, track a flying golf ball with cameras or radar, and usually require a dedicated room, hitting bay, and screen. Inside 75 reads your club instead of the ball at 1,920 times per second, so you can play putts, chips, and pitches inside 75 yards right in your living room for $119 to $229, with or without a real golf ball.'],
-  ['Do I need to hit a real golf ball?', 'No, either way works seamlessly. You can putt real golf balls across your carpet, chip real balls into a net, or take dry swings with no ball at all. There is no mode to toggle.'],
+  ['Do I need to hit a real golf ball?', 'No, either way works naturally. Putt real golf balls across your rug, chip real balls into a net, or take practice swings with no ball at all without changing a single setting.'],
   ['Do I use my own real putter and wedge?', 'Yes. Unlike toy swing sticks, Inside 75 clamps directly onto the steel shaft of the putter or wedge already in your bag, right above the ferrule. Putting and chipping with your own clubs builds real feel that transfers straight to the course.'],
   ['Should I buy the One-Clip Kit or the Two-Clip Kit?', 'Choose the Two-Clip Kit ($229, with free US shipping) if you want to play full 18-hole Short Game rounds seamlessly. You leave one clip on your putter and one on your wedge with zero swapping. Choose the One-Clip Kit ($119) if you mainly want Putting on your putter, Closest to the Pin on your wedge, or Practice with one club at a time.'],
   ['What tablets are supported?', `Inside 75 runs on ${TABLETS}. Phones are not supported yet because reading slopes and green contours is much better on a tablet screen.`],
@@ -443,7 +443,7 @@ ${header('home', true)}
 
 <div class="proof-strip"><div class="in proof-grid">
   <div class="proof-item"><div class="proof-icon">${I.club}</div><div><b>Your Real Clubs</b><span>Clamps above the ferrule on steel-shaft putters and wedges. Zero toy sticks.</span></div></div>
-  <div class="proof-item"><div class="proof-icon">${I.wave}</div><div><b>Reads Club, Not Ball</b><span>Putt on carpet, chip into a net, or take dry swings with no ball at all.</span></div></div>
+  <div class="proof-item"><div class="proof-icon">${I.wave}</div><div><b>Reads Club, Not Ball</b><span>Putt on carpet, chip into a net, or take practice swings with no ball at all.</span></div></div>
   <div class="proof-item"><div class="proof-icon">${I.tablet}</div><div><b>Real LiDAR Greens</b><span>Built from USGS 3DEP elevation data with Soft, Standard, and Tour green speeds.</span></div></div>
   <div class="proof-item"><div class="proof-icon">${I.shield}</div><div><b>Free App &amp; 30-Day Trial</b><span>Includes 1 full 18-hole course and all 4 games. No required subscription.</span></div></div>
 </div></div>
@@ -458,22 +458,22 @@ ${header('home', true)}
     <article class="step-card">
       <div class="step-img">${pic('mount-hands', 'Hands tightening the Inside 75 V2 sensor clip onto a chrome putter shaft with the included 3 mm hex key')}<span class="step-num">STEP 01</span></div>
       <div class="step-body">
-        <h3>Clamp it onto your club</h3>
-        <p>Tighten two screws right above the ferrule using the included 3 mm hex key. The app pairs over Wi-Fi and learns your club angle in about two minutes.</p>
+        <h3>Clip it onto your club</h3>
+        <p>Mount the V2 sensor right above the ferrule with the included 3 mm hex key. Connect once over home Wi-Fi and you are ready to play in under five minutes.</p>
       </div>
     </article>
     <article class="step-card">
-      <div class="step-img">${pic('lifestyle-wedge', 'Golfer in a sunlit garage studio addressing a golf ball with a steel wedge fitted with the Inside 75 V2 clip, aiming into a net with an iPad safely to the side')}<span class="step-num">STEP 02</span></div>
+      <div class="step-img">${pic('lifestyle-wedge', 'Golfer in a sunlit garage studio chipping a golf ball into a net with a steel wedge fitted with the Inside 75 V2 clip, and an iPad resting safely across from the golfer stance')}<span class="step-num">STEP 02</span></div>
       <div class="step-body">
-        <h3>Make your normal stroke</h3>
-        <p>Putt across your living room rug or chip into a backyard or garage net. Hit real golf balls or swing with no ball at all, with nothing to toggle.</p>
+        <h3>Swing your own clubs, ball or no ball</h3>
+        <p>Putt on your living room rug or chip into a garage net. Hit real golf balls when you have a net, or take practice swings anytime when you don't.</p>
       </div>
     </article>
     <article class="step-card">
       <div class="step-img">${pic('course-benttree', 'Real 3D golf green and flagstick in the Inside 75 tablet app built from USGS elevation data')}<span class="step-num">STEP 03</span></div>
       <div class="step-body">
-        <h3>Watch it break and drop</h3>
-        <p>The V2 clip reads your club 1,920 times a second and streams the stroke to your tablet. Watch your ball carry, spin, break, and roll out across real greens.</p>
+        <h3>Watch every shot play out live</h3>
+        <p>The sensor tracks your club 1,920 times a second and streams each stroke to your tablet, showing real carry, break, and rollout across contoured greens.</p>
       </div>
     </article>
   </div>
@@ -572,7 +572,7 @@ ${header('home', true)}
         </div>
       </div>
     </div>
-    <p class="tel-note" id="telNote"><strong>Honest engineering:</strong> Inside 75 measures your clubhead motion, not the golf ball. That is why it works identically whether you hit a real Pro V1 into a net, roll a putt across carpet, or take dry swings in your living room.</p>
+    <p class="tel-note" id="telNote"><strong>How it works:</strong> Inside 75 measures your clubhead motion rather than the golf ball. That is why it reads identically whether you hit a real ball into a net, roll a putt across carpet, or take practice swings with no ball in your living room.</p>
   </div>
 </div></section>
 
@@ -958,11 +958,11 @@ ${header('how', true)}
 <section class="sec"><div class="in hw-row">
   <div>
     <div class="eyebrow">Step 03 · Play Anywhere</div>
-    <h2>Swing with real balls or no ball at all.</h2>
-    <p>Set your tablet safely out of your swing path, stand over the ball, and make your normal stroke. Putt across your living room rug, chip real golf balls into a net, or take dry swings in an office or den.</p>
-    <p>Because the V2 sensor reads your clubhead speed, face angle, and swing path directly at 1,920 Hz, there is no mode to switch between real balls and dry swings.</p>
+    <h2>Set your tablet in front of you and swing.</h2>
+    <p>Place your tablet across from your stance, well clear of your swing path, so you can glance straight ahead to watch each shot. Putt across your living room rug, chip real golf balls into a net, or take practice swings without a ball.</p>
+    <p>Because the V2 sensor reads your clubhead speed, face angle, and swing path directly at 1,920 Hz, it works automatically whether you strike a real ball or swing free.</p>
   </div>
-  <figure class="hw-fig"><div class="hw-pic">${pic('lifestyle-wedge', 'Golfer chipping with a steel wedge wearing the Inside 75 V2 clip into a hitting net with an iPad safely positioned to the side')}</div><figcaption>Always check ceiling clearance, keep people, pets, and your tablet out of the swing arc, and use a hitting net when striking real balls with a wedge.</figcaption></figure>
+  <figure class="hw-fig"><div class="hw-pic">${pic('lifestyle-wedge', 'Golfer chipping with a steel wedge wearing the Inside 75 V2 clip into a hitting net with an iPad resting safely across from the golfer stance')}</div><figcaption>Always set your tablet across from your stance out of the swing arc, check ceiling clearance, and use a hitting net when striking real balls with a wedge.</figcaption></figure>
 </div></section>
 
 <section class="sec white" id="troubleshoot"><div class="in">
@@ -1026,7 +1026,7 @@ ${header('compare', true)}
         <ul class="verdict-list">
           <li>${I.check}<span>Lower scores where 60%+ of strokes happen, from 3-foot putts out to 75-yard pitches.</span></li>
           <li>${I.check}<span>Practice with your own real putter and wedge instead of a short weighted stick.</span></li>
-          <li>${I.check}<span>Play real breaking USGS greens in any living room with real balls or dry swings.</span></li>
+          <li>${I.check}<span>Play real breaking USGS greens in any living room, with real balls or without.</span></li>
           <li>${I.check}<span>Pass clubs around with up to four friends on one tablet, with zero subscription required.</span></li>
         </ul>
         <div class="verdict-cta"><a class="btn light" href="${page('/kit')}">Shop Clip Kits, From $${P.one.price}</a></div>
