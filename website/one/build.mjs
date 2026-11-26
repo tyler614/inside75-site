@@ -142,7 +142,7 @@ const FACTS = [
 
 const QA = [
   ['What exactly is Inside 75?', 'Inside 75 is an at-home short-game golf system built around a tiny wireless sensor that clamps onto your own putter and wedge. Take a real stroke on your living room rug or into a practice net, and the free tablet app plays your putt, chip, or pitch right away across real elevation-mapped greens.'],
-  ['How does Early Access work?', 'We build Inside 75 in controlled small batches in Ohio so every kit ships on time and gets real support. Join the Early Access waitlist to claim a spot in the next batch, or use a link from anyone who already owns Inside 75 to skip the waitlist and order today. Every buyer receives 3 Early Access links to share with friends.'],
+  ['How does Early Access work?', 'We build Inside 75 in controlled small batches in Ohio so every kit ships on time and gets real support. Join the Early Access waitlist to claim a spot in the next batch, or use a link from anyone who already owns Inside 75 to skip the waitlist and order today. Every buyer receives 5 Early Access links to share with friends.'],
   ['How is Inside 75 different from a golf simulator or launch monitor?', 'Launch monitors cost $2,000 to $15,000+, track a flying golf ball with cameras or radar, and usually require a dedicated room, hitting bay, and screen. Inside 75 reads your club instead of the ball, so you get accurate, instant shot feedback for putts, chips, and pitches inside 75 yards right in your living room for $119 to $229, with or without a real golf ball.'],
   ['Do I need to hit a real golf ball?', 'No, either way works naturally. Putt real golf balls across your rug, chip real balls into a net, or take practice swings with no ball at all without changing a single setting.'],
   ['Do I use my own real putter and wedge?', 'Yes. Unlike toy swing sticks, Inside 75 clamps directly onto the steel shaft of the putter or wedge already in your bag, just above the clubhead. Putting and chipping with your own clubs builds real feel that transfers straight to the course.'],
@@ -275,7 +275,7 @@ const eaModal = EA_ON ? `<div class="ea-modal-bg" id="eaModal" hidden role="dial
       <div class="field"><label for="eaCodeIn">Early Access code</label><input id="eaCodeIn" name="code" type="text" required autocomplete="off" placeholder="e.g. I75-ABCD12" style="text-transform:uppercase;letter-spacing:0.04em;font-weight:600"></div>
       <button type="submit" class="btn primary" style="width:100%">Unlock Ordering</button>
       <p class="msg" id="eaCodeMsg" role="status" hidden></p>
-      <p style="font-size:13px;color:var(--ink-3);margin:12px 0 0">Every Inside 75 owner receives 3 Early Access links to share with friends so they can skip the waitlist.</p>
+      <p style="font-size:13px;color:var(--ink-3);margin:12px 0 0">Every Inside 75 owner receives 5 Early Access links to share with friends so they can skip the waitlist.</p>
     </form>
   </div>
 </div>` : '';
@@ -467,7 +467,7 @@ function eaLocalVerify(raw){
 }
 function eaLocalMint(seed){
   var out=[];
-  for(var k=0;k<3;k++){
+  for(var k=0;k<5;k++){
     var h=2166136261,s=String(seed)+':pass:'+k+':i75-ea-v2';
     for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)>>>0;}
     var body='';
@@ -535,7 +535,7 @@ function setEaTab(tab){
   if(eaMT)eaMT.textContent=isCode?'Enter Early Access Code':'Join Early Access';
   if(eaMS)eaMS.textContent=isCode
     ?'Enter a code from a friend who owns Inside 75 (or your batch invite) to unlock ordering right now.'
-    :'We ship Inside 75 in small batches from Ohio. Join the list for the next drop, or ask any owner for one of their 3 Early Access links to skip the line.';
+    :'We ship Inside 75 in small batches from Ohio. Join the list for the next drop, or ask any owner for one of their 5 Early Access links to skip the line.';
 }
 function openEaModal(tab,kit){
   if(!eaM)return;
@@ -567,7 +567,7 @@ if(eaWF){
     if(btn)btn.disabled=true;
     var src=('ea-waitlist:'+kt).slice(0,64);
     function ok(){
-      if(msg){msg.textContent='You are on the Early Access list. Know someone who owns Inside 75? Ask them for one of their 3 Early Access links to skip the waitlist today.';msg.className='msg ok';msg.hidden=false;}
+      if(msg){msg.textContent='You are on the Early Access list. Know someone who owns Inside 75? Ask them for one of their 5 Early Access links to skip the waitlist today.';msg.className='msg ok';msg.hidden=false;}
       if(btn)btn.textContent='On the List';
       i75track('generate_lead',{source:src});
     }
@@ -866,7 +866,7 @@ ${header('home', true)}
   <div class="sec-head center">
     <div class="eyebrow">${EA_ON ? 'Early Access · ' + esc(EA.batchLabel || 'Batch 2') : 'Choose your kit'}</div>
     <h2>Ready to play 18 in your living room?</h2>
-    <p class="lead">Every kit includes assembled V2 hardware, the hex key, free tablet app access, and a 30-day home trial. Every buyer also gets 3 Early Access links to share with friends.</p>
+    <p class="lead">Every kit includes assembled V2 hardware, the hex key, free tablet app access, and a 30-day home trial. Every buyer also gets 5 Early Access links to share with friends.</p>
   </div>
   ${EA_ON ? `<div class="ea-strip" data-ea-locked>
     <div class="ea-strip-copy"><b>Small-Batch Early Access</b><span>Join the waitlist for our next Ohio batch, or enter an owner's code to skip the line and order today.</span></div>
@@ -1123,7 +1123,7 @@ ${header('kit', false)}
     </div>
     <div class="ea-pdp-box unlocked" data-ea-unlocked hidden>
       <b>Early Access Unlocked (<span data-ea-code-label></span>)</b>
-      <p style="margin:0">Your spot in ${esc(EA.batchLabel || 'Batch 2')} is ready. Every order also includes 3 Early Access links to share with friends.</p>
+      <p style="margin:0">Your spot in ${esc(EA.batchLabel || 'Batch 2')} is ready. Every order also includes 5 Early Access links to share with friends.</p>
     </div>` : ''}
 
     <div class="faq-list" style="margin-top:18px">
@@ -1348,9 +1348,17 @@ ${header('checkout', false)}
     <p id="doneSub" style="color:var(--ink-2);max-width:36em;margin:0 auto 14px">Thank you for your Inside 75 order. Your reservation reference is <strong class="mono" id="doneRef">I75-0000</strong>.</p>
     <p style="font-size:14.5px;color:var(--ink-2);max-width:38em;margin:0 auto 18px">We have recorded your kit selection and shipping details. We will email your confirmation and secure payment &amp; tracking link to <strong id="doneEmail"></strong> as soon as your ${esc(EA.batchLabel || 'Batch 2')} kit is ready to pack. Questions? Write <a href="mailto:${MAIL}">${MAIL}</a>.</p>
     <div class="ea-share-box" id="eaShareBox" hidden>
-      <h3>Share Early Access with 3 buddies</h3>
-      <p>Every kit comes with 3 Early Access links so your golf friends can skip the waitlist and order right away.</p>
+      <h3>Share Early Access with 5 friends</h3>
+      <p>Every kit comes with 5 Early Access links so your golf buddies can skip the waitlist and order right away. These links also stay tied to your Inside 75 account.</p>
       <div id="eaShareList"></div>
+    </div>
+    <div class="ea-share-box" style="background:var(--navy);color:#F6F5F0;border-color:rgba(255,255,255,0.12)">
+      <h3 style="color:#fff">Download the Inside 75 Tablet App</h3>
+      <p style="color:rgba(246,245,240,0.82)">Grab the app on your iPad or Android tablet now and sign in with <strong id="doneAppEmail" style="color:#fff">your order email</strong> so your account and Early Access links are ready the moment your kit arrives.</p>
+      <div class="store-badges" style="margin-top:12px">
+        ${cfg.appStore ? `<a class="store-badge" href="${esc(cfg.appStore)}">Download for iPad</a>` : `<span class="store-badge">iPad App <em>Link Emailed</em></span>`}
+        ${cfg.googlePlay ? `<a class="store-badge" href="${esc(cfg.googlePlay)}">Download for Android</a>` : `<span class="store-badge">Android Tablet <em>Link Emailed</em></span>`}
+      </div>
     </div>
     <a class="btn primary" href="${page('/')}">Return to 75golf.com</a>
   </div>
@@ -1510,6 +1518,7 @@ ${coreJs}
       main.hidden=true;done.hidden=false;
       document.getElementById('doneRef').textContent=ref;
       document.getElementById('doneEmail').textContent=email;
+      var dae=document.getElementById('doneAppEmail');if(dae&&email)dae.textContent=email;
       showShareLinks(ref);
     }
     if(!C.signupEndpoint){finish();return;}

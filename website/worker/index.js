@@ -117,7 +117,7 @@ export default {
       try {
         const body = await request.json();
         const seed = String(body?.ref || Date.now()).slice(0, 64);
-        const codes = mintCodes(seed, 3, env);
+        const codes = mintCodes(seed, 5, env);
         return json({ codes });
       } catch {
         return json({ codes: [] }, 400);
