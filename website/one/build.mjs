@@ -38,14 +38,15 @@ function dims(f) {
   }
   return [1200, 800];
 }
+const ASSET_V = 'v2d';
 const file = name => ['jpg', 'png'].map(e => `${name}.${e}`).find(has);
 function pic(name, alt, { cls = '', eager = false, root = false } = {}) {
   const f = file(name);
   if (!f) { missing.push(`${name}.jpg`); return ''; }
   const [w, h] = dims(f);
   const pre = root ? '/assets/' : 'assets/';
-  const im = `<img${cls ? ` class="${cls}"` : ''} src="${pre}${f}" alt="${esc(alt)}" width="${w}" height="${h}"${eager ? ' fetchpriority="high"' : ' loading="lazy" decoding="async"'}>`;
-  return has(`${name}.webp`) ? `<picture><source srcset="${pre}${name}.webp" type="image/webp">${im}</picture>` : im;
+  const im = `<img${cls ? ` class="${cls}"` : ''} src="${pre}${f}?v=${ASSET_V}" alt="${esc(alt)}" width="${w}" height="${h}"${eager ? ' fetchpriority="high"' : ' loading="lazy" decoding="async"'}>`;
+  return has(`${name}.webp`) ? `<picture><source srcset="${pre}${name}.webp?v=${ASSET_V}" type="image/webp">${im}</picture>` : im;
 }
 
 // Inline brand lockup using solid navy Inside 75 grid mark + crisp wordmark (footer gets subtle pin-square accent on dark navy)
@@ -751,12 +752,13 @@ ${header('home', true)}
 <section class="sec stone" id="hardware"><div class="in hw-grid">
   <div class="stage-card">
     <div class="stage-view">
-      <video id="v2Spin" class="contain" src="assets/clip-360.mp4" poster="assets/clip-360.jpg" data-auto muted loop playsinline preload="metadata" aria-label="360 degree turntable view of the Inside 75 V2 clip sensor"></video>
-      <img id="v2Img" src="assets/v2-putter.jpg" alt="Inside 75 V2 clip mounted on a golf club" hidden>
-      <span class="stage-badge" id="stageBadge">V2 Hardware · 360° View</span>
+      <model-viewer id="v2Model" src="assets/v2-clip.glb?v=${ASSET_V}" poster="assets/clip-360.jpg?v=${ASSET_V}" alt="Interactive 3D model of the Inside 75 V2 clip sensor" camera-controls auto-rotate auto-rotate-delay="1200" rotation-per-second="26deg" shadow-intensity="0.85" shadow-softness="0.9" exposure="1.08" environment-image="neutral" camera-orbit="32deg 74deg 112%" min-camera-orbit="auto auto 72%" max-camera-orbit="auto auto 185%" touch-action="pan-y" interaction-prompt="none"></model-viewer>
+      <img id="v2Img" src="assets/v2-putter.jpg?v=${ASSET_V}" alt="Inside 75 V2 clip mounted on a golf club" hidden>
+      <span class="stage-badge" id="stageBadge">V2 Hardware · Interactive 3D</span>
+      <span class="stage-hint" id="stageHint">Drag or touch to rotate in 3D</span>
     </div>
     <div class="angle-pills" role="group" aria-label="Inspect V2 hardware views">
-      <button type="button" data-stage="spin" data-label="V2 Hardware · 360° View" aria-pressed="true">360° Spin</button>
+      <button type="button" data-stage="3d" data-label="V2 Hardware · Interactive 3D" aria-pressed="true">3D View</button>
       <button type="button" data-stage="clubs-pair" data-label="V2 Clips · Putter + Wedge" aria-pressed="false">Putter + Wedge</button>
       <button type="button" data-stage="v2-putter" data-label="V2 Clip · On Putter Shaft" aria-pressed="false">On Putter</button>
       <button type="button" data-stage="v2-wedge" data-label="V2 Clip · On Wedge Shaft" aria-pressed="false">On Wedge</button>
@@ -1031,15 +1033,16 @@ ${coreJs}
     });
   });
 
-  // V2 360 & angle showcase switcher
-  var sp=document.getElementById('v2Spin'),im=document.getElementById('v2Img'),sb=document.getElementById('stageBadge');
+  // V2 interactive 3D & angle showcase switcher
+  var mv=document.getElementById('v2Model'),im=document.getElementById('v2Img'),sb=document.getElementById('stageBadge'),sh=document.getElementById('stageHint');
+  if(mv&&sh){mv.addEventListener('pointerdown',function(){sh.hidden=true;},{once:true});}
   document.querySelectorAll('[data-stage]').forEach(function(b){
     b.addEventListener('click',function(){
       document.querySelectorAll('[data-stage]').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});
       var k=b.getAttribute('data-stage');
       if(sb)sb.textContent=b.getAttribute('data-label')||'';
-      if(k==='spin'){if(sp){sp.hidden=false;i75playVid(sp);}if(im)im.hidden=true;}
-      else{if(sp){sp.pause();sp.hidden=true;}if(im){im.src='assets/'+k+'.jpg';im.hidden=false;}}
+      if(k==='3d'){if(mv)mv.hidden=false;if(im)im.hidden=true;if(sh)sh.hidden=false;}
+      else{if(mv)mv.hidden=true;if(sh)sh.hidden=true;if(im){im.src='assets/'+k+'.jpg?v=${ASSET_V}';im.hidden=false;}}
     });
   });
 
@@ -1067,7 +1070,7 @@ ${coreJs}
 // ---------- KIT PDP PAGE (/kit) ----------
 const pdpGallery = [
   { id: 'kit-two', type: 'img', label: 'Two-Clip Kit', alt: P.two.alt },
-  { id: 'clip-360', type: 'vid', label: '360° Spin', alt: '360 degree spin of the Inside 75 V2 clip' },
+  { id: 'clip-360', type: '3d', label: 'Interactive 3D', alt: 'Interactive 3D model of the Inside 75 V2 clip' },
   { id: 'clubs-pair', type: 'img', label: 'Putter & Wedge', alt: 'Inside 75 V2 clips mounted on both a putter and a sand wedge' },
   { id: 'hero-living', type: 'img', label: 'At Home', alt: 'Putting at home with the Inside 75 V2 clip and iPad' },
   { id: 'kit-one', type: 'img', label: 'One-Clip Kit', alt: P.one.alt },
@@ -1082,11 +1085,11 @@ ${header('kit', false)}
 <section class="pdp"><div class="in pdp-grid">
   <div class="gal">
     <div class="thumbs" role="group" aria-label="Product gallery">
-      ${pdpGallery.map((g, i) => `<button type="button" aria-pressed="${i === 0}" data-gtype="${g.type}" data-gid="${g.id}" data-galt="${esc(g.alt)}" aria-label="${esc(g.label)}"><img src="assets/${g.id}.jpg" alt="" loading="lazy">${g.type === 'vid' ? '<span class="tag360">360°</span>' : ''}</button>`).join('')}
+      ${pdpGallery.map((g, i) => `<button type="button" aria-pressed="${i === 0}" data-gtype="${g.type}" data-gid="${g.id}" data-galt="${esc(g.alt)}" aria-label="${esc(g.label)}"><img src="assets/${g.id}.jpg?v=${ASSET_V}" alt="" loading="lazy">${g.type === '3d' ? '<span class="tag360">3D</span>' : ''}</button>`).join('')}
     </div>
     <figure class="gmain">
-      <img id="gimg" src="assets/kit-two.jpg" alt="${esc(P.two.alt)}" fetchpriority="high">
-      <video id="gvid" src="assets/clip-360.mp4" poster="assets/clip-360.jpg" muted loop playsinline preload="none" hidden aria-label="360 degree spin of the Inside 75 V2 clip"></video>
+      <img id="gimg" src="assets/kit-two.jpg?v=${ASSET_V}" alt="${esc(P.two.alt)}" fetchpriority="high">
+      <model-viewer id="gmodel" src="assets/v2-clip.glb?v=${ASSET_V}" poster="assets/clip-360.jpg?v=${ASSET_V}" alt="Interactive 3D model of the Inside 75 V2 clip" camera-controls auto-rotate auto-rotate-delay="1200" rotation-per-second="26deg" shadow-intensity="0.85" shadow-softness="0.9" exposure="1.08" environment-image="neutral" camera-orbit="32deg 74deg 112%" min-camera-orbit="auto auto 72%" max-camera-orbit="auto auto 185%" touch-action="pan-y" interaction-prompt="none" hidden></model-viewer>
     </figure>
   </div>
   <div>
@@ -1162,12 +1165,12 @@ ${coreJs}
 (function(){
   var P={two:{p:${P.two.price},img:'kit-two',box:${JSON.stringify(P.two.box)},ship:${JSON.stringify(P.two.shipping + ' · 30-day home trial · 1-year warranty')}},one:{p:${P.one.price},img:'kit-one',box:${JSON.stringify(P.one.box)},ship:${JSON.stringify(P.one.shipping + ' · 30-day home trial · 1-year warranty')}}};
   var cur='two',q=1;
-  var gi=document.getElementById('gimg'),gv=document.getElementById('gvid');
+  var gi=document.getElementById('gimg'),gm=document.getElementById('gmodel');
   var th=[].slice.call(document.querySelectorAll('.thumbs button'));
   function showMedia(type,id,alt){
     th.forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-gid')===id?'true':'false');});
-    if(type==='vid'){if(gi)gi.hidden=true;if(gv){gv.hidden=false;i75playVid(gv);}}
-    else{if(gv){gv.pause();gv.hidden=true;}if(gi){gi.src='assets/'+id+'.jpg';gi.alt=alt||'Inside 75 Clip Kit';gi.hidden=false;}}
+    if(type==='3d'){if(gi)gi.hidden=true;if(gm)gm.hidden=false;}
+    else{if(gm)gm.hidden=true;if(gi){gi.src='assets/'+id+'.jpg?v=${ASSET_V}';gi.alt=alt||'Inside 75 Clip Kit';gi.hidden=false;}}
   }
   th.forEach(function(b){b.addEventListener('click',function(){showMedia(b.getAttribute('data-gtype'),b.getAttribute('data-gid'),b.getAttribute('data-galt'));});});
   function sync(){
@@ -1718,7 +1721,7 @@ const crumbs = (name, p) => ({
   ],
 });
 
-function head({ title, desc, p, ogTitle, lds = [], root = false, noindex = false, lead = '' }) {
+function head({ title, desc, p, ogTitle, lds = [], root = false, noindex = false, lead = '', modelViewer = false }) {
   const a = root ? '/assets/' : 'assets/';
   const fonts = `@font-face{font-family:Archivo;src:url(${a}fonts/archivo.woff2) format("woff2");font-weight:500 700;font-style:normal;font-display:swap}@font-face{font-family:"Public Sans";src:url(${a}fonts/public-sans.woff2) format("woff2");font-weight:400 700;font-style:normal;font-display:swap}`;
   return `<title>${esc(title)}</title>
@@ -1731,21 +1734,21 @@ ${noindex ? '<meta name="robots" content="noindex,follow">' : `<link rel="canoni
 <meta property="og:url" content="${SITE}${p}">
 <meta property="og:title" content="${esc(ogTitle || title)}">
 <meta property="og:description" content="${esc(desc)}">
-<meta property="og:image" content="${SITE}/assets/share.jpg">
+<meta property="og:image" content="${SITE}/assets/share.jpg?v=${ASSET_V}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Golfer putting at home with their own putter fitted with the Inside 75 V2 clip and an iPad displaying a sunlit 3D golf green">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${esc(ogTitle || title)}">
 <meta name="twitter:description" content="${esc(desc)}">
-<meta name="twitter:image" content="${SITE}/assets/share.jpg">
+<meta name="twitter:image" content="${SITE}/assets/share.jpg?v=${ASSET_V}">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" type="image/png" sizes="96x96" href="${a}icon-96.png">
 <link rel="icon" type="image/svg+xml" href="${a}icon.svg">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-${lead && has(lead) ? `<link rel="preload" as="image" href="${a}${lead}" fetchpriority="high">\n` : ''}<link rel="preload" as="font" type="font/woff2" href="${a}fonts/archivo.woff2" crossorigin>
+${lead && has(lead) ? `<link rel="preload" as="image" href="${a}${lead}?v=${ASSET_V}" fetchpriority="high">\n` : ''}<link rel="preload" as="font" type="font/woff2" href="${a}fonts/archivo.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="${a}fonts/public-sans.woff2" crossorigin>
-<style>${fonts}${css}</style>
+${modelViewer ? '<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>\n' : ''}<style>${fonts}${css}</style>
 ${analyticsSnippet()}
 ${lds.map(ld).join('\n')}`;
 }
@@ -1768,6 +1771,7 @@ const pages = {
     desc: 'Clamp the sleek Inside 75 V2 wireless sensor onto your own putter and wedge. Accurate, instant short-game golf inside 75 yards on real breaking greens on your iPad or Android tablet.',
     p: '/',
     lead: has('hero-living.webp') ? 'hero-living.webp' : 'hero-living.jpg',
+    modelViewer: true,
     lds: [{ '@context': 'https://schema.org', '@graph': [orgLd, siteLd, appLd] }, productLd, videoLd, faqLd],
   }), homeBody),
   'kit.html': doc(head({
@@ -1775,6 +1779,7 @@ const pages = {
     desc: 'Join Early Access or enter an owner code for the Inside 75 V2 Clip Kit: One Clip ($119) or Two Clips for putter and wedge ($229, free US shipping). Includes free tablet app, 30-day home trial, and 1-year warranty.',
     p: '/kit',
     lead: 'kit-two.jpg',
+    modelViewer: true,
     lds: [productLd, crumbs('Clip Kit', '/kit')],
   }), kitBody),
   'how-it-works.html': doc(head({

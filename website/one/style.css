@@ -425,10 +425,30 @@ h3 { font-size: clamp(20px, 1.9vw, 24px); line-height: 1.2; letter-spacing: -0.0
   background: var(--stone);
   aspect-ratio: 4/3;
 }
-.stage-view video, .stage-view img {
+.stage-view video, .stage-view img, .stage-view model-viewer {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
+}
+.stage-view model-viewer {
+  background: radial-gradient(circle at 50% 42%, #FAF9F6 0%, #ECECE6 100%);
+  cursor: grab;
+  --poster-color: transparent;
+}
+.stage-view model-viewer:active { cursor: grabbing; }
+.stage-hint {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: rgba(11, 26, 51, 0.72);
+  color: #fff;
+  font: 500 12px Archivo, "Public Sans", system-ui, sans-serif;
+  letter-spacing: 0.02em;
+  pointer-events: none;
+  backdrop-filter: blur(6px);
 }
 .stage-view video.contain, .stage-view img.contain { object-fit: contain; background: #F5F5F5; }
 .stage-badge {
@@ -789,8 +809,10 @@ h3 { font-size: clamp(20px, 1.9vw, 24px); line-height: 1.2; letter-spacing: -0.0
 .thumbs img { width: 100%; height: 100%; object-fit: cover; }
 .thumbs .tag360 { position: absolute; inset: auto 4px 4px 4px; background: rgba(11, 26, 51, 0.85); color: #fff; font: 600 10px Archivo, "Public Sans", system-ui, sans-serif; border-radius: 4px; padding: 2px 0; text-align: center; }
 .gmain { background: var(--stone); border-radius: var(--radius); overflow: hidden; aspect-ratio: 4/3; margin: 0; position: relative; }
-.gmain img, .gmain video { width: 100%; height: 100%; object-fit: cover; }
+.gmain img, .gmain video, .gmain model-viewer { width: 100%; height: 100%; object-fit: cover; display: block; }
 .gmain video { object-fit: contain; background: #F5F5F5; }
+.gmain model-viewer { background: radial-gradient(circle at 50% 42%, #FAF9F6 0%, #ECECE6 100%); cursor: grab; --poster-color: transparent; }
+.gmain model-viewer:active { cursor: grabbing; }
 .crumb { font-size: 13.5px; color: var(--ink-2); margin: 0 0 10px; }
 .crumb a { text-decoration: none; }
 .crumb a:hover { text-decoration: underline; }

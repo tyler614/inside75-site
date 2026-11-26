@@ -12,7 +12,8 @@ export function linkProblems(out) {
     for (const m of html[f].matchAll(/\s(?:href|src|poster|srcset)="([^"]+)"/g)) {
       const u = m[1];
       if (/^(https?:|mailto:|data:|tel:)/.test(u)) continue;
-      const [p, hash] = u.split('#');
+      const [pRaw, hash] = u.split('#');
+      const p = pRaw.split('?')[0];
       let file = f;
       if (p) {
         const clean = p.replace(/^\.\//, '').replace(/^\//, '') || 'index.html';
