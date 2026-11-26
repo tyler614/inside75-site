@@ -626,6 +626,7 @@ h3 { font-size: clamp(20px, 1.9vw, 24px); line-height: 1.2; letter-spacing: -0.0
   margin-bottom: 28px;
 }
 .course-card {
+  margin: 0;
   border-radius: var(--radius);
   overflow: hidden;
   background: var(--surface);
@@ -1185,6 +1186,9 @@ h3 { font-size: clamp(20px, 1.9vw, 24px); line-height: 1.2; letter-spacing: -0.0
 .ea-link-row button.copied { background: var(--pine); border-color: var(--pine); color: #fff; }
 
 /* Responsive */
+@media (max-width: 1120px) {
+  .courses-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 @media (max-width: 1020px) {
   .hero-grid, .play-grid, .hw-grid, .banner-split, .needs-grid, .verdict-grid, .app-grid, .notify-card, .pdp-grid, .chk-grid, .hw-row {
     grid-template-columns: minmax(0, 1fr);
