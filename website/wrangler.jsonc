@@ -3,6 +3,10 @@
   "name": "inside75",
   "main": "worker/index.js",
   "compatibility_date": "2026-11-26",
+  "routes": [
+    { "pattern": "75golf.com", "custom_domain": true },
+    { "pattern": "www.75golf.com", "custom_domain": true }
+  ],
   "assets": {
     "directory": "./one/dist",
     "binding": "ASSETS",

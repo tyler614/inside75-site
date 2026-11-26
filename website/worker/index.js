@@ -39,6 +39,12 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
+    // Canonical 301 redirect www.75golf.com -> 75golf.com for clean SEO
+    if (url.hostname === 'www.75golf.com') {
+      url.hostname = '75golf.com';
+      return Response.redirect(url.toString(), 301);
+    }
+
     if (url.pathname === '/api/checkout' && request.method === 'POST') {
       if (!env.STRIPE_SECRET_KEY) {
         return new Response(JSON.stringify({ error: 'stripe_not_configured' }), {
