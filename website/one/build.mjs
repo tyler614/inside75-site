@@ -38,7 +38,7 @@ function dims(f) {
   }
   return [1200, 800];
 }
-const ASSET_V = 'v2d';
+const ASSET_V = 'v2e';
 const file = name => ['jpg', 'png'].map(e => `${name}.${e}`).find(has);
 function pic(name, alt, { cls = '', eager = false, root = false } = {}) {
   const f = file(name);
@@ -64,6 +64,16 @@ const BRAND_SVG = `<svg class="brand-svg" viewBox="0 0 132 28" role="img" aria-l
   </g>
   <text class="brand-text" x="32" y="20.5" font-family="Archivo,system-ui,sans-serif" font-weight="700" font-size="19.5" letter-spacing="-0.03em" fill="#0B1A33">Inside 75</text>
 </svg>`;
+
+const APPLE_SVG = `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.96 6.33c.67-.81 1.12-1.94 1-3.08-.96.04-2.13.64-2.82 1.45-.61.7-.115 1.85-1.01 2.96 1.08.08 2.17-.52 2.83-1.33z"/></svg>`;
+const GPLAY_SVG = `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M3.6 2.3c-.3.3-.5.8-.5 1.4v16.6c0 .6.2 1.1.5 1.4l.1.1 9.3-9.3v-.2L3.7 2.2l-.1.1z"/><path fill="#34A853" d="M16.1 15.6l-3.1-3.1v-.2l3.1-3.1.1.1 3.7 2.1c1.1.6 1.1 1.6 0 2.2l-3.7 2.1-.1-.1z"/><path fill="#FBBC05" d="M16.2 15.5L13 12.3 3.6 21.7c.3.4.9.4 1.6 0l11-6.2z"/><path fill="#EA4335" d="M16.2 9.1L5.2 2.9c-.7-.4-1.3-.3-1.6 0L13 12.3l3.2-3.2z"/></svg>`;
+const storeBadge = (store, url) => {
+  const isApple = store === 'apple';
+  const inner = `${isApple ? APPLE_SVG : GPLAY_SVG}<span class="store-btn-txt"><small>${isApple ? 'Download on the' : 'GET IT ON'}</small><strong>${isApple ? 'App Store' : 'Google Play'}</strong></span>`;
+  return url
+    ? `<a class="store-btn" href="${esc(url)}" target="_blank" rel="noopener">${inner}</a>`
+    : `<span class="store-btn" aria-label="${isApple ? 'Download on the App Store' : 'Get it on Google Play'}">${inner}</span>`;
+};
 
 const ic = d => `<svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
 const I = {
@@ -950,41 +960,40 @@ ${header('home', true)}
     <h2>What you need, and what you can skip.</h2>
   </div>
   <div class="needs-grid">
-    <div class="need-card">
-      <h3>What you need</h3>
-      <ul class="need-list yes">
-        <li>${I.check}<span><b>Your own steel-shaft putter or wedge.</b> Right-handed clubs only for now.</span></li>
-        <li>${I.check}<span><b>A supported tablet.</b> Works with ${TABLETS_SIMPLE}. Phones are not supported yet.</span></li>
-        <li>${I.check}<span><b>Home Wi-Fi.</b> Both your tablet and clip connect to the same home network.</span></li>
-        <li>${I.check}<span><b>Any standard USB-C cable</b> for charging (not included in the box).</span></li>
-        <li>${I.check}<span><b>Safe space to swing.</b> Add an optional practice net if hitting real balls with a wedge.</span></li>
-      </ul>
+    <div class="skip-card">
+      <div class="skip-media">${pic('mount-hands', 'Tightening the compact Inside 75 V2 clip onto a putter shaft above a living room putting mat')}</div>
+      <div class="skip-body">
+        <div class="skip-kicker">What you can skip</div>
+        <div class="skip-tags">
+          <span>${I.x}No launch monitor</span>
+          <span>${I.x}No putting mat</span>
+          <span>${I.x}No VR or toy stick</span>
+          <span>${I.x}No required subscription</span>
+        </div>
+      </div>
     </div>
-    <div class="need-card">
-      <h3>What you do NOT need</h3>
-      <ul class="need-list no">
-        <li>${I.x}<span><b>No launch monitor or overhead camera</b></span></li>
-        <li>${I.x}<span><b>No putting mat or turf buildout</b></span></li>
-        <li>${I.x}<span><b>No VR headset or toy plastic club</b></span></li>
-        <li>${I.x}<span><b>No required yearly subscription</b></span></li>
-      </ul>
-    </div>
+    <ul class="need-rows">
+      <li><div class="need-ico">${I.club}</div><div><b>Your own steel-shaft putter or wedge</b><span>Right-handed clubs only for now. Clamps right above the clubhead in two minutes.</span></div></li>
+      <li><div class="need-ico">${I.tablet}</div><div><b>A supported tablet</b><span>Works with ${TABLETS_SIMPLE}. Phones are not supported yet.</span></div></li>
+      <li><div class="need-ico">${I.wifi}</div><div><b>Home Wi-Fi</b><span>Connects once during setup so your tablet and clip pair automatically every time.</span></div></li>
+      <li><div class="need-ico">${I.bolt}</div><div><b>Any USB-C cable &amp; safe swing room</b><span>Recharges with any USB-C cable (not in the box). Add a net if hitting real balls with a wedge.</span></div></li>
+    </ul>
   </div>
 </div></section>
 
 <section class="sec navy" id="app"><div class="in app-grid">
   <div>
     <div class="eyebrow">The Inside 75 Tablet App</div>
-    <h2>Free to play forever. Upgrade only if you want more courses.</h2>
+    <h2>Free to play. Upgrade only if you want more courses.</h2>
     <p class="lead">Download Inside 75 on your iPad or Android tablet. Every hardware kit unlocks a full 18-hole course and all four game modes with zero monthly fees.</p>
     <div class="store-badges">
-      ${cfg.appStore ? `<a class="store-badge" href="${esc(cfg.appStore)}">App Store (iPad)</a>` : `<span class="store-badge">App Store (iPad) <em>Beta / Launching</em></span>`}
-      ${cfg.googlePlay ? `<a class="store-badge" href="${esc(cfg.googlePlay)}">Google Play (Android)</a>` : `<span class="store-badge">Google Play (Tablet) <em>Beta / Launching</em></span>`}
+      ${storeBadge('apple', cfg.appStore)}
+      ${storeBadge('play', cfg.googlePlay)}
     </div>
   </div>
   <div class="tier-cards">
     <div class="tier">
-      <div class="tier-row"><b>Included Free</b><em>$0 / forever</em></div>
+      <div class="tier-row"><b>Included Free</b><em>Included ($0)</em></div>
       <p>1 complete 18-hole course, all 4 game modes (Short Game, Putting, Closest to the Pin, Practice), 1 to 4 players, Soft / Standard / Tour green speeds, and free clip firmware updates.</p>
     </div>
     <div class="tier">
@@ -996,8 +1005,8 @@ ${header('home', true)}
 
 <section class="sec white" id="faq"><div class="in faq-wrap">
   <div class="sec-head center">
-    <div class="eyebrow">Questions &amp; Answers</div>
-    <h2>Everything golfers ask before buying.</h2>
+    <div class="eyebrow">FAQ</div>
+    <h2>Frequently asked questions.</h2>
   </div>
   <div class="faq-list">
     ${QA.map(([q, a], idx) => `<details${idx < 2 ? ' open' : ''}><summary>${q}</summary><p>${a}</p></details>`).join('\n    ')}
@@ -1374,8 +1383,8 @@ ${header('checkout', false)}
       <h3 style="color:#fff">Download the Inside 75 Tablet App</h3>
       <p style="color:rgba(246,245,240,0.82)">Grab the app on your iPad or Android tablet now and sign in with <strong id="doneAppEmail" style="color:#fff">your order email</strong> so your account and Early Access links are ready the moment your kit arrives.</p>
       <div class="store-badges" style="margin-top:12px">
-        ${cfg.appStore ? `<a class="store-badge" href="${esc(cfg.appStore)}">Download for iPad</a>` : `<span class="store-badge">iPad App <em>Link Emailed</em></span>`}
-        ${cfg.googlePlay ? `<a class="store-badge" href="${esc(cfg.googlePlay)}">Download for Android</a>` : `<span class="store-badge">Android Tablet <em>Link Emailed</em></span>`}
+        ${storeBadge('apple', cfg.appStore)}
+        ${storeBadge('play', cfg.googlePlay)}
       </div>
     </div>
     <a class="btn primary" href="${page('/')}">Return to 75golf.com</a>
@@ -1421,7 +1430,7 @@ ${header('checkout', false)}
       <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--line);display:grid;gap:10px;font-size:14px;color:var(--ink-2)">
         <div style="display:flex;gap:8px;align-items:center">${I.shield}<span>30-day home trial &amp; hassle-free returns</span></div>
         <div style="display:flex;gap:8px;align-items:center">${I.bolt}<span>1-year limited hardware warranty</span></div>
-        <div style="display:flex;gap:8px;align-items:center">${I.tablet}<span>Free tablet app included forever</span></div>
+        <div style="display:flex;gap:8px;align-items:center">${I.tablet}<span>Free tablet app included</span></div>
       </div>
     </div>
   </div>

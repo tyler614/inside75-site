@@ -753,15 +753,53 @@ h3 { font-size: clamp(20px, 1.9vw, 24px); line-height: 1.2; letter-spacing: -0.0
 .verdict-cta { margin-top: auto; padding-top: 24px; }
 
 /* Needs & App */
-.needs-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.85fr); gap: 28px; }
-.need-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; }
-.need-card h3 { margin-bottom: 14px; }
-.need-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
-.need-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 15.5px; color: var(--ink-2); }
-.need-list b { color: var(--ink); }
-.need-list svg { flex: none; margin-top: 3px; }
-.need-list.yes svg { color: var(--pine); }
-.need-list.no svg { color: var(--ink-3); }
+.needs-grid { display: grid; grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr); gap: clamp(24px, 4vw, 48px); align-items: start; }
+.skip-card {
+  background: linear-gradient(160deg, #10244A 0%, #0A172F 100%);
+  color: #F6F5F0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-dark);
+}
+.skip-media { aspect-ratio: 4/3; overflow: hidden; background: #0B1A33; }
+.skip-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.skip-body { padding: 22px 24px 24px; }
+.skip-kicker { font: 600 11.5px Archivo, "Public Sans", sans-serif; letter-spacing: 0.09em; text-transform: uppercase; color: var(--mint); margin-bottom: 12px; }
+.skip-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.skip-tags span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  font-size: 13.5px;
+  color: rgba(246, 245, 240, 0.92);
+}
+.skip-tags svg { color: rgba(255, 255, 255, 0.48); flex: none; width: 14px; height: 14px; }
+.need-rows { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line-strong); }
+.need-rows li {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+  padding: 17px 0;
+  border-bottom: 1px solid var(--line);
+}
+.need-ico {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--stone);
+  border: 1px solid var(--line);
+  color: var(--navy);
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+.need-rows b { display: block; font-family: Archivo, sans-serif; font-size: 16.5px; color: var(--navy); margin-bottom: 2px; }
+.need-rows span { display: block; font-size: 15px; color: var(--ink-2); line-height: 1.5; }
 
 .app-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.95fr); gap: clamp(28px, 5vw, 56px); align-items: center; }
 .tier-cards { display: grid; gap: 14px; }
@@ -775,22 +813,25 @@ h3 { font-size: clamp(20px, 1.9vw, 24px); line-height: 1.2; letter-spacing: -0.0
 .tier b { font-family: Archivo, sans-serif; font-size: 18px; color: #fff; }
 .tier em { font: 600 18px Archivo, "Public Sans", system-ui, sans-serif; font-style: normal; color: var(--mint); }
 .tier p { margin: 0; font-size: 14.5px; color: rgba(246, 245, 240, 0.78); }
-.store-badges { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
-.store-badge {
+.store-badges { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; align-items: center; }
+.store-btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  min-height: 46px;
-  padding: 0 18px;
+  gap: 11px;
+  height: 52px;
+  padding: 0 18px 0 14px;
   border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: #000;
+  border: 1px solid rgba(255, 255, 255, 0.34);
   color: #fff;
   text-decoration: none;
-  font-family: Archivo, sans-serif;
-  font-weight: 600;
-  font-size: 14.5px;
+  transition: transform 0.15s, border-color 0.15s, background 0.15s;
 }
-.store-badge em { font: 500 11px Archivo, "Public Sans", system-ui, sans-serif; font-style: normal; text-transform: uppercase; color: var(--mint); background: rgba(137, 207, 160, 0.16); padding: 3px 7px; border-radius: 5px; }
+a.store-btn:hover { transform: translateY(-1px); border-color: rgba(255, 255, 255, 0.65); background: #0c0c0c; }
+.store-btn svg { width: 24px; height: 24px; flex: none; display: block; }
+.store-btn-txt { display: flex; flex-direction: column; line-height: 1.08; text-align: left; }
+.store-btn-txt small { font: 500 10px/1.1 "Public Sans", -apple-system, sans-serif; letter-spacing: 0.03em; color: rgba(255, 255, 255, 0.86); }
+.store-btn-txt strong { font: 600 17px/1.15 -apple-system, BlinkMacSystemFont, Archivo, sans-serif; letter-spacing: -0.015em; color: #fff; }
 
 /* FAQ */
 .faq-wrap { max-width: 920px; margin: 0 auto; }
