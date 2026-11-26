@@ -79,7 +79,7 @@ const ic = d => `<svg width="18" height="18" viewBox="0 0 20 20" fill="none" str
 const I = {
   check: ic('<path d="M4 10.5 8 14.5 16 5.5"/>'),
   x: ic('<path d="M5 5l10 10M15 5 5 15"/>'),
-  cart: ic('<circle cx="8" cy="17" r="1.4"/><circle cx="15.5" cy="17" r="1.4"/><path d="M2 3h2.5l2 10h9.5l1.8-7H5.2"/>'),
+  cart: ic('<path d="M5 7h10l1 10.5H4L5 7z"/><path d="M7.5 7V5.5a2.5 2.5 0 0 1 5 0V7"/>'),
   menu: ic('<path d="M3 5.5h14M3 10h14M3 14.5h14"/>'),
   club: ic('<path d="M7 2v11.5l-3 3.5h8"/><rect x="8.5" y="5" width="5" height="4.5" rx="1"/>'),
   wifi: ic('<path d="M3 8a10 10 0 0 1 14 0M6 11a6 6 0 0 1 8 0M9 14a2 2 0 0 1 2 0"/>'),
@@ -105,10 +105,9 @@ const P = {
     plays: 'All 4 games, including full Short Game rounds',
     shipping: 'Free US shipping',
     bullets: [
-      '2 Inside 75 V2 wireless shaft sensors (assembled with clamp bolts)',
+      '2 Inside 75 V2 wireless shaft sensors (pre-assembled)',
       'Custom 2 mm hex key in molded presentation tray',
-      'Free Inside 75 tablet app with 1 full 18-hole course & all 4 modes',
-      'Free US ground shipping, 30-day home trial, and 1-year warranty',
+      'Free tablet app with 1 full 18-hole course & all 4 modes',
     ],
     box: 'Two Inside 75 V2 clips (each pre-assembled with two clamp screws) and one 2 mm hex key in the presentation tray. USB-C cable not included.',
   },
@@ -125,10 +124,9 @@ const P = {
     plays: 'Putting, Closest to the Pin, and Practice',
     shipping: '$9 US flat shipping',
     bullets: [
-      '1 Inside 75 V2 wireless shaft sensor (assembled with clamp bolts)',
+      '1 Inside 75 V2 wireless shaft sensor (pre-assembled)',
       'Custom 2 mm hex key in molded presentation tray',
-      'Free Inside 75 tablet app with 1 full 18-hole course & all 4 modes',
-      '30-day home trial and 1-year hardware warranty',
+      'Free tablet app with 1 full 18-hole course & all 4 modes',
     ],
     box: 'One Inside 75 V2 clip (pre-assembled with two clamp screws) and one 2 mm hex key in the presentation tray. USB-C cable not included.',
   },
@@ -191,28 +189,27 @@ const analyticsSnippet = () => {
 };
 
 const promoBar = EA_ON
-  ? `<div class="promo" id="promoBar"><span id="promoText"><strong>Early Access · Small-Batch Release:</strong> ${esc(cfg.shippingNote || 'Free US shipping on Two-Clip Kits.')}</span><button type="button" class="promo-link" data-ea-open="code" id="promoBtn">Have an Early Access code?</button></div>`
-  : `<div class="promo"><strong>Now Open:</strong> ${esc(cfg.shippingNote || 'Free US shipping on the Two-Clip Kit.')} <a href="${page('/kit')}">Shop Kits</a></div>`;
+  ? `<div class="promo" id="promoBar"><span id="promoText"><strong>Early Access · ${esc(EA.batchLabel || 'Batch 2')}</strong></span><button type="button" class="promo-link" data-ea-open="code" id="promoBtn">Have a code?</button></div>`
+  : `<div class="promo"><strong>Now Open:</strong> Free US shipping on Two-Clip Kits. <a href="${page('/kit')}">Shop Kits</a></div>`;
 
 const header = (here) => `${promoBar}
 <header class="bar"><div class="in bar-in">
   <a class="brand-link" href="${page('/')}" aria-label="Inside 75 Home">${BRAND_SVG}</a>
   <nav class="nav-links" aria-label="Main navigation">
     <a href="${page('/how-it-works')}"${here === 'how' ? ' aria-current="page"' : ''}>How It Works</a>
-    <a href="${home('#gameplay')}">See It Play</a>
     <a href="${page('/compare')}"${here === 'compare' ? ' aria-current="page"' : ''}>Compare</a>
     <a href="${page('/kit')}"${here === 'kit' ? ' aria-current="page"' : ''}>Clip Kits</a>
     <a href="${home('#faq')}">FAQ</a>
   </nav>
   <div class="nav-actions">
-    <button type="button" class="cartbtn" data-cart-open aria-label="Open shopping cart">${I.cart}<span>Cart</span><i data-cart-count>0</i></button>
+    <button type="button" class="cartbtn" data-cart-open data-cart-btn${EA_ON ? ' hidden' : ''} aria-label="Open shopping cart">${I.cart}<i data-cart-count hidden>0</i></button>
     <a class="btn primary sm" href="${page('/kit')}" data-ea-cta>${EA_ON ? 'Early Access' : 'Order Now'}</a>
     <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobNav" aria-label="Toggle navigation menu">${I.menu}</button>
   </div>
 </div>
 <nav class="mob-nav" id="mobNav" hidden aria-label="Mobile navigation">
+  <a href="${home('#gameplay')}">Actual Gameplay</a>
   <a href="${page('/how-it-works')}">How It Works</a>
-  <a href="${home('#gameplay')}">See It Play</a>
   <a href="${page('/compare')}">Compare</a>
   <a href="${page('/kit')}">Clip Kits</a>
   <a href="${home('#faq')}">FAQ</a>
@@ -373,9 +370,15 @@ function cartSummary(){
 window.i75summary=cartSummary;
 window.i75clearCart=function(){cart={};saveCart(cart);renderCart();};
 
+function syncCartBtn(){
+  var s=cartSummary();
+  var unlocked=!(C.earlyAccess&&C.earlyAccess.enabled)||Boolean(localStorage.getItem('i75ea'));
+  document.querySelectorAll('[data-cart-btn]').forEach(function(b){b.hidden=!(unlocked||s.cnt>0);});
+  document.querySelectorAll('[data-cart-count]').forEach(function(n){n.textContent=s.cnt;n.hidden=s.cnt===0;});
+}
 function renderCart(){
   var s=cartSummary();
-  document.querySelectorAll('[data-cart-count]').forEach(function(n){n.textContent=s.cnt;});
+  syncCartBtn();
   var L=$('lines');if(!L)return;
   L.textContent='';
   if(!s.cnt){
@@ -519,15 +522,16 @@ function syncEarlyAccessUI(){
   document.querySelectorAll('[data-ea-locked]').forEach(function(n){n.hidden=unlocked;});
   document.querySelectorAll('[data-ea-unlocked]').forEach(function(n){n.hidden=!unlocked;});
   document.querySelectorAll('[data-ea-code-label]').forEach(function(n){n.textContent=code;});
+  syncCartBtn();
   var pt=$('promoText'),pb=$('promoBtn');
   if(pt&&pb&&C.earlyAccess&&C.earlyAccess.enabled){
     if(unlocked){
-      pt.innerHTML='<strong>Early Access Unlocked ('+code+'):</strong> Your spot in '+C.earlyAccess.batchLabel+' is ready.';
+      pt.innerHTML='<strong>Early Access Unlocked ('+code+')</strong>';
       pb.textContent='Order Your Kit';
       pb.setAttribute('data-ea-go-kit','1');
     }else{
-      pt.innerHTML='<strong>Early Access · Small-Batch Release:</strong> Limited batches · Free US shipping on Two-Clip Kits.';
-      pb.textContent='Have an Early Access code?';
+      pt.innerHTML='<strong>Early Access · '+C.earlyAccess.batchLabel+'</strong>';
+      pb.textContent='Have a code?';
       pb.removeAttribute('data-ea-go-kit');
     }
   }
@@ -539,6 +543,18 @@ function syncEarlyAccessUI(){
   document.dispatchEvent(new CustomEvent('i75ea:change',{detail:{unlocked:unlocked,code:code}}));
 }
 window.i75syncEA=syncEarlyAccessUI;
+
+// Mobile comparison table head-to-head toggle
+document.querySelectorAll('.cmp-mob-bar').forEach(function(bar){
+  var tbl=bar.nextElementSibling&&bar.nextElementSibling.querySelector('table.cmp');
+  if(!tbl)return;
+  bar.querySelectorAll('button[data-cmp-col]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      bar.querySelectorAll('button[data-cmp-col]').forEach(function(x){x.setAttribute('aria-pressed',x===btn?'true':'false');});
+      tbl.setAttribute('data-mob-col',btn.getAttribute('data-cmp-col'));
+    });
+  });
+});
 
 // Early Access Modal wiring
 var eaM=$('eaModal'),eaTW=$('eaTabWait'),eaTC=$('eaTabCode'),eaWF=$('eaWaitForm'),eaCF=$('eaCodeForm'),eaMT=$('eaModalTitle'),eaMS=$('eaModalSub');
@@ -656,6 +672,9 @@ syncEarlyAccessUI();
 })();`;
 
 // ---------- HOME PAGE ----------
+const HOME_FAQ_IDX = [1, 3, 4, 5, 6, 8, 10, 14];
+const HOME_QA = HOME_FAQ_IDX.map(i => QA[i]).filter(Boolean);
+
 const homeBody = `
 ${header('home', true)}
 <main>
@@ -663,17 +682,16 @@ ${header('home', true)}
   <div>
     <div class="eyebrow">Real clubs · Real greens · At home</div>
     <h1>Play real golf at home with your own putter and wedge.</h1>
-    <p class="sub">Clamp a tiny wireless sensor onto the shaft of the clubs already in your bag. Honest enough that scratch golfers respect the feel, simple enough to get 15 minutes of real reps on your living room rug.</p>
+    <p class="sub">Clamp a tiny wireless sensor onto the clubs already in your bag. Real green speeds and real break on your iPad or Android tablet, ball or no ball.</p>
     <div class="hero-ctas">
-      <a class="btn light" href="#kits" data-ea-cta>${EA_ON ? 'Get Early Access, From $' + P.one.price : 'Shop the Clip Kit, From $' + P.one.price}</a>
+      <a class="btn light" href="#kits" data-ea-cta>${EA_ON ? 'Get Early Access, From $' + P.one.price : 'Shop Kits, From $' + P.one.price}</a>
       <a class="btn ghost" href="#gameplay">Watch It Play</a>
     </div>
-    <ul class="hero-checks">
-      <li>${I.check}<span>Uses your own putter &amp; wedge</span></li>
-      <li>${I.check}<span>No launch monitor, mat, or VR</span></li>
-      <li>${I.check}<span>Hit real balls or swing air</span></li>
-      <li>${I.check}<span>Free tablet app · 30-day trial</span></li>
-    </ul>
+    <div class="hero-meta">
+      <span>${I.check}Your own putter &amp; wedge</span>
+      <span>${I.check}Real balls or practice swings</span>
+      <span>${I.check}Free tablet app · 30-day trial</span>
+    </div>
   </div>
   <div class="hero-media">
     <div class="hero-frame">
@@ -686,66 +704,13 @@ ${header('home', true)}
   </div>
 </div></section>
 
-<div class="proof-strip"><div class="in proof-grid">
-  <div class="proof-item"><div class="proof-icon">${I.club}</div><div><b>Your Real Clubs</b><span>Clamps cleanly right above the clubhead on steel-shaft putters and wedges. Zero toy sticks.</span></div></div>
-  <div class="proof-item"><div class="proof-icon">${I.wave}</div><div><b>Accurate &amp; Instant</b><span>Catches subtle speed and face-angle changes with practically zero lag, ball or no ball.</span></div></div>
-  <div class="proof-item"><div class="proof-icon">${I.tablet}</div><div><b>Real-World Greens</b><span>Mapped from real course terrain with Soft, Standard, and Tour green speeds.</span></div></div>
-  <div class="proof-item"><div class="proof-icon">${I.shield}</div><div><b>Free App &amp; 30-Day Trial</b><span>Includes 1 full 18-hole course and all 4 games. No required subscription.</span></div></div>
-</div></div>
-
-<section class="sec" id="steps"><div class="in">
-  <div class="sec-head">
-    <div class="eyebrow">How Inside 75 works</div>
-    <h2>Clamps on in 2 minutes. Plays every shot inside 75 yards.</h2>
-    <p class="lead">No room buildout, no projector, and no calibration rig. Just your putter, your wedge, and the tablet you already own.</p>
-  </div>
-  <div class="steps-grid">
-    <article class="step-card">
-      <div class="step-img">${pic('mount-hands', 'Hands tightening the Inside 75 V2 sensor clip onto a chrome putter shaft with the included hex key')}</div>
-      <div class="step-body">
-        <h3>Clip it onto your club</h3>
-        <p>Clamp the sleek sensor right above the clubhead with the included hex key. Connect to your home Wi-Fi once and you are ready to play in under five minutes.</p>
-      </div>
-    </article>
-    <article class="step-card">
-      <div class="step-img">${pic('lifestyle-wedge', 'Golfer in a sunlit garage studio chipping a golf ball into a net with a steel wedge fitted with the Inside 75 V2 clip, and an iPad resting safely across from the golfer stance')}</div>
-      <div class="step-body">
-        <h3>Swing your own clubs, ball or no ball</h3>
-        <p>Putt on your living room rug or chip into a garage net. Hit real golf balls when you have a net, or take practice swings anytime when you don't.</p>
-      </div>
-    </article>
-    <article class="step-card">
-      <div class="step-img">${pic('course-benttree', 'Real 3D golf green and flagstick in the Inside 75 tablet app built from real elevation scans')}</div>
-      <div class="step-body">
-        <h3>Watch the shot react right off your face</h3>
-        <p>The ball launches on screen the moment you swing, with practically zero lag. Pull a 10-footer slightly left or leave a chip short and you will see it honestly, just like outdoors.</p>
-      </div>
-    </article>
-  </div>
-</div></section>
-
 <section class="sec white" id="gameplay"><div class="in play-grid">
-  <div>
-    <div class="eyebrow">Inside the app</div>
-    <h2>Impressive enough for scratch golfers. Ready in two minutes.</h2>
-    <p class="lead">Most indoor golf gear feels like an arcade toy. Inside 75 responds right off your clubface with real green speeds and breaks, so even low-handicap and scratch golfers actually trust it between tee times.</p>
-    <div class="clip-tabs" role="group" aria-label="Explore Inside 75 game modes">
-      <button type="button" class="clip-tab" data-clip="reel-putting" data-meta="Real 4 ft, 10 ft &amp; 25 ft putts · Soft 9.5 / Standard 10.5 / Tour 12.0" data-tag="Actual Gameplay" aria-pressed="true">
-        <div><b>Putting &amp; Green Reading</b><span>First-person stroke, real slope &amp; break, pace control from 3 to 40 ft</span></div><em>3 to 40 ft</em>
-      </button>
-      <button type="button" class="clip-tab" data-clip="reel-chipping" data-meta="Real greenside chips &amp; approach pitches · Natural bounce, check &amp; rollout" data-tag="Actual Gameplay" aria-pressed="false">
-        <div><b>Chipping &amp; Pitching</b><span>Hit your own wedges over bunkers and tight lies out to 75 yards</span></div><em>Up to 75 yd</em>
-      </button>
-      <button type="button" class="clip-tab" data-clip="reel-practice" data-meta="Dial in any yardage (5 to 75 yd) · Fairway, rough &amp; bunker lies · Live dispersion" data-tag="Actual Gameplay" aria-pressed="false">
-        <div><b>Dialed-In Practice Mode</b><span>Lock in specific wedge numbers and putting distances in 15 minutes</span></div><em>Any Yardage</em>
-      </button>
-      <button type="button" class="clip-tab" data-clip="reel-courses" data-meta="Real elevation-mapped courses · Chip onto the green, then putt it in the cup" data-tag="Actual Gameplay" aria-pressed="false">
-        <div><b>18-Hole Short Game Courses</b><span>Scramble up-and-down across real contoured courses at home</span></div><em>18 Holes</em>
-      </button>
-    </div>
-    <p style="font-size:14.5px;color:var(--ink-2)">Pull a 10-footer half a degree left and it burns the left edge. Every session tracks <strong>clubhead speed, face angle, swing path, and Strokes Gained</strong> so 15 minutes on a Tuesday night actually shows up on your Saturday scorecard.</p>
+  <div class="play-head">
+    <div class="eyebrow">Actual Gameplay</div>
+    <h2>Real green speeds. Real break. Right off your clubface.</h2>
+    <p class="lead">Every putt, chip, and pitch responds immediately to your own putter and wedge on your tablet.</p>
   </div>
-  <div>
+  <div class="play-media">
     <div class="ipad-shell">
       <div class="ipad-screen">
         <video id="gameVid" src="assets/reel-putting.mp4" poster="assets/reel-putting.jpg" data-auto muted loop playsinline preload="metadata" aria-label="Real gameplay inside the Inside 75 tablet app"></video>
@@ -756,29 +721,50 @@ ${header('home', true)}
       </div>
     </div>
   </div>
+  <div class="play-controls">
+    <div class="clip-tabs" role="group" aria-label="Explore Inside 75 game modes">
+      <button type="button" class="clip-tab" data-clip="reel-putting" data-meta="Real 4 ft, 10 ft &amp; 25 ft putts · Soft 9.5 / Standard 10.5 / Tour 12.0" data-tag="Actual Gameplay" data-cap="Putting &amp; Green Reading: First-person stroke with real slope, break, and pace control from 3 to 40 ft." aria-pressed="true">
+        <div><strong class="ct-short">Putting</strong><b>Putting &amp; Green Reading</b><span>First-person stroke, real slope &amp; break, pace control from 3 to 40 ft</span></div><em>3 to 40 ft</em>
+      </button>
+      <button type="button" class="clip-tab" data-clip="reel-chipping" data-meta="Real greenside chips &amp; approach pitches · Natural bounce, check &amp; rollout" data-tag="Actual Gameplay" data-cap="Chipping &amp; Pitching: Hit your own wedges over bunkers and tight lies out to 75 yards with realistic check and rollout." aria-pressed="false">
+        <div><strong class="ct-short">Chipping</strong><b>Chipping &amp; Pitching</b><span>Hit your own wedges over bunkers and tight lies out to 75 yards</span></div><em>Up to 75 yd</em>
+      </button>
+      <button type="button" class="clip-tab" data-clip="reel-practice" data-meta="Dial in any yardage (5 to 75 yd) · Fairway, rough &amp; bunker lies · Live dispersion" data-tag="Actual Gameplay" data-cap="Dialed-In Practice: Lock in specific wedge numbers from 5 to 75 yards and track live dispersion in 15 minutes." aria-pressed="false">
+        <div><strong class="ct-short">Practice</strong><b>Dialed-In Practice Mode</b><span>Lock in specific wedge numbers and putting distances in 15 minutes</span></div><em>Any Yardage</em>
+      </button>
+      <button type="button" class="clip-tab" data-clip="reel-courses" data-meta="Real elevation-mapped courses · Chip onto the green, then putt it in the cup" data-tag="Actual Gameplay" data-cap="18-Hole Short Game: Scramble up-and-down across real elevation-mapped courses with up to four players on one tablet." aria-pressed="false">
+        <div><strong class="ct-short">18 Holes</strong><b>18-Hole Short Game Courses</b><span>Scramble up-and-down across real contoured courses at home</span></div><em>18 Holes</em>
+      </button>
+    </div>
+    <p class="clip-mob-cap" id="gameMobCap"><strong>Putting &amp; Green Reading:</strong> First-person stroke with real slope, break, and pace control from 3 to 40 ft.</p>
+  </div>
 </div></section>
 
-<section class="sec stone" id="hardware"><div class="in hw-grid">
-  <div class="stage-card">
-    <div class="stage-view">
-      <model-viewer id="v2Model" src="assets/v2-clip.glb?v=${ASSET_V}" poster="assets/clip-360.jpg?v=${ASSET_V}" alt="Interactive 3D model of the Inside 75 V2 clip sensor" camera-controls auto-rotate auto-rotate-delay="1200" rotation-per-second="26deg" shadow-intensity="0.85" shadow-softness="0.9" exposure="1.08" environment-image="neutral" camera-orbit="32deg 74deg 112%" min-camera-orbit="auto auto 72%" max-camera-orbit="auto auto 185%" touch-action="pan-y" interaction-prompt="none"></model-viewer>
-      <img id="v2Img" src="assets/v2-putter.jpg?v=${ASSET_V}" alt="Inside 75 V2 clip mounted on a golf club" hidden>
-      <span class="stage-badge" id="stageBadge">V2 Hardware · Interactive 3D</span>
-      <span class="stage-hint" id="stageHint">Drag or touch to rotate in 3D</span>
-    </div>
-    <div class="angle-pills" role="group" aria-label="Inspect V2 hardware views">
-      <button type="button" data-stage="3d" data-label="V2 Hardware · Interactive 3D" aria-pressed="true">3D View</button>
-      <button type="button" data-stage="clubs-pair" data-label="V2 Clips · Putter + Wedge" aria-pressed="false">Putter + Wedge</button>
-      <button type="button" data-stage="v2-putter" data-label="V2 Clip · On Putter Shaft" aria-pressed="false">On Putter</button>
-      <button type="button" data-stage="v2-wedge" data-label="V2 Clip · On Wedge Shaft" aria-pressed="false">On Wedge</button>
-      <button type="button" data-stage="v2-back34" data-label="V2 Clip · Two-Bolt Shaft Clamp" aria-pressed="false">Back Clamp</button>
-      <button type="button" data-stage="clip-charge" data-label="V2 Clip · USB-C Charging" aria-pressed="false">USB-C Charge</button>
-    </div>
-  </div>
-  <div>
+<section class="sec stone" id="hardware"><div class="in hw-grid hw-showcase">
+  <div class="hw-head">
     <div class="eyebrow">Meet the V2 Clip</div>
     <h2>Compact, rounded, and built to stay on your clubs.</h2>
-    <p class="lead">Redesigned from the ground up with a smooth, low-profile shell that sits cleanly above the hosel and disappears once you stand over the ball.</p>
+    <p class="lead">A smooth, low-profile wireless sensor that clamps cleanly above the hosel and disappears once you stand over the ball.</p>
+  </div>
+  <div class="hw-stage">
+    <div class="stage-card">
+      <div class="stage-view">
+        <model-viewer id="v2Model" src="assets/v2-clip.glb?v=${ASSET_V}" poster="assets/clip-360.jpg?v=${ASSET_V}" alt="Interactive 3D model of the Inside 75 V2 clip sensor" camera-controls auto-rotate auto-rotate-delay="1200" rotation-per-second="26deg" shadow-intensity="0.85" shadow-softness="0.9" exposure="1.08" environment-image="neutral" camera-orbit="32deg 74deg 112%" min-camera-orbit="auto auto 72%" max-camera-orbit="auto auto 185%" touch-action="pan-y" interaction-prompt="none"></model-viewer>
+        <img id="v2Img" src="assets/v2-putter.jpg?v=${ASSET_V}" alt="Inside 75 V2 clip mounted on a golf club" hidden>
+        <span class="stage-badge" id="stageBadge">V2 Hardware · Interactive 3D</span>
+        <span class="stage-hint" id="stageHint">Drag or touch to rotate in 3D</span>
+      </div>
+      <div class="angle-pills" role="group" aria-label="Inspect V2 hardware views">
+        <button type="button" data-stage="3d" data-label="V2 Hardware · Interactive 3D" aria-pressed="true">3D View</button>
+        <button type="button" data-stage="clubs-pair" data-label="V2 Clips · Putter + Wedge" aria-pressed="false">Putter + Wedge</button>
+        <button type="button" data-stage="v2-putter" data-label="V2 Clip · On Putter Shaft" aria-pressed="false">On Putter</button>
+        <button type="button" data-stage="v2-wedge" data-label="V2 Clip · On Wedge Shaft" aria-pressed="false">On Wedge</button>
+        <button type="button" data-stage="v2-back34" data-label="V2 Clip · Two-Bolt Shaft Clamp" aria-pressed="false">Back Clamp</button>
+        <button type="button" data-stage="clip-charge" data-label="V2 Clip · USB-C Charging" aria-pressed="false">USB-C Charge</button>
+      </div>
+    </div>
+  </div>
+  <div class="hw-feats">
     <ul class="feat-list">
       <li><div class="fi">${I.wave}</div><div><b>Pinpoint stroke accuracy</b><span>Captures tiny differences in speed, face angle, and swing path right near the clubhead, from touchy 3-footers to 75-yard pitches.</span></div></li>
       <li><div class="fi">${I.wifi}</div><div><b>Instant, lag-free response</b><span>Streams straight to your tablet over home Wi-Fi so the ball reacts the moment you swing, with wireless updates built in.</span></div></li>
@@ -789,18 +775,18 @@ ${header('home', true)}
 
 <section class="sec" id="telemetry"><div class="in">
   <div class="sec-head">
-    <div class="eyebrow">Real feel, zero flattery</div>
-    <h2>Why even scratch golfers trust the feedback.</h2>
-    <p class="lead">Weighted swing toys flatter every stroke, and indoor ball radars struggle on soft chips and short putts. Because Inside 75 sits right on your club, tiny changes in speed, face angle, and path show up on screen immediately.</p>
+    <div class="eyebrow">1,920 Hz Club Sensing</div>
+    <h2>Measured at the clubhead. Not guessed across a room.</h2>
+    <p class="lead">Inside 75 reads clubhead speed, face angle, and swing path directly through impact, so subtle changes on soft chips and 10-foot putts show up honestly every time.</p>
   </div>
   <div class="tel-stage">
     <img id="telBg" class="tel-bg" src="assets/course-benttree.jpg?v=${ASSET_V}" alt="Sunlit breaking golf green inside the Inside 75 app" loading="lazy" decoding="async">
     <div class="tel-scrim" aria-hidden="true"></div>
     <div class="tel-top">
       <div class="tel-tabs" role="group" aria-label="Select shot type">
-        <button type="button" data-shot="putt" aria-pressed="true">Putt (3 to 40 ft)</button>
-        <button type="button" data-shot="chip" aria-pressed="false">Chip (Fringe &amp; Rough)</button>
-        <button type="button" data-shot="pitch" aria-pressed="false">Pitch (Up to 75 yd)</button>
+        <button type="button" data-shot="putt" aria-pressed="true">Putt</button>
+        <button type="button" data-shot="chip" aria-pressed="false">Chip</button>
+        <button type="button" data-shot="pitch" aria-pressed="false">Pitch</button>
       </div>
     </div>
     <div class="tel-hud">
@@ -825,7 +811,7 @@ ${header('home', true)}
       </div>
     </div>
   </div>
-  <p class="tel-note" id="telNote"><strong>Why it feels immediate:</strong> Inside 75 reads your club through impact instead of waiting to track a flying ball across a room. The shot launches on screen right away and reads honestly whether you hit a real ball or take a practice swing.</p>
+  <p class="tel-note" id="telNote"><strong>Instant on-screen feedback:</strong> Pull a 10-footer half a degree left and it burns the left edge. Every session tracks clubhead speed, face angle, swing path, and Strokes Gained, ball or no ball.</p>
 </div></section>
 
 <section class="sec white" id="courses"><div class="in">
@@ -836,6 +822,7 @@ ${header('home', true)}
     </div>
     <p class="lead" style="margin:0">Every mound, tier, bunker lip, and breaking putt comes from high-resolution elevation mapping of real courses. Switch between Soft, Standard, and Tour green speeds anytime.</p>
   </div>
+  <p class="swipe-hint" aria-hidden="true">Swipe to browse views &#8594;</p>
   <div class="courses-grid">
     ${COURSES.map(c => `<figure class="course-card">${pic(c.img, c.name)}<figcaption><b>${c.name}</b><span>${c.meta}</span></figcaption></figure>`).join('')}
   </div>
@@ -844,7 +831,7 @@ ${header('home', true)}
     <div class="banner-copy">
       <div class="eyebrow">Stay sharp between tee times</div>
       <h3>15 minutes on a weeknight. 18 holes with your foursome on Friday.</h3>
-      <p>Whether you are trying to break 80 or stay sharp as a scratch golfer with a packed week, groove your 35-yard wedge and 10-foot start line after work, then pass the putter around with up to four friends on one tablet.</p>
+      <p>Groove your 35-yard wedge and 10-foot start line after work, then pass the putter around with up to four friends on one tablet.</p>
       <div class="pill-row">
         <span>Short Game (18 Holes)</span>
         <span>Putting</span>
@@ -855,34 +842,37 @@ ${header('home', true)}
   </div>
 </div></section>
 
-<section class="sec" id="compare-preview"><div class="in">
+<section class="sec" id="steps"><div class="in">
   <div class="sec-head split">
     <div>
-      <div class="eyebrow">Honest comparison</div>
-      <h2>Real clubs. Real greens. A fraction of the cost.</h2>
+      <div class="eyebrow">2-Minute Setup</div>
+      <h2>Clamps on once. Ready every time you pick up your club.</h2>
     </div>
-    <a class="btn line" href="${page('/compare')}">Full Comparison Guide &#8594;</a>
+    <a class="btn line" href="${page('/how-it-works')}">Full Setup Guide &#8594;</a>
   </div>
-  <div class="cmp-wrap">
-    <table class="cmp">
-      <thead>
-        <tr>
-          <th>Feature</th>
-          <th class="hi">Inside 75</th>
-          <th>Launch Monitors</th>
-          <th>Toy Swing Sticks</th>
-          <th>Putting Mats</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>Typical Price</td><td class="hi">$119 to $229</td><td>$2,000 to $15,000+</td><td>$250 to $330</td><td>$100 to $500</td></tr>
-        <tr><td>Uses your real putter &amp; wedge</td><td class="hi"><span class="ok">&#10003; Yes</span></td><td>Yes</td><td><span class="no">No (short weighted stick)</span></td><td>Putter only</td></tr>
-        <tr><td>Putts, chips &amp; pitches (0 to 75 yd)</td><td class="hi"><span class="ok">&#10003; All three</span></td><td>Limited on short putts</td><td>Simulated swings</td><td><span class="no">Putts only</span></td></tr>
-        <tr><td>Works in a normal living room</td><td class="hi"><span class="ok">&#10003; Yes</span></td><td><span class="no">Needs tall room + bay</span></td><td>Yes</td><td>Flat mat only</td></tr>
-        <tr><td>Works with real balls OR no ball</td><td class="hi"><span class="ok">&#10003; Both</span></td><td><span class="no">Real balls only</span></td><td>No ball only</td><td>Real balls only</td></tr>
-        <tr><td>Mandatory subscription</td><td class="hi"><span class="ok">None (Free app)</span></td><td>Often $200 to $500/yr</td><td>Often paid courses</td><td>None</td></tr>
-      </tbody>
-    </table>
+  <p class="swipe-hint" aria-hidden="true">Swipe steps &#8594;</p>
+  <div class="steps-grid">
+    <article class="step-card">
+      <div class="step-img">${pic('mount-hands', 'Hands tightening the Inside 75 V2 sensor clip onto a chrome putter shaft with the included hex key')}</div>
+      <div class="step-body">
+        <h3>Clip it onto your club</h3>
+        <p>Clamp the sensor right above the clubhead with the included hex key and connect to home Wi-Fi once in under five minutes.</p>
+      </div>
+    </article>
+    <article class="step-card">
+      <div class="step-img">${pic('lifestyle-wedge', 'Golfer in a sunlit garage studio chipping a golf ball into a net with a steel wedge fitted with the Inside 75 V2 clip, and an iPad resting safely across from the golfer stance')}</div>
+      <div class="step-body">
+        <h3>Swing your own clubs, ball or no ball</h3>
+        <p>Putt on your living room rug or chip into a garage net. Hit real golf balls when you have a net, or take practice swings anytime.</p>
+      </div>
+    </article>
+    <article class="step-card">
+      <div class="step-img">${pic('course-benttree', 'Real 3D golf green and flagstick in the Inside 75 tablet app built from real elevation scans')}</div>
+      <div class="step-body">
+        <h3>Watch the shot react right away</h3>
+        <p>The ball launches on screen the moment you swing, with real break and pace from 3-foot putts to 75-yard pitches.</p>
+      </div>
+    </article>
   </div>
 </div></section>
 
@@ -890,13 +880,13 @@ ${header('home', true)}
   <div class="sec-head center">
     <div class="eyebrow">${EA_ON ? 'Early Access · ' + esc(EA.batchLabel || 'Batch 2') : 'Choose your kit'}</div>
     <h2>Ready to play 18 in your living room?</h2>
-    <p class="lead">Every kit includes assembled V2 hardware, the hex key, free tablet app access, and a 30-day home trial. Every buyer also gets 5 Early Access links to share with friends.</p>
+    <p class="lead">Assembled V2 hardware, 2 mm hex key, free tablet app, and a 30-day home trial. Every buyer also gets 5 Early Access links to share with friends.</p>
   </div>
   ${EA_ON ? `<div class="ea-strip" data-ea-locked>
-    <div class="ea-strip-copy"><b>Small-Batch Early Access</b><span>Join the waitlist for the next batch, or enter an owner's code to skip the line and order today.</span></div>
+    <div class="ea-strip-copy"><b>Have an Early Access code?</b><span>Enter a friend's code to unlock ordering today, or join the waitlist below.</span></div>
     <form class="ea-code-form" data-ea-inline data-msg="homeEaMsg">
       <label for="homeEaIn" class="sr">Early Access code</label>
-      <input id="homeEaIn" type="text" placeholder="Access code" autocomplete="off">
+      <input id="homeEaIn" type="text" placeholder="Enter code" autocomplete="off">
       <button type="submit" class="btn sm">Unlock</button>
     </form>
   </div>
@@ -921,8 +911,8 @@ ${header('home', true)}
         </div>
         ${EA_ON ? `<div class="kit-acts" data-ea-locked>
           <button type="button" class="btn primary" data-ea-open="wait" data-ea-kit="two">Join Early Access</button>
-          <button type="button" class="btn line" data-ea-open="code" data-ea-kit="two">Have a Code?</button>
         </div>` : ''}
+        <a class="kit-detail-link" href="${page('/kit')}#two">Full kit details &amp; tech specs &#8594;</a>
       </div>
     </article>
     <article class="kit-card">
@@ -940,20 +930,56 @@ ${header('home', true)}
         </div>
         ${EA_ON ? `<div class="kit-acts" data-ea-locked>
           <button type="button" class="btn" data-ea-open="wait" data-ea-kit="one">Join Early Access</button>
-          <button type="button" class="btn line" data-ea-open="code" data-ea-kit="one">Have a Code?</button>
         </div>` : ''}
+        <a class="kit-detail-link" href="${page('/kit')}#one">Full kit details &amp; tech specs &#8594;</a>
       </div>
     </article>
   </div>
   <div class="guarantee-bar">
     <div>${I.truck}<span>Free US shipping on 2-Clip Kits</span></div>
-    <div>${I.shield}<span>30-day home trial &amp; easy returns</span></div>
+    <div>${I.shield}<span>30-day home trial &amp; returns</span></div>
     <div>${I.bolt}<span>1-year hardware warranty</span></div>
-    <div>${I.tablet}<span>Free iPad &amp; Android app included</span></div>
+    <div>${I.tablet}<span>Free tablet app included</span></div>
   </div>
 </div></section>
 
-<section class="sec" id="requirements"><div class="in">
+<section class="sec" id="compare-preview"><div class="in">
+  <div class="sec-head split">
+    <div>
+      <div class="eyebrow">Honest comparison</div>
+      <h2>Real clubs. Real greens. A fraction of the cost.</h2>
+    </div>
+    <a class="btn line" href="${page('/compare')}">Full Comparison Guide &#8594;</a>
+  </div>
+  <div class="cmp-mob-bar" role="group" aria-label="Compare Inside 75 against">
+    <button type="button" data-cmp-col="1" aria-pressed="true">Launch Monitors</button>
+    <button type="button" data-cmp-col="2" aria-pressed="false">Swing Sticks</button>
+    <button type="button" data-cmp-col="3" aria-pressed="false">Putting Mats</button>
+  </div>
+  <div class="cmp-wrap">
+    <table class="cmp" data-mob-col="1">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th class="hi">Inside 75</th>
+          <th>Launch Monitors</th>
+          <th>Swing Sticks</th>
+          <th>Putting Mats</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Typical Price</td><td class="hi">$119 to $229</td><td>$2,000 to $15,000+</td><td>$250 to $330</td><td>$100 to $500</td></tr>
+        <tr><td>Uses your real putter &amp; wedge</td><td class="hi"><span class="ok">&#10003; Yes</span></td><td>Yes</td><td><span class="no">No (short wand)</span></td><td>Putter only</td></tr>
+        <tr><td>Putts, chips &amp; pitches (0 to 75 yd)</td><td class="hi"><span class="ok">&#10003; All three</span></td><td>Limited on short putts</td><td>Simulated swings</td><td><span class="no">Putts only</span></td></tr>
+        <tr><td>Works in a normal living room</td><td class="hi"><span class="ok">&#10003; Yes</span></td><td><span class="no">Needs tall room + bay</span></td><td>Yes</td><td>Flat mat only</td></tr>
+        <tr><td>Real balls OR practice swings</td><td class="hi"><span class="ok">&#10003; Both</span></td><td><span class="no">Real balls only</span></td><td>No ball only</td><td>Real balls only</td></tr>
+        <tr><td>Mandatory subscription</td><td class="hi"><span class="ok">None (Free app)</span></td><td>Often $200 to $500/yr</td><td>Often paid courses</td><td>None</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div></section>
+
+<section class="sec white" id="requirements"><div class="in">
   <div class="sec-head">
     <div class="eyebrow">No surprises before you order</div>
     <h2>What you need, and what you can skip.</h2>
@@ -966,7 +992,7 @@ ${header('home', true)}
         <div class="skip-tags">
           <span>${I.x}No launch monitor</span>
           <span>${I.x}No putting mat</span>
-          <span>${I.x}No VR or toy stick</span>
+          <span>${I.x}No VR or swing stick</span>
           <span>${I.x}No required subscription</span>
         </div>
       </div>
@@ -989,6 +1015,7 @@ ${header('home', true)}
       ${storeBadge('apple', cfg.appStore)}
       ${storeBadge('play', cfg.googlePlay)}
     </div>
+    <p style="font-size:13px;color:rgba(246,245,240,0.68);margin:10px 0 0">Early Access tablet builds via TestFlight (iPad) and Google Play (Android tablets).</p>
   </div>
   <div class="tier-cards">
     <div class="tier">
@@ -1008,7 +1035,7 @@ ${header('home', true)}
     <h2>Frequently asked questions.</h2>
   </div>
   <div class="faq-list">
-    ${QA.map(([q, a], idx) => `<details${idx < 2 ? ' open' : ''}><summary>${q}</summary><p>${a}</p></details>`).join('\n    ')}
+    ${HOME_QA.map(([q, a]) => `<details><summary>${q}</summary><p>${a}</p></details>`).join('\n    ')}
   </div>
 </div></section>
 
@@ -1035,8 +1062,8 @@ ${cartDrawer}
 <script>
 ${coreJs}
 (function(){
-  // Gameplay video switcher
-  var gv=document.getElementById('gameVid'),gm=document.getElementById('gameMeta'),gt=document.getElementById('gameTag');
+  // Gameplay video switcher (updates iPad video, bottom bar, and compact mobile caption)
+  var gv=document.getElementById('gameVid'),gm=document.getElementById('gameMeta'),gt=document.getElementById('gameTag'),gmc=document.getElementById('gameMobCap');
   document.querySelectorAll('[data-clip]').forEach(function(b){
     b.addEventListener('click',function(){
       document.querySelectorAll('[data-clip]').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});
@@ -1044,6 +1071,15 @@ ${coreJs}
       if(gv){gv.poster='assets/'+c+'.jpg';gv.src='assets/'+c+'.mp4';gv.load();i75playVid(gv);}
       if(gm)gm.textContent=b.getAttribute('data-meta')||'';
       if(gt)gt.textContent=b.getAttribute('data-tag')||'';
+      var cap=b.getAttribute('data-cap')||'';
+      if(gmc&&cap){
+        var idx=cap.indexOf(':');
+        if(idx>0){
+          gmc.textContent='';
+          var st=document.createElement('strong');st.textContent=cap.slice(0,idx+1)+' ';
+          gmc.appendChild(st);gmc.appendChild(document.createTextNode(cap.slice(idx+1).trim()));
+        }else{gmc.textContent=cap;}
+      }
     });
   });
 
@@ -1110,8 +1146,8 @@ ${header('kit', false)}
   </div>
   <div>
     <p class="crumb"><a href="${page('/')}">Home</a> / Inside 75 Clip Kit (V2)</p>
-    <h1 style="font-size:clamp(32px,3.6vw,44px);line-height:1.05">Inside 75 Clip Kit</h1>
-    <p style="color:var(--ink-2);margin:10px 0 0">Compact wireless sensors for your own putter and wedge. Accurate, instant on-screen shot feedback across real breaking greens on your iPad or Android tablet.</p>
+    <h1 style="font-size:clamp(30px,3.6vw,44px);line-height:1.05">Inside 75 Clip Kit</h1>
+    <p style="color:var(--ink-2);margin:8px 0 0">Wireless shaft sensors for your own putter and wedge, playing real greens on your tablet.</p>
     <div class="pdp-price" id="bp">$${P.two.price}</div>
     <div class="pdp-ship" id="bship">${P.two.shipping} · 30-day home trial · 1-year warranty</div>
 
@@ -1142,7 +1178,7 @@ ${header('kit', false)}
       <button type="button" class="btn primary" id="pWait" style="width:100%;margin-bottom:12px">Join Early Access Waitlist</button>
       <form class="ea-code-form" data-ea-inline data-msg="pdpEaMsg" style="width:100%">
         <label for="pdpEaIn" class="sr">Early Access code</label>
-        <input id="pdpEaIn" type="text" placeholder="Have a friend's code?" autocomplete="off" style="flex:1">
+        <input id="pdpEaIn" type="text" placeholder="Enter code" autocomplete="off" style="flex:1">
         <button type="submit" class="btn sm">Unlock</button>
       </form>
       <p class="msg" id="pdpEaMsg" role="status" hidden></p>
@@ -1251,6 +1287,7 @@ ${header('how', true)}
     <h2>Set your tablet in front of you and swing.</h2>
     <p>Place your tablet across from your stance, well clear of your swing path, so you can glance straight ahead to watch each shot. Putt across your living room rug, chip real golf balls into a net, or take practice swings without a ball.</p>
     <p>Because the V2 sensor reads your clubhead speed, face angle, and swing path right through impact, the ball reacts immediately on screen whether you strike a real ball or take a practice swing.</p>
+    <p style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap"><a class="btn primary" href="${page('/kit')}" data-ea-cta>${EA_ON ? 'Get Early Access' : 'Shop Clip Kits'}</a><a class="btn line" href="${home('#gameplay')}">Watch Gameplay</a></p>
   </div>
   <figure class="hw-fig"><div class="hw-pic">${pic('lifestyle-wedge', 'Golfer chipping with a steel wedge wearing the Inside 75 V2 clip into a hitting net with an iPad resting safely across from the golfer stance')}</div><figcaption>Always set your tablet across from your stance out of the swing arc, check ceiling clearance, and use a hitting net when striking real balls with a wedge.</figcaption></figure>
 </div></section>
@@ -1285,8 +1322,13 @@ ${header('compare', true)}
 </div></section>
 
 <section class="sec"><div class="in">
+  <div class="cmp-mob-bar" role="group" aria-label="Compare Inside 75 against">
+    <button type="button" data-cmp-col="1" aria-pressed="true">Launch Monitors</button>
+    <button type="button" data-cmp-col="2" aria-pressed="false">Swing Sticks</button>
+    <button type="button" data-cmp-col="3" aria-pressed="false">Putting Mats</button>
+  </div>
   <div class="cmp-wrap" style="margin-bottom:44px">
-    <table class="cmp">
+    <table class="cmp" data-mob-col="1">
       <thead>
         <tr>
           <th>Criteria</th>
@@ -1319,7 +1361,7 @@ ${header('compare', true)}
           <li>${I.check}<span>Play real breaking greens in any living room with instant shot response, ball or no ball.</span></li>
           <li>${I.check}<span>Pass clubs around with up to four friends on one tablet, with zero subscription required.</span></li>
         </ul>
-        <div class="verdict-cta"><a class="btn light" href="${page('/kit')}">Shop Clip Kits, From $${P.one.price}</a></div>
+        <div class="verdict-cta"><a class="btn light" href="${page('/kit')}" data-ea-cta>${EA_ON ? 'Get Early Access, From $' + P.one.price : 'Shop Clip Kits, From $' + P.one.price}</a></div>
       </div>
     </article>
     <article class="verdict-card secondary">
@@ -1401,9 +1443,9 @@ ${header('checkout', false)}
           <div class="field"><label for="cFirst">First name</label><input id="cFirst" name="first" type="text" required autocomplete="given-name" placeholder="Alex"></div>
           <div class="field"><label for="cLast">Last name</label><input id="cLast" name="last" type="text" required autocomplete="family-name" placeholder="Morgan"></div>
           <div class="field full"><label for="cAddr">Street address</label><input id="cAddr" name="address" type="text" required autocomplete="street-address" placeholder="123 Fairway Dr"></div>
-          <div class="field"><label for="cCity">City</label><input id="cCity" name="city" type="text" required autocomplete="address-level2" placeholder="Columbus"></div>
-          <div class="field"><label for="cState">State</label><input id="cState" name="state" type="text" required autocomplete="address-level1" placeholder="OH" maxlength="24"></div>
-          <div class="field"><label for="cZip">ZIP code</label><input id="cZip" name="zip" type="text" required autocomplete="postal-code" placeholder="43221"></div>
+          <div class="field"><label for="cCity">City</label><input id="cCity" name="city" type="text" required autocomplete="address-level2" placeholder="City"></div>
+          <div class="field"><label for="cState">State</label><input id="cState" name="state" type="text" required autocomplete="address-level1" placeholder="ST" maxlength="24"></div>
+          <div class="field"><label for="cZip">ZIP code</label><input id="cZip" name="zip" type="text" required autocomplete="postal-code" placeholder="12345"></div>
           <div class="field"><label for="cTablet">Which tablet will you play on?</label>
             <select id="cTablet" name="tablet">
               <option value="ipad">iPad (2019 or newer)</option>
@@ -1418,7 +1460,7 @@ ${header('checkout', false)}
       </form>
     </div>
 
-    <div class="chk-card">
+    <div class="chk-card chk-summary">
       <h2>Order Summary</h2>
       <div id="chkLines"></div>
       <div class="chk-totals">

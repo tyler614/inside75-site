@@ -16,8 +16,8 @@
     "two": ""
   },
   "checkoutApi": "",
-  "appStore": "",
-  "googlePlay": "",
+  "appStore": "https://testflight.apple.com/join/6J9p2csC",
+  "googlePlay": "https://play.google.com/apps/internaltest/4700622306554656876",
   "analytics": {
     "ga4": "",
     "metaPixel": "",
