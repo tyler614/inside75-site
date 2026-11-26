@@ -38,7 +38,7 @@ function dims(f) {
   }
   return [1200, 800];
 }
-const ASSET_V = 'v2f';
+const ASSET_V = 'v2g';
 const file = name => ['jpg', 'png'].map(e => `${name}.${e}`).find(has);
 function pic(name, alt, { cls = '', eager = false, root = false } = {}) {
   const f = file(name);
@@ -961,7 +961,7 @@ ${header('home', true)}
   </div>
   <div class="needs-grid">
     <div class="skip-card">
-      <div class="skip-media">${pic('mount-hands', 'Tightening the compact Inside 75 V2 clip onto a putter shaft above a living room putting mat')}</div>
+      <div class="skip-media">${pic('clubs-pair', 'Inside 75 V2 clips mounted at true scale on a stainless blade putter and forged sand wedge')}</div>
       <div class="skip-body">
         <div class="skip-kicker">What you can skip</div>
         <div class="skip-tags">
