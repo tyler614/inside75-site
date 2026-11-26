@@ -38,7 +38,7 @@ function dims(f) {
   }
   return [1200, 800];
 }
-const ASSET_V = 'v2j';
+const ASSET_V = 'v2k';
 const file = name => ['jpg', 'png'].map(e => `${name}.${e}`).find(has);
 function pic(name, alt, { cls = '', eager = false, root = false } = {}) {
   const f = file(name);
@@ -860,24 +860,24 @@ ${header('home', true)}
       </div>
     </article>
     <article class="step-card">
-      <div class="step-img">${pic('setup-garage', 'Golfer chipping off a small 2x3 ft turf pad into a tall 7x7 ft hitting net in a suburban 2-car garage with an iPad on a wooden workbench angled toward them')}</div>
+      <div class="step-img">${pic('setup-garage', 'Golfer chipping off a small 2x3 ft turf pad into a tall 7x7 ft hitting net in a suburban 2-car garage with an iPad tilted on the concrete floor across from their stance')}</div>
       <div class="step-body">
         <h3>Garage mat &amp; net</h3>
-        <p>A 2x3 ft turf pad, full-height hitting net, and your iPad resting on the workbench.</p>
+        <p>A 2x3 ft turf pad, full-height hitting net, and your iPad tilted right on the floor across from your stance.</p>
       </div>
     </article>
     <article class="step-card">
-      <div class="step-img">${pic('setup-basement', 'Golfer taking a ball-free putting stroke on finished basement carpet with a real putter and Inside 75 V2 clip, looking toward an iPad on an ottoman angled toward them')}</div>
+      <div class="step-img">${pic('setup-basement', 'Golfer taking a ball-free putting stroke on finished basement carpet with a grounded blade putter and Inside 75 V2 clip, looking toward an iPad on an ottoman angled toward them')}</div>
       <div class="step-body">
         <h3>Finished basement</h3>
         <p>No mat and no ball. Take real putting reps on basement carpet with your tablet on an ottoman.</p>
       </div>
     </article>
     <article class="step-card">
-      <div class="step-img">${pic('setup-yard', 'Golfer chipping off a portable turf mat into a tall 7x7 ft backyard hitting net with an iPad on a patio side table angled toward them')}</div>
+      <div class="step-img">${pic('setup-yard', 'Golfer chipping off a portable turf mat into a tall 7x7 ft backyard hitting net with an iPad tilted right on the grass across from their stance')}</div>
       <div class="step-body">
         <h3>Backyard lawn</h3>
-        <p>Drop a hitting mat in front of a backyard net with your tablet on a side table.</p>
+        <p>Drop a hitting mat in front of a backyard net and set your tablet right on the grass by your stance.</p>
       </div>
     </article>
   </div>
@@ -1133,8 +1133,8 @@ const pdpGallery = [
   { id: 'lifestyle-unbox', type: 'img', label: 'Kit at Home', alt: 'Inside 75 Two-Clip presentation tray on an oak table beside an iPad, blade putter, sand wedge, and golf bag' },
   { id: 'clubs-pair', type: 'img', label: 'Putter & Wedge', alt: 'Inside 75 V2 clips mounted on both a putter and a sand wedge' },
   { id: 'hero-living', type: 'img', label: 'Living Room', alt: 'Taking a ball-free putting stroke at home with the Inside 75 V2 clip and an iPad angled toward the golfer' },
-  { id: 'setup-garage', type: 'img', label: 'Garage Net', alt: 'Chipping off a small turf pad into a tall 7x7 ft hitting net in a 2-car garage with an iPad on the workbench' },
-  { id: 'setup-basement', type: 'img', label: 'Basement Putt', alt: 'Ball-free putting on finished basement carpet with an iPad propped on an ottoman' },
+  { id: 'setup-garage', type: 'img', label: 'Garage Net', alt: 'Chipping off a small turf pad into a tall 7x7 ft hitting net in a 2-car garage with an iPad tilted on the floor across from the mat' },
+  { id: 'setup-basement', type: 'img', label: 'Basement Putt', alt: 'Ball-free putting on finished basement carpet with a grounded putter and an iPad propped on an ottoman' },
   { id: 'mount-hands', type: 'img', label: '2-Min Install', alt: 'Tightening the Inside 75 V2 clip onto a putter shaft with a hex key' },
 ];
 
@@ -1296,7 +1296,7 @@ ${header('how', true)}
     <p>Because the V2 sensor reads your clubhead speed, face angle, and swing path right through impact, the ball reacts immediately on screen whether you strike a real ball or take a practice swing.</p>
     <p style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap"><a class="btn primary" href="${page('/kit')}" data-ea-cta>${EA_ON ? 'Get Early Access' : 'Shop Clip Kits'}</a><a class="btn line" href="${home('#gameplay')}">Watch Gameplay</a></p>
   </div>
-  <figure class="hw-fig"><div class="hw-pic">${pic('setup-garage', 'Golfer chipping off a small 2x3 ft turf pad into a tall 7x7 ft hitting net in a 2-car garage with an iPad on a wooden workbench safely across from their stance')}</div><figcaption>Always set your tablet across from your stance out of the swing arc, check ceiling clearance, and use a full-height hitting net when striking real balls with a wedge.</figcaption></figure>
+  <figure class="hw-fig"><div class="hw-pic">${pic('setup-garage', 'Golfer chipping off a small 2x3 ft turf pad into a tall 7x7 ft hitting net in a 2-car garage with an iPad tilted on the concrete floor safely across from their stance')}</div><figcaption>Always set your tablet across from your stance out of the swing arc, check ceiling clearance, and use a full-height hitting net when striking real balls with a wedge.</figcaption></figure>
 </div></section>
 
 <section class="sec white"><div class="in">
@@ -1308,16 +1308,16 @@ ${header('how', true)}
   <p class="swipe-hint" aria-hidden="true">Swipe setups &#8594;</p>
   <div class="steps-grid">
     <article class="step-card">
-      <div class="step-img">${pic('setup-garage', 'Suburban 2-car garage setup with 2x3 ft turf pad, tall 7x7 ft hitting net, and iPad on a wooden workbench')}</div>
-      <div class="step-body"><h3>2-car garage</h3><p>Small 2x3 ft turf pad, full-height hitting net, and your iPad resting on the workbench.</p></div>
+      <div class="step-img">${pic('setup-garage', 'Suburban 2-car garage setup with 2x3 ft turf pad, tall 7x7 ft hitting net, and iPad tilted on the concrete floor across from the mat')}</div>
+      <div class="step-body"><h3>2-car garage</h3><p>Small 2x3 ft turf pad, full-height hitting net, and your iPad tilted right on the floor across from your stance.</p></div>
     </article>
     <article class="step-card">
-      <div class="step-img">${pic('setup-basement', 'Finished basement ball-free putting setup on carpet with a real putter and iPad on an ottoman')}</div>
+      <div class="step-img">${pic('setup-basement', 'Finished basement ball-free putting setup on carpet with a grounded blade putter and iPad on an ottoman')}</div>
       <div class="step-body"><h3>Finished basement</h3><p>No ball and no mat. Take real putting strokes on basement carpet with your tablet on an ottoman.</p></div>
     </article>
     <article class="step-card">
-      <div class="step-img">${pic('setup-yard', 'Suburban backyard setup with portable turf mat on grass, tall 7x7 ft net, and iPad on a patio side table')}</div>
-      <div class="step-body"><h3>Backyard lawn</h3><p>Portable hitting mat on the grass, full-height net, and your iPad on a patio side table.</p></div>
+      <div class="step-img">${pic('setup-yard', 'Suburban backyard setup with portable turf mat on grass, tall 7x7 ft net, and iPad tilted right on the grass across from the mat')}</div>
+      <div class="step-body"><h3>Backyard lawn</h3><p>Portable hitting mat on the grass, full-height net, and your iPad tilted right on the grass by your stance.</p></div>
     </article>
     <article class="step-card">
       <div class="step-img">${pic('lifestyle-office', 'Home office ball-free putting break on a flat rug with an iPad on a walnut desk')}</div>
