@@ -713,16 +713,16 @@ ${header('home', true)}
     <h2>Impressive enough for scratch golfers. Ready in two minutes.</h2>
     <p class="lead">Most indoor golf gear feels like an arcade toy. Inside 75 responds right off your clubface with real green speeds and breaks, so even low-handicap and scratch golfers actually trust it between tee times.</p>
     <div class="clip-tabs" role="group" aria-label="Explore Inside 75 game modes">
-      <button type="button" class="clip-tab" data-clip="reel-putting" data-meta="Real 4 ft, 10 ft &amp; 25 ft putts · Soft 9.5 / Standard 10.5 / Tour 12.0" data-tag="Live App Footage" aria-pressed="true">
+      <button type="button" class="clip-tab" data-clip="reel-putting" data-meta="Real 4 ft, 10 ft &amp; 25 ft putts · Soft 9.5 / Standard 10.5 / Tour 12.0" data-tag="Actual Gameplay" aria-pressed="true">
         <div><b>Putting &amp; Green Reading</b><span>First-person stroke, real slope &amp; break, pace control from 3 to 40 ft</span></div><em>3 to 40 ft</em>
       </button>
-      <button type="button" class="clip-tab" data-clip="reel-chipping" data-meta="Real greenside chips &amp; approach pitches · Natural bounce, check &amp; rollout" data-tag="Live App Footage" aria-pressed="false">
+      <button type="button" class="clip-tab" data-clip="reel-chipping" data-meta="Real greenside chips &amp; approach pitches · Natural bounce, check &amp; rollout" data-tag="Actual Gameplay" aria-pressed="false">
         <div><b>Chipping &amp; Pitching</b><span>Hit your own wedges over bunkers and tight lies out to 75 yards</span></div><em>Up to 75 yd</em>
       </button>
-      <button type="button" class="clip-tab" data-clip="reel-practice" data-meta="Dial in any yardage (5 to 75 yd) · Fairway, rough &amp; bunker lies · Live dispersion" data-tag="Live App Footage" aria-pressed="false">
+      <button type="button" class="clip-tab" data-clip="reel-practice" data-meta="Dial in any yardage (5 to 75 yd) · Fairway, rough &amp; bunker lies · Live dispersion" data-tag="Actual Gameplay" aria-pressed="false">
         <div><b>Dialed-In Practice Mode</b><span>Lock in specific wedge numbers and putting distances in 15 minutes</span></div><em>Any Yardage</em>
       </button>
-      <button type="button" class="clip-tab" data-clip="reel-courses" data-meta="Real elevation-mapped courses · Chip onto the green, then putt it in the cup" data-tag="Live App Footage" aria-pressed="false">
+      <button type="button" class="clip-tab" data-clip="reel-courses" data-meta="Real elevation-mapped courses · Chip onto the green, then putt it in the cup" data-tag="Actual Gameplay" aria-pressed="false">
         <div><b>18-Hole Short Game Courses</b><span>Scramble up-and-down across real contoured courses at home</span></div><em>18 Holes</em>
       </button>
     </div>
@@ -735,7 +735,7 @@ ${header('home', true)}
       </div>
       <div class="ipad-bar">
         <span id="gameMeta">Real 4 ft, 10 ft &amp; 25 ft putts · Soft 9.5 / Standard 10.5 / Tour 12.0</span>
-        <strong id="gameTag">Live App Footage</strong>
+        <strong id="gameTag">Actual Gameplay</strong>
       </div>
     </div>
   </div>
