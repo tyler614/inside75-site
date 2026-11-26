@@ -88,18 +88,18 @@ const P = {
     price: 229,
     compareAt: 238,
     img: 'kit-two',
-    alt: 'Two Inside 75 V2 sensor clips in their white presentation tray with the 3 mm hex key',
+    alt: 'Two Inside 75 V2 sensor clips in their white presentation tray with the 2 mm hex key',
     sub: 'Keep one clip on your putter and one on your wedge so you play full 18-hole Short Game rounds without ever swapping clubs.',
     opt: 'Putter + Wedge · Zero swapping',
     plays: 'All 4 games, including full Short Game rounds',
     shipping: 'Free US shipping',
     bullets: [
       '2 Inside 75 V2 wireless shaft sensors (assembled with clamp bolts)',
-      'Custom 3 mm hex key in molded presentation tray',
+      'Custom 2 mm hex key in molded presentation tray',
       'Free Inside 75 tablet app with 1 full 18-hole course & all 4 modes',
       'Free US ground shipping, 30-day home trial, and 1-year warranty',
     ],
-    box: 'Two Inside 75 V2 clips (each pre-assembled with two clamp screws) and one 3 mm hex key in the presentation tray. USB-C cable not included.',
+    box: 'Two Inside 75 V2 clips (each pre-assembled with two clamp screws) and one 2 mm hex key in the presentation tray. USB-C cable not included.',
   },
   one: {
     sku: 'I75-KIT-1',
@@ -108,18 +108,18 @@ const P = {
     price: 119,
     compareAt: null,
     img: 'kit-one',
-    alt: 'One Inside 75 V2 sensor clip in its white presentation tray with the 3 mm hex key',
+    alt: 'One Inside 75 V2 sensor clip in its white presentation tray with the 2 mm hex key',
     sub: 'Start with your putter or your wedge. Play Putting, Closest to the Pin, and Practice, or move the clip between clubs in about 20 seconds.',
     opt: 'Putter or Wedge · Easy to move',
     plays: 'Putting, Closest to the Pin, and Practice',
     shipping: '$9 US flat shipping',
     bullets: [
       '1 Inside 75 V2 wireless shaft sensor (assembled with clamp bolts)',
-      'Custom 3 mm hex key in molded presentation tray',
+      'Custom 2 mm hex key in molded presentation tray',
       'Free Inside 75 tablet app with 1 full 18-hole course & all 4 modes',
       '30-day home trial and 1-year hardware warranty',
     ],
-    box: 'One Inside 75 V2 clip (pre-assembled with two clamp screws) and one 3 mm hex key in the presentation tray. USB-C cable not included.',
+    box: 'One Inside 75 V2 clip (pre-assembled with two clamp screws) and one 2 mm hex key in the presentation tray. USB-C cable not included.',
   },
 };
 
@@ -1600,7 +1600,7 @@ const shippingHtml = `
 <h2>30-Day Home Trial &amp; Returns</h2>
 <p>Try Inside 75 on your own clubs in your own living room for 30 days. If it is not a fit for your game, email <a href="mailto:${MAIL}">${MAIL}</a> within 30 days of delivery with your order number to start a return.</p>
 <ul>
-  <li>Return the clip(s), screws, and 3 mm hex key in good condition in the original box.</li>
+  <li>Return the clip(s), screws, and 2 mm hex key in good condition in the original box.</li>
   <li>Refunds are issued to your original payment method within 5 business days of receiving the return.</li>
   <li>No restocking fees.</li>
 </ul>
