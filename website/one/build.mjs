@@ -38,7 +38,7 @@ function dims(f) {
   }
   return [1200, 800];
 }
-const ASSET_V = 'v2i';
+const ASSET_V = 'v2j';
 const file = name => ['jpg', 'png'].map(e => `${name}.${e}`).find(has);
 function pic(name, alt, { cls = '', eager = false, root = false } = {}) {
   const f = file(name);
@@ -860,24 +860,24 @@ ${header('home', true)}
       </div>
     </article>
     <article class="step-card">
-      <div class="step-img">${pic('setup-garage', 'Golfer chipping off a small 2x3 ft turf pad into a pop-up net in a suburban 2-car garage with an iPad on a tripod angled toward them')}</div>
+      <div class="step-img">${pic('setup-garage', 'Golfer chipping off a small 2x3 ft turf pad into a tall 7x7 ft hitting net in a suburban 2-car garage with an iPad on a wooden workbench angled toward them')}</div>
       <div class="step-body">
-        <h3>Garage turf pad &amp; net</h3>
-        <p>A compact 2x3 ft turf pad, any pop-up net, and an iPad on a tripod or folding chair.</p>
+        <h3>Garage mat &amp; net</h3>
+        <p>A 2x3 ft turf pad, full-height hitting net, and your iPad resting on the workbench.</p>
       </div>
     </article>
     <article class="step-card">
-      <div class="step-img">${pic('setup-basement', 'Golfer chipping off a compact 1x2 ft turf strip into a pop-up chipping net in a carpeted basement with an iPad on an ottoman angled toward them')}</div>
+      <div class="step-img">${pic('setup-basement', 'Golfer taking a ball-free putting stroke on finished basement carpet with a real putter and Inside 75 V2 clip, looking toward an iPad on an ottoman angled toward them')}</div>
       <div class="step-body">
         <h3>Finished basement</h3>
-        <p>Drop a 1x2 ft chipping strip on basement carpet and prop your tablet on an ottoman.</p>
+        <p>No mat and no ball. Take real putting reps on basement carpet with your tablet on an ottoman.</p>
       </div>
     </article>
     <article class="step-card">
-      <div class="step-img">${pic('setup-yard', 'Golfer chipping off a portable turf mat into a backyard pop-up net with an iPad propped on a folding camp chair angled toward them')}</div>
+      <div class="step-img">${pic('setup-yard', 'Golfer chipping off a portable turf mat into a tall 7x7 ft backyard hitting net with an iPad on a patio side table angled toward them')}</div>
       <div class="step-body">
         <h3>Backyard lawn</h3>
-        <p>Take your wedge and a pop-up net outside, or swing dry on a rug or office floor with zero ball.</p>
+        <p>Drop a hitting mat in front of a backyard net with your tablet on a side table.</p>
       </div>
     </article>
   </div>
@@ -1133,8 +1133,8 @@ const pdpGallery = [
   { id: 'lifestyle-unbox', type: 'img', label: 'Kit at Home', alt: 'Inside 75 Two-Clip presentation tray on an oak table beside an iPad, blade putter, sand wedge, and golf bag' },
   { id: 'clubs-pair', type: 'img', label: 'Putter & Wedge', alt: 'Inside 75 V2 clips mounted on both a putter and a sand wedge' },
   { id: 'hero-living', type: 'img', label: 'Living Room', alt: 'Taking a ball-free putting stroke at home with the Inside 75 V2 clip and an iPad angled toward the golfer' },
-  { id: 'setup-garage', type: 'img', label: 'Garage Net', alt: 'Chipping off a small turf pad into a pop-up net in a 2-car garage with an iPad on a tripod' },
-  { id: 'setup-basement', type: 'img', label: 'Basement Setup', alt: 'Chipping off a compact turf strip into a pop-up net in a carpeted basement with an iPad on an ottoman' },
+  { id: 'setup-garage', type: 'img', label: 'Garage Net', alt: 'Chipping off a small turf pad into a tall 7x7 ft hitting net in a 2-car garage with an iPad on the workbench' },
+  { id: 'setup-basement', type: 'img', label: 'Basement Putt', alt: 'Ball-free putting on finished basement carpet with an iPad propped on an ottoman' },
   { id: 'mount-hands', type: 'img', label: '2-Min Install', alt: 'Tightening the Inside 75 V2 clip onto a putter shaft with a hex key' },
 ];
 
@@ -1296,32 +1296,32 @@ ${header('how', true)}
     <p>Because the V2 sensor reads your clubhead speed, face angle, and swing path right through impact, the ball reacts immediately on screen whether you strike a real ball or take a practice swing.</p>
     <p style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap"><a class="btn primary" href="${page('/kit')}" data-ea-cta>${EA_ON ? 'Get Early Access' : 'Shop Clip Kits'}</a><a class="btn line" href="${home('#gameplay')}">Watch Gameplay</a></p>
   </div>
-  <figure class="hw-fig"><div class="hw-pic">${pic('setup-garage', 'Golfer chipping off a small 2x3 ft turf pad into a pop-up net in a 2-car garage with an iPad on a tripod safely across from their stance')}</div><figcaption>Always set your tablet across from your stance out of the swing arc, check ceiling clearance, and use a pop-up hitting net when striking real balls with a wedge.</figcaption></figure>
+  <figure class="hw-fig"><div class="hw-pic">${pic('setup-garage', 'Golfer chipping off a small 2x3 ft turf pad into a tall 7x7 ft hitting net in a 2-car garage with an iPad on a wooden workbench safely across from their stance')}</div><figcaption>Always set your tablet across from your stance out of the swing arc, check ceiling clearance, and use a full-height hitting net when striking real balls with a wedge.</figcaption></figure>
 </div></section>
 
 <section class="sec white"><div class="in">
   <div class="sec-head">
     <div class="eyebrow">Real Ways Golfers Set It Up</div>
     <h2>No simulator buildout needed. Use the space you already have.</h2>
-    <p class="lead">Take ball-free strokes on any rug or patio, or pair a small turf pad with a pop-up net in your garage, basement, or yard.</p>
+    <p class="lead">Take ball-free strokes on any rug or carpet, or pair a small turf pad with a full-height net in your garage or backyard.</p>
   </div>
   <p class="swipe-hint" aria-hidden="true">Swipe setups &#8594;</p>
   <div class="steps-grid">
     <article class="step-card">
-      <div class="step-img">${pic('setup-garage', 'Suburban 2-car garage setup with 2x3 ft turf pad, pop-up net, and iPad on a tripod')}</div>
-      <div class="step-body"><h3>2-car garage</h3><p>Small 2x3 ft turf pad, pop-up net, and an iPad on a lightweight tripod.</p></div>
+      <div class="step-img">${pic('setup-garage', 'Suburban 2-car garage setup with 2x3 ft turf pad, tall 7x7 ft hitting net, and iPad on a wooden workbench')}</div>
+      <div class="step-body"><h3>2-car garage</h3><p>Small 2x3 ft turf pad, full-height hitting net, and your iPad resting on the workbench.</p></div>
     </article>
     <article class="step-card">
-      <div class="step-img">${pic('setup-basement', 'Finished basement setup with 1x2 ft turf chipping strip on carpet, pop-up net, and iPad on an ottoman')}</div>
-      <div class="step-body"><h3>Finished basement</h3><p>Compact 1x2 ft chipping strip on carpet with your tablet propped on an ottoman.</p></div>
+      <div class="step-img">${pic('setup-basement', 'Finished basement ball-free putting setup on carpet with a real putter and iPad on an ottoman')}</div>
+      <div class="step-body"><h3>Finished basement</h3><p>No ball and no mat. Take real putting strokes on basement carpet with your tablet on an ottoman.</p></div>
     </article>
     <article class="step-card">
-      <div class="step-img">${pic('setup-yard', 'Suburban backyard setup with portable turf mat on grass, pop-up net, and iPad on a folding camp chair')}</div>
-      <div class="step-body"><h3>Backyard lawn</h3><p>Portable hitting mat on the grass, pop-up net, and an iPad on a camp chair.</p></div>
+      <div class="step-img">${pic('setup-yard', 'Suburban backyard setup with portable turf mat on grass, tall 7x7 ft net, and iPad on a patio side table')}</div>
+      <div class="step-body"><h3>Backyard lawn</h3><p>Portable hitting mat on the grass, full-height net, and your iPad on a patio side table.</p></div>
     </article>
     <article class="step-card">
       <div class="step-img">${pic('lifestyle-office', 'Home office ball-free putting break on a flat rug with an iPad on a walnut desk')}</div>
-      <div class="step-body"><h3>Home office or living room</h3><p>Zero ball and zero mat. Grab five minutes of putting reps right off your rug.</p></div>
+      <div class="step-body"><h3>Home office</h3><p>Zero ball and zero mat. Grab five minutes of putting reps right off your rug between calls.</p></div>
     </article>
   </div>
 </div></section>
