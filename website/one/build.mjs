@@ -138,26 +138,26 @@ const FACTS = [
 ];
 
 const QA = [
-  ['What exactly is Inside 75?', 'Inside 75 is an at-home short-game golf system built around a tiny wireless sensor that clamps onto your own putter and wedge. Take a real stroke on your living room rug or into a practice net, and the free tablet app plays your putt, chip, or pitch live across real greens built from U.S. Geological Survey elevation data.'],
-  ['How is Inside 75 different from a golf simulator or launch monitor?', 'Launch monitors cost $2,000 to $15,000+, track a flying golf ball with cameras or radar, and usually require a dedicated room, hitting bay, and screen. Inside 75 reads your club instead of the ball at 1,920 times per second, so you can play putts, chips, and pitches inside 75 yards right in your living room for $119 to $229, with or without a real golf ball.'],
+  ['What exactly is Inside 75?', 'Inside 75 is an at-home short-game golf system built around a tiny wireless sensor that clamps onto your own putter and wedge. Take a real stroke on your living room rug or into a practice net, and the free tablet app plays your putt, chip, or pitch right away across real elevation-mapped greens.'],
+  ['How is Inside 75 different from a golf simulator or launch monitor?', 'Launch monitors cost $2,000 to $15,000+, track a flying golf ball with cameras or radar, and usually require a dedicated room, hitting bay, and screen. Inside 75 reads your club instead of the ball, so you get accurate, instant shot feedback for putts, chips, and pitches inside 75 yards right in your living room for $119 to $229, with or without a real golf ball.'],
   ['Do I need to hit a real golf ball?', 'No, either way works naturally. Putt real golf balls across your rug, chip real balls into a net, or take practice swings with no ball at all without changing a single setting.'],
   ['Do I use my own real putter and wedge?', 'Yes. Unlike toy swing sticks, Inside 75 clamps directly onto the steel shaft of the putter or wedge already in your bag, right above the ferrule. Putting and chipping with your own clubs builds real feel that transfers straight to the course.'],
   ['Should I buy the One-Clip Kit or the Two-Clip Kit?', 'Choose the Two-Clip Kit ($229, with free US shipping) if you want to play full 18-hole Short Game rounds seamlessly. You leave one clip on your putter and one on your wedge with zero swapping. Choose the One-Clip Kit ($119) if you mainly want Putting on your putter, Closest to the Pin on your wedge, or Practice with one club at a time.'],
   ['What tablets are supported?', `Inside 75 runs on ${TABLETS}. Phones are not supported yet because reading slopes and green contours is much better on a tablet screen.`],
-  ['Are the greens real or randomly generated?', 'The greens and surrounding terrain are built from U.S. Geological Survey (USGS) 3DEP LiDAR elevation surveys and state aerial imagery. Every putt has true slope and break, and you can switch between Soft (9.5), Standard (10.5), and Tour (12.0) green speeds.'],
+  ['Are the greens real or randomly generated?', 'The greens and surrounding terrain are built from U.S. Geological Survey (USGS) elevation surveys and aerial mapping of real courses. Every putt has true slope and break, and you can switch between Soft (9.5), Standard (10.5), and Tour (12.0) green speeds.'],
   ['Is a subscription required to play?', 'No. The Inside 75 tablet app is free to download and includes one complete 18-hole course and all four game modes (Short Game, Putting, Closest to the Pin, and Practice) with no subscription. Optional Inside 75 Plus ($49.99/year) unlocks every course and long-term swing history.'],
   ['Can I play multiplayer with friends or family?', 'Yes. One to four players can share a single tablet and take turns over 3, 9, or 18 holes.'],
   ['Does Inside 75 work for left-handed golfers?', 'Not yet. Inside 75 currently supports right-handed putters and wedges only. Left-handed support is on our roadmap.'],
-  ['How long does setup take?', 'First-time setup takes about five minutes total: two minutes to connect the clip to your 2.4 GHz home Wi-Fi over Bluetooth, and two minutes to tighten the clamp with the included 3 mm hex key and complete the quick in-app club fit. After that, pick up your club and play.'],
+  ['How long does setup take?', 'First-time setup takes about five minutes total: two minutes to pair the clip to your home Wi-Fi in the app, and two minutes to tighten the clamp with the included 3 mm hex key and run the quick club fit. After that, just pick up your club and play.'],
   ['How does the clip charge and turn on?', 'Charge it with any standard USB-C cable (not included in the box). A subtle LED shows charging status. There is no power switch: the clip goes to sleep automatically when resting and wakes the moment you pick up your club.'],
-  ['What Wi-Fi network does it require?', 'Your clip and tablet talk directly over your main 2.4 GHz home Wi-Fi network. Both devices must be on the same network (avoid guest networks that isolate devices from each other).'],
+  ['What Wi-Fi network does it require?', 'Your clip and tablet talk directly over your main 2.4 GHz home Wi-Fi network so shots show up with practically zero lag. Both devices just need to be on the same home network (avoid guest networks that isolate devices).'],
   ['What is your shipping and return policy?', 'Orders include a 30-day home trial and a 1-year hardware warranty. Two-Clip Kits ship free anywhere in the continental United States; One-Clip Kits ship for a flat $9. If you are not impressed at home, email hello@75golf.com within 30 days of delivery for a straightforward return.'],
 ];
 
 const COURSES = [
-  { img: 'course-benttree', name: '18-Hole Parkland Layouts', meta: 'Real USGS LiDAR contours, guarded greens, and sloped tiers' },
+  { img: 'course-benttree', name: '18-Hole Parkland Layouts', meta: 'Real-world green contours, guarded pins, and sloped tiers' },
   { img: 'course-foxfire3', name: 'Greenside Chip & Pitch Approaches', meta: 'Fringe, fairway, and rough lies from 10 to 75 yards' },
-  { img: 'course-range', name: 'Dedicated Wedge Practice Range', meta: '25, 50 & 75 yd targets plus exact +/- yardage stepping' },
+  { img: 'course-range', name: 'Dialed-In Wedge Practice', meta: 'Pick any exact yardage from 5 to 75 yards and track your dispersion' },
   { img: 'course-royal', name: 'Championship Putting Greens', meta: 'Soft 9.5, Standard 10.5, and Tour 12.0 green speeds' },
 ];
 
@@ -435,16 +435,16 @@ ${header('home', true)}
       ${pic('hero-living', 'Golfer putting on a living room rug with their own blade putter wearing the sleek Inside 75 V2 clip, with an iPad ahead showing a sunlit 3D golf green', { eager: true })}
       <div class="hero-hud" aria-hidden="true">
         <div class="hero-hud-title">Inside 75 V2 Clip + Tablet App</div>
-        <div class="hero-hud-stats"><span>1,920 Hz IMU</span><span>3 to 75 yd</span><strong>Real USGS Greens</strong></div>
+        <div class="hero-hud-stats"><span>Instant Response</span><span>3 to 75 yd</span><strong>Real-Slope Greens</strong></div>
       </div>
     </div>
   </div>
 </div></section>
 
 <div class="proof-strip"><div class="in proof-grid">
-  <div class="proof-item"><div class="proof-icon">${I.club}</div><div><b>Your Real Clubs</b><span>Clamps above the ferrule on steel-shaft putters and wedges. Zero toy sticks.</span></div></div>
-  <div class="proof-item"><div class="proof-icon">${I.wave}</div><div><b>Reads Club, Not Ball</b><span>Putt on carpet, chip into a net, or take practice swings with no ball at all.</span></div></div>
-  <div class="proof-item"><div class="proof-icon">${I.tablet}</div><div><b>Real LiDAR Greens</b><span>Built from USGS 3DEP elevation data with Soft, Standard, and Tour green speeds.</span></div></div>
+  <div class="proof-item"><div class="proof-icon">${I.club}</div><div><b>Your Real Clubs</b><span>Clamps cleanly above the ferrule on steel-shaft putters and wedges. Zero toy sticks.</span></div></div>
+  <div class="proof-item"><div class="proof-icon">${I.wave}</div><div><b>Accurate &amp; Instant</b><span>Catches subtle speed and face-angle changes with practically zero lag, ball or no ball.</span></div></div>
+  <div class="proof-item"><div class="proof-icon">${I.tablet}</div><div><b>Real-World Greens</b><span>Mapped from real course terrain with Soft, Standard, and Tour green speeds.</span></div></div>
   <div class="proof-item"><div class="proof-icon">${I.shield}</div><div><b>Free App &amp; 30-Day Trial</b><span>Includes 1 full 18-hole course and all 4 games. No required subscription.</span></div></div>
 </div></div>
 
@@ -459,7 +459,7 @@ ${header('home', true)}
       <div class="step-img">${pic('mount-hands', 'Hands tightening the Inside 75 V2 sensor clip onto a chrome putter shaft with the included 3 mm hex key')}<span class="step-num">STEP 01</span></div>
       <div class="step-body">
         <h3>Clip it onto your club</h3>
-        <p>Mount the V2 sensor right above the ferrule with the included 3 mm hex key. Connect once over home Wi-Fi and you are ready to play in under five minutes.</p>
+        <p>Mount the sleek V2 sensor right above the ferrule with the included hex key. Pair it to your home Wi-Fi once and you are ready to play in under five minutes.</p>
       </div>
     </article>
     <article class="step-card">
@@ -470,10 +470,10 @@ ${header('home', true)}
       </div>
     </article>
     <article class="step-card">
-      <div class="step-img">${pic('course-benttree', 'Real 3D golf green and flagstick in the Inside 75 tablet app built from USGS elevation data')}<span class="step-num">STEP 03</span></div>
+      <div class="step-img">${pic('course-benttree', 'Real 3D golf green and flagstick in the Inside 75 tablet app built from real elevation scans')}<span class="step-num">STEP 03</span></div>
       <div class="step-body">
-        <h3>Watch every shot play out live</h3>
-        <p>The sensor tracks your club 1,920 times a second and streams each stroke to your tablet, showing real carry, break, and rollout across contoured greens.</p>
+        <h3>Watch the shot react right off your face</h3>
+        <p>The ball launches on screen the moment you swing, with practically zero lag. Pull a 10-footer slightly left or leave a chip short and you will see it honestly, just like outdoors.</p>
       </div>
     </article>
   </div>
@@ -488,14 +488,14 @@ ${header('home', true)}
       <button type="button" class="clip-tab" data-clip="reel-putting" data-meta="Real 4 ft, 10 ft &amp; 25 ft putts · Soft 9.5 / Standard 10.5 / Tour 12.0" data-tag="Live App Footage" aria-pressed="true">
         <div><b>Putting &amp; Green Reading</b><span>First-person stroke, real slope &amp; break, pace control from 3 to 40 ft</span></div><em>3 to 40 ft</em>
       </button>
-      <button type="button" class="clip-tab" data-clip="reel-chipping" data-meta="Fringe, rough &amp; fairway lies · Carry, apex, landing angle &amp; rollout" data-tag="Around the Green" aria-pressed="false">
+      <button type="button" class="clip-tab" data-clip="reel-chipping" data-meta="Real greenside chips &amp; approach pitches · Natural bounce, check &amp; rollout" data-tag="Live App Footage" aria-pressed="false">
         <div><b>Chipping &amp; Pitching</b><span>Hit your own wedges over bunkers and tight lies out to 75 yards</span></div><em>Up to 75 yd</em>
       </button>
-      <button type="button" class="clip-tab" data-clip="reel-practice" data-meta="Pick any exact distance (+/- stepping) · 25 / 50 / 75 yd targets · Strokes Gained" data-tag="Practice Range" aria-pressed="false">
-        <div><b>Dialed-In Practice Range</b><span>Lock in specific wedge numbers and putting distances in 15 minutes</span></div><em>Any Yardage</em>
+      <button type="button" class="clip-tab" data-clip="reel-practice" data-meta="Dial in any yardage (5 to 75 yd) · Fairway, rough &amp; bunker lies · Live dispersion" data-tag="Live App Footage" aria-pressed="false">
+        <div><b>Dialed-In Practice Mode</b><span>Lock in specific wedge numbers and putting distances in 15 minutes</span></div><em>Any Yardage</em>
       </button>
-      <button type="button" class="clip-tab" data-clip="reel-courses" data-meta="USGS 3DEP LiDAR terrain · 3, 9, or 18 up-and-down holes · 1 to 4 players" data-tag="Real Courses" aria-pressed="false">
-        <div><b>18-Hole Short Game Courses</b><span>Scramble up-and-down across real elevation-mapped courses at home</span></div><em>18 Holes</em>
+      <button type="button" class="clip-tab" data-clip="reel-courses" data-meta="Real elevation-mapped courses · Chip onto the green, then putt it in the cup" data-tag="Live App Footage" aria-pressed="false">
+        <div><b>18-Hole Short Game Courses</b><span>Scramble up-and-down across real contoured courses at home</span></div><em>18 Holes</em>
       </button>
     </div>
     <p style="font-size:14.5px;color:var(--ink-2)">Every session tracks <strong>clubhead speed, face angle, swing path, and Strokes Gained</strong> so 15 minutes on a Tuesday night actually shows up on your Saturday scorecard.</p>
@@ -532,20 +532,20 @@ ${header('home', true)}
   <div>
     <div class="eyebrow">Meet the V2 Clip</div>
     <h2>Compact, rounded, and built to stay on your clubs.</h2>
-    <p class="lead">Redesigned from the ground up with a smooth, pocketable low-profile shell that sits cleanly above the ferrule and disappears once you stand over the ball.</p>
+    <p class="lead">Redesigned from the ground up with a smooth, low-profile shell that sits cleanly above the ferrule and disappears once you stand over the ball.</p>
     <ul class="feat-list">
-      <li><div class="fi">${I.wave}</div><div><b>1,920 Hz high-speed club sensing</b><span>Captures clubhead speed, face angle, and swing path right near the clubhead through impact.</span></div></li>
-      <li><div class="fi">${I.bolt}</div><div><b>No power button to remember</b><span>Sleeps automatically when your club rests in the bag and wakes the second you pick it up. Recharges by USB-C.</span></div></li>
-      <li><div class="fi">${I.wifi}</div><div><b>Direct 2.4 GHz Wi-Fi + free updates</b><span>Connects straight to your tablet over home Wi-Fi and receives free over-the-air firmware improvements from the app.</span></div></li>
+      <li><div class="fi">${I.wave}</div><div><b>Pinpoint stroke accuracy</b><span>Captures tiny differences in speed, face angle, and swing path right near the clubhead, from touchy 3-footers to 75-yard pitches.</span></div></li>
+      <li><div class="fi">${I.wifi}</div><div><b>Instant, lag-free response</b><span>Streams straight to your tablet over home Wi-Fi so the ball reacts the moment you swing, with free wireless updates built in.</span></div></li>
+      <li><div class="fi">${I.bolt}</div><div><b>No power button to remember</b><span>Sleeps automatically when your club rests in the bag and wakes the second you pick it up. Recharges with any USB-C cable.</span></div></li>
     </ul>
   </div>
 </div></section>
 
 <section class="sec" id="telemetry"><div class="in">
   <div class="sec-head">
-    <div class="eyebrow">Club-first physics</div>
-    <h2>Why reading your club beats a $3,000 radar indoors.</h2>
-    <p class="lead">Indoor ball-tracking radars struggle with short putts and chips in tight rooms. Because Inside 75 sits directly on your club, every delicate 4-foot putt and 40-yard pitch reads cleanly in any room.</p>
+    <div class="eyebrow">Real feel, zero guesswork</div>
+    <h2>Why tracking your club feels so real indoors.</h2>
+    <p class="lead">Indoor ball radars struggle with short putts and chips in tight rooms. Because Inside 75 sits directly on your club, it catches subtle face-angle and speed changes cleanly and plays them out on screen right away.</p>
   </div>
   <div class="tel-box">
     <div class="tel-tabs" role="group" aria-label="Select shot type">
@@ -555,7 +555,7 @@ ${header('home', true)}
     </div>
     <div class="tel-cols">
       <div class="tel-panel">
-        <div class="tel-label">1. Measured directly from your club (1,920 Hz)</div>
+        <div class="tel-label">1. Read right off your clubhead</div>
         <div class="tel-metrics">
           <div class="tel-m"><span>Club Speed</span><strong id="tm1">5.8 mph</strong></div>
           <div class="tel-m"><span>Face Angle</span><strong id="tm2">0.4° Open</strong></div>
@@ -564,7 +564,7 @@ ${header('home', true)}
       </div>
       <div class="tel-arrow" aria-hidden="true">&#8594;</div>
       <div class="tel-panel out">
-        <div class="tel-label">2. Simulated live on your tablet green</div>
+        <div class="tel-label">2. Plays out instantly on your tablet</div>
         <div class="tel-metrics">
           <div class="tel-m"><span id="tl4">Start Line</span><strong id="tm4">1.2° Right</strong></div>
           <div class="tel-m"><span id="tl5">Green Speed</span><strong id="tm5">10.5 Stimp</strong></div>
@@ -572,17 +572,17 @@ ${header('home', true)}
         </div>
       </div>
     </div>
-    <p class="tel-note" id="telNote"><strong>How it works:</strong> Inside 75 measures your clubhead motion rather than the golf ball. That is why it reads identically whether you hit a real ball into a net, roll a putt across carpet, or take practice swings with no ball in your living room.</p>
+    <p class="tel-note" id="telNote"><strong>Why it feels immediate:</strong> Inside 75 reads your club through impact instead of waiting to track a flying ball across a room. The shot launches on screen right away and reads honestly whether you hit a real ball or take a practice swing.</p>
   </div>
 </div></section>
 
 <section class="sec white" id="courses"><div class="in">
   <div class="sec-head split">
     <div>
-      <div class="eyebrow">Real terrain · USGS 3DEP LiDAR</div>
-      <h2>Greens built from real elevation surveys.</h2>
+      <div class="eyebrow">Real-world greens</div>
+      <h2>Greens built from real course terrain.</h2>
     </div>
-    <p class="lead" style="margin:0">Every mound, tier, bunker lip, and breaking putt comes from high-resolution USGS LiDAR elevation data and aerial mapping. Switch between Soft, Standard, and Tour green speeds anytime.</p>
+    <p class="lead" style="margin:0">Every mound, tier, bunker lip, and breaking putt comes from high-resolution elevation mapping of real courses. Switch between Soft, Standard, and Tour green speeds anytime.</p>
   </div>
   <div class="courses-grid">
     ${COURSES.map(c => `<figure class="course-card">${pic(c.img, c.name)}<figcaption><b>${c.name}</b><span>${c.meta}</span></figcaption></figure>`).join('')}
@@ -726,7 +726,7 @@ ${header('home', true)}
     </div>
     <div class="tier">
       <div class="tier-row"><b>Inside 75 Plus</b><em>$49.99 / yr (optional)</em></div>
-      <p>Unlocks the full growing library of real LiDAR courses plus long-term swing and short-game history across every session.</p>
+      <p>Unlocks the full growing library of real elevation-mapped courses plus long-term swing and short-game history across every session.</p>
     </div>
   </div>
 </div></section>
@@ -746,7 +746,7 @@ ${header('home', true)}
     <div>
       <div class="eyebrow">Batch drops &amp; new courses</div>
       <h2 style="font-size:clamp(26px,3.2vw,38px)">Not ready to order today? Get course &amp; drop updates.</h2>
-      <p style="color:var(--ink-2);margin:0">Drop your email for shipping batch dates, new LiDAR course releases, and left-handed support announcements. No spam, unsubscribe anytime.</p>
+      <p style="color:var(--ink-2);margin:0">Drop your email for shipping batch dates, new course releases, and left-handed support announcements. No spam, unsubscribe anytime.</p>
     </div>
     <div>
       <form class="form" id="homeNotify" data-signup="75golf.com">
@@ -837,7 +837,7 @@ ${header('kit', false)}
   <div>
     <p class="crumb"><a href="${page('/')}">Home</a> / Inside 75 Clip Kit (V2)</p>
     <h1 style="font-size:clamp(32px,3.6vw,44px);line-height:1.05">Inside 75 Clip Kit</h1>
-    <p style="color:var(--ink-2);margin:10px 0 0">Wireless 1,920 Hz short-game club sensors for your own putter and wedge. Play real USGS LiDAR greens on your iPad or Android tablet.</p>
+    <p style="color:var(--ink-2);margin:10px 0 0">Compact wireless sensors for your own putter and wedge. Accurate, instant on-screen shot feedback across real breaking greens on your iPad or Android tablet.</p>
     <div class="pdp-price" id="bp">$${P.two.price}</div>
     <div class="pdp-ship" id="bship">${P.two.shipping} · 30-day home trial · 1-year warranty</div>
 
@@ -876,7 +876,7 @@ ${header('kit', false)}
   <div>
     <div class="eyebrow">Technical Specifications</div>
     <h2>Built for feel, speed, and zero friction.</h2>
-    <p class="lead">Every detail of the V2 clip is engineered to disappear on your club while capturing crisp short-game telemetry 1,920 times per second.</p>
+    <p class="lead">Every detail of the V2 clip is built to disappear on your club while delivering fast, responsive, pinpoint short-game feedback.</p>
     <p><a class="btn line" href="${page('/how-it-works')}">See Step-by-Step Setup &#8594;</a></p>
   </div>
   <dl class="spec-table">
@@ -960,7 +960,7 @@ ${header('how', true)}
     <div class="eyebrow">Step 03 · Play Anywhere</div>
     <h2>Set your tablet in front of you and swing.</h2>
     <p>Place your tablet across from your stance, well clear of your swing path, so you can glance straight ahead to watch each shot. Putt across your living room rug, chip real golf balls into a net, or take practice swings without a ball.</p>
-    <p>Because the V2 sensor reads your clubhead speed, face angle, and swing path directly at 1,920 Hz, it works automatically whether you strike a real ball or swing free.</p>
+    <p>Because the V2 sensor reads your clubhead speed, face angle, and swing path right through impact, the ball reacts immediately on screen whether you strike a real ball or take a practice swing.</p>
   </div>
   <figure class="hw-fig"><div class="hw-pic">${pic('lifestyle-wedge', 'Golfer chipping with a steel wedge wearing the Inside 75 V2 clip into a hitting net with an iPad resting safely across from the golfer stance')}</div><figcaption>Always set your tablet across from your stance out of the swing arc, check ceiling clearance, and use a hitting net when striking real balls with a wedge.</figcaption></figure>
 </div></section>
@@ -1011,7 +1011,7 @@ ${header('compare', true)}
         <tr><td>Uses your own real clubs</td><td class="hi"><span class="ok">&#10003; Your own putter &amp; wedge</span></td><td>Yes (full bag)</td><td><span class="no">No (short weighted wand)</span></td><td>Putter only</td></tr>
         <tr><td>Works without hitting balls</td><td class="hi"><span class="ok">&#10003; Real balls OR air swings</span></td><td><span class="no">No (must track ball flight)</span></td><td>Air swings only</td><td>Real balls only</td></tr>
         <tr><td>Room required</td><td class="hi"><span class="ok">Any living room, office, or garage</span></td><td>High ceiling + screen/net + hitting strip</td><td>Living room</td><td>Flat floor strip</td></tr>
-        <tr><td>Sloped breaking greens</td><td class="hi"><span class="ok">&#10003; Real USGS LiDAR greens</span></td><td>Yes (via paid sim software)</td><td>Basic arcade greens</td><td>Flat or manual wedges</td></tr>
+        <tr><td>Sloped breaking greens</td><td class="hi"><span class="ok">&#10003; Real elevation-mapped greens</span></td><td>Yes (via paid sim software)</td><td>Basic arcade greens</td><td>Flat or manual wedges</td></tr>
         <tr><td>Ongoing subscription</td><td class="hi"><span class="ok">$0 required</span> (optional $49.99/yr Plus)</td><td>Usually $200 to $500/yr</td><td>Often $20+/yr for courses</td><td>None</td></tr>
       </tbody>
     </table>
@@ -1026,7 +1026,7 @@ ${header('compare', true)}
         <ul class="verdict-list">
           <li>${I.check}<span>Lower scores where 60%+ of strokes happen, from 3-foot putts out to 75-yard pitches.</span></li>
           <li>${I.check}<span>Practice with your own real putter and wedge instead of a short weighted stick.</span></li>
-          <li>${I.check}<span>Play real breaking USGS greens in any living room, with real balls or without.</span></li>
+          <li>${I.check}<span>Play real breaking greens in any living room with instant shot response, ball or no ball.</span></li>
           <li>${I.check}<span>Pass clubs around with up to four friends on one tablet, with zero subscription required.</span></li>
         </ul>
         <div class="verdict-cta"><a class="btn light" href="${page('/kit')}">Shop Clip Kits, From $${P.one.price}</a></div>
@@ -1036,7 +1036,7 @@ ${header('compare', true)}
       <div class="verdict-body">
         <div class="verdict-kicker">Full Launch Monitor · $2,000 to $15,000+</div>
         <h3>When a full hitting bay fits better</h3>
-        <p style="color:var(--ink-2);margin:10px 0 18px">Inside 75 is purpose-built for short game. A radar or photometric launch monitor is still the right tool if your priority is full-speed ball flight.</p>
+        <p style="color:var(--ink-2);margin:10px 0 18px">Inside 75 is purpose-built for short game. A full-bay launch monitor is still the right tool if your priority is hitting drivers and long irons.</p>
         <ul class="verdict-list">
           <li>${I.check}<span>Your main goal is hitting full drivers and long irons and measuring exact ball spin axis off the face.</span></li>
           <li>${I.check}<span>You already have a 9+ foot ceiling, hitting enclosure, impact screen, and a $2,500+ hardware budget.</span></li>
@@ -1350,10 +1350,10 @@ const appLd = {
 const videoLd = {
   '@context': 'https://schema.org',
   '@type': 'VideoObject',
-  name: 'Inside 75 Gameplay: 10-Foot Breaking Putt on Real LiDAR Green',
-  description: 'Real gameplay recorded in the Inside 75 tablet app showing a 10-foot breaking putt rolling across a USGS elevation-mapped green into the cup.',
-  thumbnailUrl: `${SITE}/assets/putt-10.jpg`,
-  contentUrl: `${SITE}/assets/putt-10.mp4`,
+  name: 'Inside 75 Gameplay: Real Short Game Chip & Putt on Contoured Greens',
+  description: 'Real gameplay recorded in the Inside 75 tablet app showing chipping onto an elevation-mapped green and holing putts across real slopes.',
+  thumbnailUrl: `${SITE}/assets/reel-putting.jpg`,
+  contentUrl: `${SITE}/assets/reel-putting.mp4`,
   uploadDate: '2026-11-26',
 };
 const faqLd = {
