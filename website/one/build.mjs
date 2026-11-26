@@ -123,7 +123,10 @@ const P = {
   },
 };
 
-const TABLETS = 'iPads with an A12 chip or newer (iPadOS 16.3+) and recent 64-bit Android tablets (Vulkan 1.1)';
+const TABLETS_SIMPLE = 'most modern iPads (2019 or newer) and recent Android tablets';
+const TABLETS_TECH = 'iPads with an A12 chip or newer (iPadOS 16.3+) and recent 64-bit Android tablets (Vulkan 1.1)';
+const EA = cfg.earlyAccess || { enabled: false, batchLabel: 'Batch 2', founderCodes: ['TYLER', 'OHIO75', 'SCRATCH', 'EARLY75'] };
+const EA_ON = Boolean(EA.enabled);
 
 const FACTS = [
   ['Hardware', 'Inside 75 V2 wireless club-shaft sensor'],
@@ -133,24 +136,25 @@ const FACTS = [
   ['Connectivity', 'Direct 2.4 GHz home Wi-Fi to your tablet (Bluetooth used for 2-minute initial setup only)'],
   ['Power & Sleep', 'USB-C rechargeable (cable not included). No power button: auto-sleeps when still, wakes when picked up.'],
   ['Updates', 'Free wireless firmware updates directly from the Inside 75 app'],
-  ['Supported Tablets', `${TABLETS}. Phones are not supported yet.`],
+  ['Supported Tablets', `${TABLETS_TECH}. Phones are not supported yet.`],
   ['Company', '75 Golf LLC, Columbus, Ohio'],
 ];
 
 const QA = [
   ['What exactly is Inside 75?', 'Inside 75 is an at-home short-game golf system built around a tiny wireless sensor that clamps onto your own putter and wedge. Take a real stroke on your living room rug or into a practice net, and the free tablet app plays your putt, chip, or pitch right away across real elevation-mapped greens.'],
+  ['How does Early Access work?', 'We build Inside 75 in controlled small batches in Ohio so every kit ships on time and gets real support. Join the Early Access waitlist to claim a spot in the next batch, or use a link from anyone who already owns Inside 75 to skip the waitlist and order today. Every buyer receives 3 Early Access links to share with friends.'],
   ['How is Inside 75 different from a golf simulator or launch monitor?', 'Launch monitors cost $2,000 to $15,000+, track a flying golf ball with cameras or radar, and usually require a dedicated room, hitting bay, and screen. Inside 75 reads your club instead of the ball, so you get accurate, instant shot feedback for putts, chips, and pitches inside 75 yards right in your living room for $119 to $229, with or without a real golf ball.'],
   ['Do I need to hit a real golf ball?', 'No, either way works naturally. Putt real golf balls across your rug, chip real balls into a net, or take practice swings with no ball at all without changing a single setting.'],
-  ['Do I use my own real putter and wedge?', 'Yes. Unlike toy swing sticks, Inside 75 clamps directly onto the steel shaft of the putter or wedge already in your bag, right above the ferrule. Putting and chipping with your own clubs builds real feel that transfers straight to the course.'],
+  ['Do I use my own real putter and wedge?', 'Yes. Unlike toy swing sticks, Inside 75 clamps directly onto the steel shaft of the putter or wedge already in your bag, just above the clubhead. Putting and chipping with your own clubs builds real feel that transfers straight to the course.'],
   ['Should I buy the One-Clip Kit or the Two-Clip Kit?', 'Choose the Two-Clip Kit ($229, with free US shipping) if you want to play full 18-hole Short Game rounds seamlessly. You leave one clip on your putter and one on your wedge with zero swapping. Choose the One-Clip Kit ($119) if you mainly want Putting on your putter, Closest to the Pin on your wedge, or Practice with one club at a time.'],
-  ['What tablets are supported?', `Inside 75 runs on ${TABLETS}. Phones are not supported yet because reading slopes and green contours is much better on a tablet screen.`],
-  ['Are the greens real or randomly generated?', 'The greens and surrounding terrain are built from U.S. Geological Survey (USGS) elevation surveys and aerial mapping of real courses. Every putt has true slope and break, and you can switch between Soft (9.5), Standard (10.5), and Tour (12.0) green speeds.'],
+  ['What tablets are supported?', `Inside 75 works with ${TABLETS_SIMPLE}. Phones are not supported yet because reading slopes and green contours is much better on a tablet screen. Full hardware requirements are listed in Tech Specs on the Kit page.`],
+  ['Are the greens real or randomly generated?', 'The greens and surrounding terrain are mapped from real elevation surveys and aerial scans of real golf courses. Every putt has true slope and break, and you can switch between Soft (9.5), Standard (10.5), and Tour (12.0) green speeds.'],
   ['Is a subscription required to play?', 'No. The Inside 75 tablet app is free to download and includes one complete 18-hole course and all four game modes (Short Game, Putting, Closest to the Pin, and Practice) with no subscription. Optional Inside 75 Plus ($49.99/year) unlocks every course and long-term swing history.'],
   ['Can I play multiplayer with friends or family?', 'Yes. One to four players can share a single tablet and take turns over 3, 9, or 18 holes.'],
   ['Does Inside 75 work for left-handed golfers?', 'Not yet. Inside 75 currently supports right-handed putters and wedges only. Left-handed support is on our roadmap.'],
-  ['How long does setup take?', 'First-time setup takes about five minutes total: two minutes to pair the clip to your home Wi-Fi in the app, and two minutes to tighten the clamp with the included 3 mm hex key and run the quick club fit. After that, just pick up your club and play.'],
+  ['How long does setup take?', 'First-time setup takes about five minutes total: two minutes to connect the clip to your home Wi-Fi in the app, and two minutes to tighten the clamp with the included hex key and run the quick club fit. After that, just pick up your club and play.'],
   ['How does the clip charge and turn on?', 'Charge it with any standard USB-C cable (not included in the box). A subtle LED shows charging status. There is no power switch: the clip goes to sleep automatically when resting and wakes the moment you pick up your club.'],
-  ['What Wi-Fi network does it require?', 'Your clip and tablet talk directly over your main 2.4 GHz home Wi-Fi network so shots show up with practically zero lag. Both devices just need to be on the same home network (avoid guest networks that isolate devices).'],
+  ['What Wi-Fi network does it require?', 'Your clip and tablet talk directly over your home Wi-Fi so shots show up with practically zero lag. Both devices just need to be on the same home Wi-Fi network (avoid guest networks).'],
   ['What is your shipping and return policy?', 'Orders include a 30-day home trial and a 1-year hardware warranty. Two-Clip Kits ship free anywhere in the continental United States; One-Clip Kits ship for a flat $9. If you are not impressed at home, email hello@75golf.com within 30 days of delivery for a straightforward return.'],
 ];
 
@@ -176,7 +180,9 @@ const analyticsSnippet = () => {
   return chunks.join('\n');
 };
 
-const promoBar = `<div class="promo"><strong>Now Open:</strong> ${esc(cfg.shippingNote || 'Free US shipping on the Two-Clip Kit.')} <a href="${page('/kit')}">Shop Kits</a></div>`;
+const promoBar = EA_ON
+  ? `<div class="promo" id="promoBar"><span id="promoText"><strong>Early Access · Small-Batch Release:</strong> ${esc(cfg.shippingNote || 'Free US shipping on Two-Clip Kits.')}</span><button type="button" class="promo-link" data-ea-open="code" id="promoBtn">Have an Early Access code?</button></div>`
+  : `<div class="promo"><strong>Now Open:</strong> ${esc(cfg.shippingNote || 'Free US shipping on the Two-Clip Kit.')} <a href="${page('/kit')}">Shop Kits</a></div>`;
 
 const header = (here) => `${promoBar}
 <header class="bar"><div class="in bar-in">
@@ -185,12 +191,12 @@ const header = (here) => `${promoBar}
     <a href="${page('/how-it-works')}"${here === 'how' ? ' aria-current="page"' : ''}>How It Works</a>
     <a href="${home('#gameplay')}">See It Play</a>
     <a href="${page('/compare')}"${here === 'compare' ? ' aria-current="page"' : ''}>Compare</a>
-    <a href="${page('/kit')}"${here === 'kit' ? ' aria-current="page"' : ''}>Shop Kits</a>
+    <a href="${page('/kit')}"${here === 'kit' ? ' aria-current="page"' : ''}>Clip Kits</a>
     <a href="${home('#faq')}">FAQ</a>
   </nav>
   <div class="nav-actions">
     <button type="button" class="cartbtn" data-cart-open aria-label="Open shopping cart">${I.cart}<span>Cart</span><i data-cart-count>0</i></button>
-    <a class="btn primary sm" href="${page('/kit')}">Order Now</a>
+    <a class="btn primary sm" href="${page('/kit')}" data-ea-cta>${EA_ON ? 'Early Access' : 'Order Now'}</a>
     <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobNav" aria-label="Toggle navigation menu">${I.menu}</button>
   </div>
 </div>
@@ -198,9 +204,9 @@ const header = (here) => `${promoBar}
   <a href="${page('/how-it-works')}">How It Works</a>
   <a href="${home('#gameplay')}">See It Play</a>
   <a href="${page('/compare')}">Compare</a>
-  <a href="${page('/kit')}">Shop Clip Kits</a>
+  <a href="${page('/kit')}">Clip Kits</a>
   <a href="${home('#faq')}">FAQ</a>
-  <a class="btn primary" href="${page('/kit')}">Order Now, From $${P.one.price}</a>
+  <a class="btn primary" href="${page('/kit')}" data-ea-cta>${EA_ON ? 'Early Access, From $' + P.one.price : 'Order Now, From $' + P.one.price}</a>
 </nav>
 </header>`;
 
@@ -240,9 +246,39 @@ const footer = `<footer class="foot"><div class="in">
   </div>
   <div class="foot-bot">
     <span>&copy; 2026 75 Golf LLC · Ohio, USA. All rights reserved.</span>
-    <span>Right-handed steel shafts · iPad (A12+) &amp; Android tablets</span>
+    <span>Right-handed steel shafts · iPad &amp; Android tablets</span>
   </div>
 </div></footer>`;
+
+const eaModal = EA_ON ? `<div class="ea-modal-bg" id="eaModal" hidden role="dialog" aria-modal="true" aria-labelledby="eaModalTitle">
+  <div class="ea-modal">
+    <button type="button" class="x" data-ea-close aria-label="Close Early Access dialog">&times;</button>
+    <div class="eyebrow">Early Access · ${esc(EA.batchLabel || 'Batch 2')}</div>
+    <h3 id="eaModalTitle">Join Early Access</h3>
+    <p class="ea-sub" id="eaModalSub">We ship Inside 75 in small batches from Ohio. Join the waitlist for the next drop, or enter a friend's Early Access code to order today.</p>
+    <div class="ea-tabs" role="group" aria-label="Early Access options">
+      <button type="button" id="eaTabWait" aria-pressed="true">Join Waitlist</button>
+      <button type="button" id="eaTabCode" aria-pressed="false">Have a Code</button>
+    </div>
+    <form id="eaWaitForm">
+      <div class="field"><label for="eaEmail">Email address</label><input id="eaEmail" name="email" type="email" required autocomplete="email" placeholder="you@example.com"></div>
+      <div class="field"><label for="eaKit">Which kit are you eyeing?</label>
+        <select id="eaKit" name="kit">
+          <option value="two">Two-Clip Kit ($229 · Free US shipping)</option>
+          <option value="one">One-Clip Starter Kit ($119)</option>
+        </select>
+      </div>
+      <button type="submit" class="btn primary" style="width:100%">Request Early Access</button>
+      <p class="msg" id="eaWaitMsg" role="status" hidden></p>
+    </form>
+    <form id="eaCodeForm" hidden>
+      <div class="field"><label for="eaCodeIn">Early Access code</label><input id="eaCodeIn" name="code" type="text" required autocomplete="off" placeholder="e.g. I75-ABCD12" style="text-transform:uppercase;letter-spacing:0.04em;font-weight:600"></div>
+      <button type="submit" class="btn primary" style="width:100%">Unlock Ordering</button>
+      <p class="msg" id="eaCodeMsg" role="status" hidden></p>
+      <p style="font-size:13px;color:var(--ink-3);margin:12px 0 0">Every Inside 75 owner receives 3 Early Access links to share with friends so they can skip the waitlist.</p>
+    </form>
+  </div>
+</div>` : '';
 
 const cartDrawer = `<div class="scrim" data-cart-close hidden></div>
 <aside class="drawer" id="drawer" hidden aria-label="Shopping cart">
@@ -256,9 +292,9 @@ const cartDrawer = `<div class="scrim" data-cart-close hidden></div>
     <a class="btn primary" id="goCheckout" href="${page('/checkout')}">Proceed to Checkout</a>
     <button type="button" class="btn line sm" data-cart-close>Continue Shopping</button>
   </div>
-</aside>`;
+</aside>${eaModal}`;
 
-// ---------- client-side runtime (cart, UTM/ecommerce events, video switcher, 360 viewer, telemetry, checkout) ----------
+// ---------- client-side runtime (cart, Early Access, UTM/ecommerce events, video switcher, 360 viewer, telemetry, checkout) ----------
 const clientConfig = {
   products: {
     two: { sku: P.two.sku, name: P.two.name, short: P.two.short, price: P.two.price, img: `assets/${file(P.two.img)}` },
@@ -266,6 +302,11 @@ const clientConfig = {
   },
   freeShip: cfg.freeShippingThreshold || 150,
   flatShip: cfg.flatShipping || 9,
+  earlyAccess: {
+    enabled: EA_ON,
+    batchLabel: EA.batchLabel || 'Batch 2',
+    founderCodes: (EA.founderCodes || []).map(c => String(c).toUpperCase()),
+  },
   stripeLinks: cfg.stripePaymentLinks || {},
   checkoutApi: cfg.checkoutApi || '',
   checkoutPage: page('/checkout'),
@@ -408,6 +449,193 @@ document.querySelectorAll('video[data-auto]').forEach(function(v){
 });
 window.i75playVid=playVid;
 window.i75cfg=C;
+
+// Early Access (Waitlist + Skip-the-Line Member Codes)
+var EA_ALPHA='23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
+function eaChecksum(body){
+  var h=2166136261,s=body+':i75-ea-v2';
+  for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)>>>0;}
+  return EA_ALPHA[h%EA_ALPHA.length]+EA_ALPHA[(h>>>5)%EA_ALPHA.length];
+}
+function eaLocalVerify(raw){
+  var c=String(raw||'').trim().toUpperCase().replace(/[^A-Z0-9-]/g,'');
+  if(!c)return null;
+  if(C.earlyAccess&&C.earlyAccess.founderCodes&&C.earlyAccess.founderCodes.indexOf(c)>=0)return c;
+  var m=/^I75-([2-9A-HJ-NP-Z]{4})([2-9A-HJ-NP-Z]{2})$/.exec(c);
+  if(m&&eaChecksum(m[1])===m[2])return c;
+  return null;
+}
+function eaLocalMint(seed){
+  var out=[];
+  for(var k=0;k<3;k++){
+    var h=2166136261,s=String(seed)+':pass:'+k+':i75-ea-v2';
+    for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)>>>0;}
+    var body='';
+    for(var j=0;j<4;j++){h=Math.imul(h^(j+17),16777619)>>>0;body+=EA_ALPHA[h%EA_ALPHA.length];}
+    out.push('I75-'+body+eaChecksum(body));
+  }
+  return out;
+}
+function eaGetCode(){try{return localStorage.getItem('i75ea')||'';}catch(e){return '';}}
+function eaSetCode(c){try{if(c)localStorage.setItem('i75ea',c);else localStorage.removeItem('i75ea');}catch(e){}}
+function eaIsUnlocked(){return !(C.earlyAccess&&C.earlyAccess.enabled)||Boolean(eaGetCode());}
+window.i75eaUnlocked=eaIsUnlocked;
+window.i75eaCode=eaGetCode;
+
+window.i75verifyCode=function(raw){
+  var clean=String(raw||'').trim().toUpperCase().replace(/[^A-Z0-9-]/g,'');
+  if(!clean)return Promise.resolve(null);
+  return fetch('/api/invite/verify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({code:clean})})
+    .then(function(r){return r.ok?r.json().then(function(d){return d&&d.valid?d.code:null;}):null;})
+    .catch(function(){return eaLocalVerify(clean);})
+    .then(function(ok){return ok||eaLocalVerify(clean);});
+};
+window.i75mintPasses=function(ref){
+  return fetch('/api/invite/mint',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({ref:ref})})
+    .then(function(r){return r.ok?r.json().then(function(d){return d&&d.codes&&d.codes.length?d.codes:eaLocalMint(ref);}):eaLocalMint(ref);})
+    .catch(function(){return eaLocalMint(ref);});
+};
+
+function syncEarlyAccessUI(){
+  var unlocked=eaIsUnlocked(),code=eaGetCode();
+  document.documentElement.setAttribute('data-ea',unlocked?'unlocked':'locked');
+  document.querySelectorAll('[data-ea-locked]').forEach(function(n){n.hidden=unlocked;});
+  document.querySelectorAll('[data-ea-unlocked]').forEach(function(n){n.hidden=!unlocked;});
+  document.querySelectorAll('[data-ea-code-label]').forEach(function(n){n.textContent=code;});
+  var pt=$('promoText'),pb=$('promoBtn');
+  if(pt&&pb&&C.earlyAccess&&C.earlyAccess.enabled){
+    if(unlocked){
+      pt.innerHTML='<strong>Early Access Unlocked ('+code+'):</strong> Your spot in '+C.earlyAccess.batchLabel+' is ready.';
+      pb.textContent='Order Your Kit';
+      pb.setAttribute('data-ea-go-kit','1');
+    }else{
+      pt.innerHTML='<strong>Early Access · Small-Batch Release:</strong> Limited Ohio batches · Free US shipping on Two-Clip Kits.';
+      pb.textContent='Have an Early Access code?';
+      pb.removeAttribute('data-ea-go-kit');
+    }
+  }
+  document.querySelectorAll('[data-ea-cta]').forEach(function(a){
+    if(unlocked){
+      a.textContent=a.textContent.indexOf('From')>=0?'Order Now, From $119':'Order Now';
+    }
+  });
+  document.dispatchEvent(new CustomEvent('i75ea:change',{detail:{unlocked:unlocked,code:code}}));
+}
+window.i75syncEA=syncEarlyAccessUI;
+
+// Early Access Modal wiring
+var eaM=$('eaModal'),eaTW=$('eaTabWait'),eaTC=$('eaTabCode'),eaWF=$('eaWaitForm'),eaCF=$('eaCodeForm'),eaMT=$('eaModalTitle'),eaMS=$('eaModalSub');
+function setEaTab(tab){
+  if(!eaTW||!eaTC||!eaWF||!eaCF)return;
+  var isCode=(tab==='code');
+  eaTW.setAttribute('aria-pressed',String(!isCode));
+  eaTC.setAttribute('aria-pressed',String(isCode));
+  eaWF.hidden=isCode;
+  eaCF.hidden=!isCode;
+  if(eaMT)eaMT.textContent=isCode?'Enter Early Access Code':'Join Early Access';
+  if(eaMS)eaMS.textContent=isCode
+    ?'Enter a code from a friend who owns Inside 75 (or your batch invite) to unlock ordering right now.'
+    :'We ship Inside 75 in small batches from Ohio. Join the list for the next drop, or ask any owner for one of their 3 Early Access links to skip the line.';
+}
+function openEaModal(tab,kit){
+  if(!eaM)return;
+  setEaTab(tab||'wait');
+  var sel=$('eaKit');if(sel&&kit&&(kit==='one'||kit==='two'))sel.value=kit;
+  eaM.hidden=false;
+  var inp=tab==='code'?$('eaCodeIn'):$('eaEmail');
+  if(inp)setTimeout(function(){inp.focus();},40);
+}
+function closeEaModal(){if(eaM)eaM.hidden=true;}
+window.i75openEA=openEaModal;
+if(eaTW)eaTW.onclick=function(){setEaTab('wait');};
+if(eaTC)eaTC.onclick=function(){setEaTab('code');};
+document.querySelectorAll('[data-ea-open]').forEach(function(b){
+  b.addEventListener('click',function(){
+    if(b.getAttribute('data-ea-go-kit')==='1'){location.href='${page('/kit')}';return;}
+    openEaModal(b.getAttribute('data-ea-open'),b.getAttribute('data-ea-kit'));
+  });
+});
+document.querySelectorAll('[data-ea-close]').forEach(function(b){b.addEventListener('click',closeEaModal);});
+if(eaM)eaM.addEventListener('click',function(e){if(e.target===eaM)closeEaModal();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeEaModal();});
+
+if(eaWF){
+  eaWF.addEventListener('submit',function(e){
+    e.preventDefault();
+    var em=$('eaEmail').value.trim(),kt=$('eaKit').value||'two',msg=$('eaWaitMsg'),btn=eaWF.querySelector('button[type=submit]');
+    if(!em)return;
+    if(btn)btn.disabled=true;
+    var src=('ea-waitlist:'+kt).slice(0,64);
+    function ok(){
+      if(msg){msg.textContent='You are on the Early Access list. Know someone who owns Inside 75? Ask them for one of their 3 Early Access links to skip the waitlist today.';msg.className='msg ok';msg.hidden=false;}
+      if(btn)btn.textContent='On the List';
+      i75track('generate_lead',{source:src});
+    }
+    function fail(){
+      if(btn)btn.disabled=false;
+      if(msg){msg.textContent='Could not save right now. Please try again or email ${MAIL}.';msg.className='msg bad';msg.hidden=false;}
+    }
+    if(!C.signupEndpoint){ok();return;}
+    fetch(C.signupEndpoint,{method:'POST',headers:{'Content-Type':'application/json',apikey:C.signupKey,Prefer:'return=minimal'},body:JSON.stringify({email:em,source:src})})
+      .then(function(r){if(r.ok||r.status===409)ok();else fail();}).catch(fail);
+  });
+}
+
+function handleCodeSubmit(inputEl,msgEl,btnEl,onUnlock){
+  var raw=(inputEl&&inputEl.value||'').trim();
+  if(!raw)return;
+  if(btnEl)btnEl.disabled=true;
+  if(msgEl)msgEl.hidden=true;
+  window.i75verifyCode(raw).then(function(valid){
+    if(btnEl)btnEl.disabled=false;
+    if(valid){
+      eaSetCode(valid);
+      syncEarlyAccessUI();
+      if(msgEl){msgEl.textContent='Early Access unlocked! Ordering is now open.';msgEl.className='msg ok';msgEl.hidden=false;}
+      if(onUnlock)onUnlock(valid);
+    }else{
+      if(msgEl){msgEl.textContent='We did not recognize that code. Double-check with your friend or join the waitlist.';msgEl.className='msg bad';msgEl.hidden=false;}
+    }
+  });
+}
+window.i75handleCodeSubmit=handleCodeSubmit;
+if(eaCF){
+  eaCF.addEventListener('submit',function(e){
+    e.preventDefault();
+    handleCodeSubmit($('eaCodeIn'),$('eaCodeMsg'),eaCF.querySelector('button[type=submit]'),function(){
+      setTimeout(closeEaModal,550);
+    });
+  });
+}
+
+// Inline code forms anywhere on the page
+document.querySelectorAll('form[data-ea-inline]').forEach(function(f){
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var inp=f.querySelector('input'),btn=f.querySelector('button[type=submit]'),msg=document.getElementById(f.getAttribute('data-msg')||'');
+    handleCodeSubmit(inp,msg,btn);
+  });
+});
+
+// Auto-unlock if arriving with ?invite=CODE or ?code=CODE
+try{
+  var uq=new URLSearchParams(location.search);
+  var urlCode=uq.get('invite')||uq.get('code');
+  if(urlCode){
+    window.i75verifyCode(urlCode).then(function(valid){
+      if(valid){
+        eaSetCode(valid);
+        syncEarlyAccessUI();
+        try{
+          uq.delete('invite');uq.delete('code');
+          var qstr=uq.toString();
+          history.replaceState(null,'',location.pathname+(qstr?'?'+qstr:'')+location.hash);
+        }catch(e){}
+      }
+    });
+  }
+}catch(e){}
+syncEarlyAccessUI();
 })();`;
 
 // ---------- HOME PAGE ----------
@@ -420,7 +648,7 @@ ${header('home', true)}
     <h1>Play real golf at home with your own putter and wedge.</h1>
     <p class="sub">Clamp a tiny wireless sensor onto the shaft of the clubs already in your bag. Honest enough that scratch golfers respect the feel, simple enough to get 15 minutes of real reps on your living room rug.</p>
     <div class="hero-ctas">
-      <a class="btn light" href="#kits">Shop the Clip Kit, From $${P.one.price}</a>
+      <a class="btn light" href="#kits" data-ea-cta>${EA_ON ? 'Get Early Access, From $' + P.one.price : 'Shop the Clip Kit, From $' + P.one.price}</a>
       <a class="btn ghost" href="#gameplay">Watch It Play</a>
     </div>
     <ul class="hero-checks">
@@ -442,7 +670,7 @@ ${header('home', true)}
 </div></section>
 
 <div class="proof-strip"><div class="in proof-grid">
-  <div class="proof-item"><div class="proof-icon">${I.club}</div><div><b>Your Real Clubs</b><span>Clamps cleanly above the ferrule on steel-shaft putters and wedges. Zero toy sticks.</span></div></div>
+  <div class="proof-item"><div class="proof-icon">${I.club}</div><div><b>Your Real Clubs</b><span>Clamps cleanly right above the clubhead on steel-shaft putters and wedges. Zero toy sticks.</span></div></div>
   <div class="proof-item"><div class="proof-icon">${I.wave}</div><div><b>Accurate &amp; Instant</b><span>Catches subtle speed and face-angle changes with practically zero lag, ball or no ball.</span></div></div>
   <div class="proof-item"><div class="proof-icon">${I.tablet}</div><div><b>Real-World Greens</b><span>Mapped from real course terrain with Soft, Standard, and Tour green speeds.</span></div></div>
   <div class="proof-item"><div class="proof-icon">${I.shield}</div><div><b>Free App &amp; 30-Day Trial</b><span>Includes 1 full 18-hole course and all 4 games. No required subscription.</span></div></div>
@@ -456,10 +684,10 @@ ${header('home', true)}
   </div>
   <div class="steps-grid">
     <article class="step-card">
-      <div class="step-img">${pic('mount-hands', 'Hands tightening the Inside 75 V2 sensor clip onto a chrome putter shaft with the included 3 mm hex key')}<span class="step-num">STEP 01</span></div>
+      <div class="step-img">${pic('mount-hands', 'Hands tightening the Inside 75 V2 sensor clip onto a chrome putter shaft with the included hex key')}<span class="step-num">STEP 01</span></div>
       <div class="step-body">
         <h3>Clip it onto your club</h3>
-        <p>Mount the sleek V2 sensor right above the ferrule with the included hex key. Pair it to your home Wi-Fi once and you are ready to play in under five minutes.</p>
+        <p>Clamp the sleek sensor right above the clubhead with the included hex key. Connect to your home Wi-Fi once and you are ready to play in under five minutes.</p>
       </div>
     </article>
     <article class="step-card">
@@ -532,7 +760,7 @@ ${header('home', true)}
   <div>
     <div class="eyebrow">Meet the V2 Clip</div>
     <h2>Compact, rounded, and built to stay on your clubs.</h2>
-    <p class="lead">Redesigned from the ground up with a smooth, low-profile shell that sits cleanly above the ferrule and disappears once you stand over the ball.</p>
+    <p class="lead">Redesigned from the ground up with a smooth, low-profile shell that sits cleanly above the hosel and disappears once you stand over the ball.</p>
     <ul class="feat-list">
       <li><div class="fi">${I.wave}</div><div><b>Pinpoint stroke accuracy</b><span>Captures tiny differences in speed, face angle, and swing path right near the clubhead, from touchy 3-footers to 75-yard pitches.</span></div></li>
       <li><div class="fi">${I.wifi}</div><div><b>Instant, lag-free response</b><span>Streams straight to your tablet over home Wi-Fi so the ball reacts the moment you swing, with free wireless updates built in.</span></div></li>
@@ -636,10 +864,22 @@ ${header('home', true)}
 
 <section class="sec stone" id="kits"><div class="in">
   <div class="sec-head center">
-    <div class="eyebrow">Choose your kit</div>
+    <div class="eyebrow">${EA_ON ? 'Early Access · ' + esc(EA.batchLabel || 'Batch 2') : 'Choose your kit'}</div>
     <h2>Ready to play 18 in your living room?</h2>
-    <p class="lead">Every kit includes assembled V2 hardware, the 3 mm hex key, free tablet app access, and a 30-day home trial.</p>
+    <p class="lead">Every kit includes assembled V2 hardware, the hex key, free tablet app access, and a 30-day home trial. Every buyer also gets 3 Early Access links to share with friends.</p>
   </div>
+  ${EA_ON ? `<div class="ea-strip" data-ea-locked>
+    <div class="ea-strip-copy"><b>Small-Batch Early Access</b><span>Join the waitlist for our next Ohio batch, or enter an owner's code to skip the line and order today.</span></div>
+    <form class="ea-code-form" data-ea-inline data-msg="homeEaMsg">
+      <label for="homeEaIn" class="sr">Early Access code</label>
+      <input id="homeEaIn" type="text" placeholder="Access code" autocomplete="off">
+      <button type="submit" class="btn sm">Unlock</button>
+    </form>
+  </div>
+  <p class="msg" id="homeEaMsg" role="status" hidden style="text-align:center;margin:-14px auto 22px"></p>
+  <div class="ea-strip unlocked" data-ea-unlocked hidden>
+    <div class="ea-strip-copy"><b>Early Access Unlocked (<span data-ea-code-label></span>)</b><span>Your spot in ${esc(EA.batchLabel || 'Batch 2')} is open. Pick your kit below to order now.</span></div>
+  </div>` : ''}
   <div class="kits-grid">
     <article class="kit-card featured">
       <span class="kit-ribbon">Most Popular · Free US Shipping</span>
@@ -651,10 +891,14 @@ ${header('home', true)}
         </div>
         <p class="kit-desc">${P.two.sub}</p>
         <ul class="kit-bullets">${P.two.bullets.map(b => `<li>${I.check}<span>${b}</span></li>`).join('')}</ul>
-        <div class="kit-acts">
-          <button type="button" class="btn primary" data-buy="two">Buy Now, $${P.two.price}</button>
+        <div class="kit-acts" data-ea-unlocked${EA_ON ? ' hidden' : ''}>
+          <button type="button" class="btn primary" data-buy="two">Order Now, $${P.two.price}</button>
           <button type="button" class="btn line" data-add="two">Add to Cart</button>
         </div>
+        ${EA_ON ? `<div class="kit-acts" data-ea-locked>
+          <button type="button" class="btn primary" data-ea-open="wait" data-ea-kit="two">Join Early Access</button>
+          <button type="button" class="btn line" data-ea-open="code" data-ea-kit="two">Have a Code?</button>
+        </div>` : ''}
       </div>
     </article>
     <article class="kit-card">
@@ -666,10 +910,14 @@ ${header('home', true)}
         </div>
         <p class="kit-desc">${P.one.sub}</p>
         <ul class="kit-bullets">${P.one.bullets.map(b => `<li>${I.check}<span>${b}</span></li>`).join('')}</ul>
-        <div class="kit-acts">
-          <button type="button" class="btn" data-buy="one">Buy Now, $${P.one.price}</button>
+        <div class="kit-acts" data-ea-unlocked${EA_ON ? ' hidden' : ''}>
+          <button type="button" class="btn" data-buy="one">Order Now, $${P.one.price}</button>
           <button type="button" class="btn line" data-add="one">Add to Cart</button>
         </div>
+        ${EA_ON ? `<div class="kit-acts" data-ea-locked>
+          <button type="button" class="btn" data-ea-open="wait" data-ea-kit="one">Join Early Access</button>
+          <button type="button" class="btn line" data-ea-open="code" data-ea-kit="one">Have a Code?</button>
+        </div>` : ''}
       </div>
     </article>
   </div>
@@ -691,8 +939,8 @@ ${header('home', true)}
       <h3>What you need</h3>
       <ul class="need-list yes">
         <li>${I.check}<span><b>Your own steel-shaft putter or wedge.</b> Right-handed clubs only for now.</span></li>
-        <li>${I.check}<span><b>A supported tablet.</b> ${TABLETS}. Phones are not supported yet.</span></li>
-        <li>${I.check}<span><b>Main 2.4 GHz home Wi-Fi.</b> Both tablet and clip connect to the same network.</span></li>
+        <li>${I.check}<span><b>A supported tablet.</b> Works with ${TABLETS_SIMPLE}. Phones are not supported yet.</span></li>
+        <li>${I.check}<span><b>Home Wi-Fi.</b> Both your tablet and clip connect to the same home network.</span></li>
         <li>${I.check}<span><b>Any standard USB-C cable</b> for charging (not included in the box).</span></li>
         <li>${I.check}<span><b>Safe space to swing.</b> Add an optional practice net if hitting real balls with a wedge.</span></li>
       </ul>
@@ -855,18 +1103,33 @@ ${header('kit', false)}
       </label>
     </fieldset>
 
-    <div class="qrow">
+    <div class="qrow" data-ea-unlocked${EA_ON ? ' hidden' : ''}>
       <div class="qty"><button type="button" id="qm" aria-label="Decrease quantity">&minus;</button><output id="qv">1</output><button type="button" id="qp" aria-label="Increase quantity">+</button></div>
       <button type="button" class="btn primary" id="padd">Add to Cart, $${P.two.price}</button>
     </div>
-    <div class="buy-now-row">
-      <button type="button" class="btn" id="pbuy">Express Buy Now</button>
+    <div class="buy-now-row" data-ea-unlocked${EA_ON ? ' hidden' : ''}>
+      <button type="button" class="btn" id="pbuy">Express Order Now</button>
     </div>
+    ${EA_ON ? `<div class="ea-pdp-box" data-ea-locked>
+      <b>Early Access · ${esc(EA.batchLabel || 'Batch 2')}</b>
+      <p>We ship in small batches from Ohio. Join the waitlist for the next drop, or enter a friend's Early Access code to skip the line and order today.</p>
+      <button type="button" class="btn primary" id="pWait" style="width:100%;margin-bottom:12px">Join Early Access Waitlist</button>
+      <form class="ea-code-form" data-ea-inline data-msg="pdpEaMsg" style="width:100%">
+        <label for="pdpEaIn" class="sr">Early Access code</label>
+        <input id="pdpEaIn" type="text" placeholder="Have a friend's code?" autocomplete="off" style="flex:1">
+        <button type="submit" class="btn sm">Unlock</button>
+      </form>
+      <p class="msg" id="pdpEaMsg" role="status" hidden></p>
+    </div>
+    <div class="ea-pdp-box unlocked" data-ea-unlocked hidden>
+      <b>Early Access Unlocked (<span data-ea-code-label></span>)</b>
+      <p style="margin:0">Your spot in ${esc(EA.batchLabel || 'Batch 2')} is ready. Every order also includes 3 Early Access links to share with friends.</p>
+    </div>` : ''}
 
     <div class="faq-list" style="margin-top:18px">
       <details open><summary>What is in the box?</summary><p id="kbox">${P.two.box}</p></details>
       <details><summary>One clip or two?</summary><p>A full round of Short Game uses both your wedge and your putter. Two clips let you keep one on each club with zero swapping. One clip plays Putting, Closest to the Pin, and Practice, and moves between clubs in about 20 seconds.</p></details>
-      <details><summary>Supported clubs &amp; tablets</summary><p>Fits right-handed steel-shaft putters and wedges. Plays on ${TABLETS}. Phones are not supported yet.</p></details>
+      <details><summary>Supported clubs &amp; tablets</summary><p>Fits right-handed steel-shaft putters and wedges. Works with ${TABLETS_SIMPLE}. Phones are not supported yet. See Tech Specs below for exact hardware requirements.</p></details>
       <details><summary>Shipping, 30-day trial &amp; warranty</summary><p>Two-Clip Kits ship free in the US ($9 flat shipping on One-Clip Kits). Every kit includes a 30-day home trial and 1-year limited hardware warranty. <a href="${page('/shipping-returns')}">Full policy</a>.</p></details>
     </div>
   </div>
@@ -920,6 +1183,7 @@ ${coreJs}
   document.getElementById('qp').onclick=function(){if(q<9){q++;sync();}};
   document.getElementById('padd').onclick=function(){i75add(cur,q,this,false);};
   document.getElementById('pbuy').onclick=function(){i75add(cur,q,this,true);};
+  var pw=document.getElementById('pWait');if(pw)pw.onclick=function(){if(window.i75openEA)window.i75openEA('wait',cur);};
   var h=(location.hash||'').slice(1);if(h==='one'||h==='two')pick(h);else sync();
   i75track('view_item',{currency:'USD',value:P[cur].p,items:[{item_id:cur==='two'?'I75-KIT-2':'I75-KIT-1',item_name:'Inside 75 Clip Kit'}]});
 })();
@@ -939,8 +1203,8 @@ ${header('how', true)}
   <div>
     <div class="eyebrow">Step 01 · 2 Minutes</div>
     <h2>Connect to your home Wi-Fi once.</h2>
-    <p>Open the free Inside 75 app on your iPad or Android tablet, tap <strong>Set up my clip</strong>, and plug the V2 clip into any USB-C power source. It appears automatically over Bluetooth in about 20 seconds.</p>
-    <p>Pick your main 2.4 GHz home Wi-Fi network and enter its password once. From then on, the clip joins automatically over Wi-Fi every time you pick up your club. Bluetooth is never needed during play.</p>
+    <p>Open the free Inside 75 app on your iPad or Android tablet, tap <strong>Set up my clip</strong>, and plug the clip into USB-C power. Your tablet finds it automatically in about 20 seconds.</p>
+    <p>Pick your home Wi-Fi network and enter its password once. From then on, the clip connects automatically every time you pick up your club.</p>
   </div>
   <div class="hw-pic">${pic('clip-charge', 'Inside 75 V2 clip plugged into a USB-C cable with charging LED lit')}</div>
 </div></section>
@@ -949,10 +1213,10 @@ ${header('how', true)}
   <div>
     <div class="eyebrow">Step 02 · 2 Minutes</div>
     <h2>Clamp onto your club and run the quick fit.</h2>
-    <p>Unplug the clip and place the two halves around your steel putter or wedge shaft as low as it sits, right above the ferrule, with the two hex bolts facing the target. Snug both screws evenly with the included 3 mm hex key until the clip cannot twist.</p>
-    <p>The app then guides you through a quick three-step fit (a shaft roll, your normal address, and squaring the face on a flat edge) so it knows your exact club geometry. Moving a clip to a different club later takes about 20 seconds.</p>
+    <p>Unplug the clip and place the two halves around your steel putter or wedge shaft just above the clubhead, with the two bolts facing the target. Snug both screws evenly with the included hex key until the clip cannot twist.</p>
+    <p>The app then guides you through a quick three-step fit (a shaft roll, your normal address, and squaring the face on a flat edge) so it learns your exact club. Moving a clip to a different club later takes about 20 seconds.</p>
   </div>
-  <div class="hw-pic">${pic('mount-hands', 'Golfer tightening the Inside 75 V2 clip onto a chrome putter shaft with the included 3 mm hex key')}</div>
+  <div class="hw-pic">${pic('mount-hands', 'Golfer tightening the Inside 75 V2 clip onto a chrome putter shaft with the included hex key')}</div>
 </div></section>
 
 <section class="sec"><div class="in hw-row">
@@ -971,13 +1235,13 @@ ${header('how', true)}
     <h2>Wi-Fi, charging, and wake checklist.</h2>
   </div>
   <dl class="spec-table" style="max-width:860px">
-    <div><dt>Same Network</dt><dd>Your tablet and clip must share the same 2.4 GHz Wi-Fi network. Avoid guest Wi-Fi networks, which often block local device communication.</dd></div>
+    <div><dt>Same Wi-Fi</dt><dd>Keep your tablet and clip on the same home Wi-Fi network (avoid guest networks). Most home routers work automatically; if yours lists separate 2.4 GHz and 5 GHz names, pick the 2.4 GHz one.</dd></div>
     <div><dt>iPad Local Network</dt><dd>On iPad, open Settings &gt; Inside 75 and confirm Local Network permission is enabled.</dd></div>
     <div><dt>Auto Sleep &amp; Wake</dt><dd>Unplugged, the clip rests after a few minutes of stillness. Pick up your club to wake it automatically. While plugged into USB-C, it stays awake.</dd></div>
     <div><dt>Firmware Updates</dt><dd>The app delivers free wireless clip updates under Settings &gt; Clip software.</dd></div>
     <div><dt>Still Stuck?</dt><dd>Email <a href="mailto:${MAIL}">${MAIL}</a> and our team in Ohio will help get you rolling.</dd></div>
   </dl>
-  <p style="margin-top:28px"><a class="btn primary" href="${page('/kit')}">Shop the Clip Kit &#8594;</a></p>
+  <p style="margin-top:28px"><a class="btn primary" href="${page('/kit')}" data-ea-cta>${EA_ON ? 'Get Early Access &#8594;' : 'Shop the Clip Kit &#8594;'}</a></p>
 </div></section>
 </main>
 ${footer}
@@ -1059,17 +1323,35 @@ ${header('checkout', false)}
   <p class="crumb"><a href="${page('/kit')}">&larr; Back to Clip Kit</a></p>
   <h1 style="font-size:clamp(30px,3.6vw,44px);margin-bottom:26px">Checkout</h1>
 
+  <div id="chkGate" class="chk-card" hidden style="text-align:center;padding:48px 24px;max-width:560px;margin:0 auto">
+    <div class="eyebrow" style="margin-bottom:8px">Early Access · ${esc(EA.batchLabel || 'Batch 2')}</div>
+    <h2 style="margin-bottom:10px">Enter your Early Access code to order</h2>
+    <p style="color:var(--ink-2);margin:0 auto 22px;max-width:34em">We ship Inside 75 in small batches from Ohio. Enter an Early Access code from a friend to unlock checkout right away, or join the waitlist for our next drop.</p>
+    <form class="ea-code-form" data-ea-inline data-msg="chkGateMsg" style="justify-content:center;margin-bottom:14px">
+      <label for="chkGateIn" class="sr">Early Access code</label>
+      <input id="chkGateIn" type="text" placeholder="Enter code" autocomplete="off">
+      <button type="submit" class="btn primary">Unlock Checkout</button>
+    </form>
+    <p class="msg" id="chkGateMsg" role="status" hidden></p>
+    <p style="margin:18px 0 0;font-size:14.5px;color:var(--ink-2)">No code yet? <button type="button" class="btn line sm" data-ea-open="wait" style="margin-left:8px">Join the Waitlist</button></p>
+  </div>
+
   <div id="chkEmpty" class="chk-card" hidden style="text-align:center;padding:48px 24px">
     <h2 style="margin-bottom:10px">Your cart is empty</h2>
     <p style="color:var(--ink-2);margin-bottom:22px">Add a One-Clip or Two-Clip Kit to continue to checkout.</p>
-    <a class="btn primary" href="${page('/kit')}">Shop Clip Kits</a>
+    <a class="btn primary" href="${page('/kit')}">View Clip Kits</a>
   </div>
 
   <div id="chkSuccess" class="chk-card chk-done" hidden>
     <div class="ok-badge">${I.check}</div>
-    <h2 id="doneTitle">Order Reserved!</h2>
-    <p id="doneSub" style="color:var(--ink-2);max-width:36em;margin:0 auto 18px">Thank you for your Inside 75 order. Your reservation reference is <strong class="mono" id="doneRef">I75-0000</strong>.</p>
-    <p style="font-size:14.5px;color:var(--ink-2);max-width:38em;margin:0 auto 24px">We have recorded your kit selection and shipping details. We will email your confirmation and secure payment &amp; tracking link to <strong id="doneEmail"></strong> as soon as your Batch 2 kit is ready to pack. Questions? Write <a href="mailto:${MAIL}">${MAIL}</a>.</p>
+    <h2 id="doneTitle">You're in! Order Reserved.</h2>
+    <p id="doneSub" style="color:var(--ink-2);max-width:36em;margin:0 auto 14px">Thank you for your Inside 75 order. Your reservation reference is <strong class="mono" id="doneRef">I75-0000</strong>.</p>
+    <p style="font-size:14.5px;color:var(--ink-2);max-width:38em;margin:0 auto 18px">We have recorded your kit selection and shipping details. We will email your confirmation and secure payment &amp; tracking link to <strong id="doneEmail"></strong> as soon as your ${esc(EA.batchLabel || 'Batch 2')} kit is ready to pack. Questions? Write <a href="mailto:${MAIL}">${MAIL}</a>.</p>
+    <div class="ea-share-box" id="eaShareBox" hidden>
+      <h3>Share Early Access with 3 buddies</h3>
+      <p>Every kit comes with 3 Early Access links so your golf friends can skip the waitlist and order right away.</p>
+      <div id="eaShareList"></div>
+    </div>
     <a class="btn primary" href="${page('/')}">Return to 75golf.com</a>
   </div>
 
@@ -1090,7 +1372,7 @@ ${header('checkout', false)}
           <div class="field"><label for="cZip">ZIP code</label><input id="cZip" name="zip" type="text" required autocomplete="postal-code" placeholder="43221"></div>
           <div class="field"><label for="cTablet">Which tablet will you play on?</label>
             <select id="cTablet" name="tablet">
-              <option value="ipad">iPad (A12 or newer)</option>
+              <option value="ipad">iPad (2019 or newer)</option>
               <option value="android">Android Tablet</option>
               <option value="both">Both / Not sure yet</option>
             </select>
@@ -1125,15 +1407,50 @@ ${cartDrawer}
 ${coreJs}
 (function(){
   var q=new URLSearchParams(location.search);
-  var main=document.getElementById('chkMain'),empty=document.getElementById('chkEmpty'),done=document.getElementById('chkSuccess');
+  var main=document.getElementById('chkMain'),empty=document.getElementById('chkEmpty'),done=document.getElementById('chkSuccess'),gate=document.getElementById('chkGate');
+  function showShareLinks(ref){
+    var box=document.getElementById('eaShareBox'),list=document.getElementById('eaShareList');
+    if(!box||!list||!window.i75mintPasses)return;
+    window.i75mintPasses(ref).then(function(codes){
+      if(!codes||!codes.length)return;
+      list.textContent='';
+      codes.forEach(function(cd){
+        var url='https://75golf.com/?invite='+cd;
+        var row=document.createElement('div');row.className='ea-link-row';
+        var codeEl=document.createElement('code');codeEl.textContent=url;
+        var btn=document.createElement('button');btn.type='button';btn.textContent='Copy Link';
+        btn.onclick=function(){
+          try{navigator.clipboard.writeText(url);}catch(e){}
+          btn.textContent='Copied!';btn.classList.add('copied');
+          setTimeout(function(){btn.textContent='Copy Link';btn.classList.remove('copied');},1500);
+        };
+        row.appendChild(codeEl);row.appendChild(btn);list.appendChild(row);
+      });
+      box.hidden=false;
+    });
+  }
   if(q.get('status')==='success'){
-    i75clearCart();main.hidden=true;empty.hidden=true;done.hidden=false;
-    document.getElementById('doneTitle').textContent='Order Confirmed!';
-    document.getElementById('doneRef').textContent=(q.get('session_id')||'STRIPE').slice(-10).toUpperCase();
+    var refId=(q.get('session_id')||'STRIPE').slice(-10).toUpperCase();
+    i75clearCart();main.hidden=true;empty.hidden=true;if(gate)gate.hidden=true;done.hidden=false;
+    document.getElementById('doneTitle').textContent="You're in! Order Confirmed.";
+    document.getElementById('doneRef').textContent=refId;
+    showShareLinks(refId);
     return;
   }
+  function updateGate(){
+    var s0=i75summary();
+    if(window.i75eaUnlocked&&!window.i75eaUnlocked()){
+      main.hidden=true;empty.hidden=true;if(gate)gate.hidden=false;
+      return false;
+    }
+    if(gate)gate.hidden=true;
+    if(!s0.cnt){main.hidden=true;empty.hidden=false;return false;}
+    main.hidden=false;empty.hidden=true;
+    return true;
+  }
+  document.addEventListener('i75ea:change',function(){if(done.hidden)updateGate();});
+  if(!updateGate())return;
   var s=i75summary();
-  if(!s.cnt){main.hidden=true;empty.hidden=false;return;}
   i75track('begin_checkout',{currency:'USD',value:s.tot});
   var L=document.getElementById('chkLines');
   s.items.forEach(function(it){
@@ -1193,6 +1510,7 @@ ${coreJs}
       main.hidden=true;done.hidden=false;
       document.getElementById('doneRef').textContent=ref;
       document.getElementById('doneEmail').textContent=email;
+      showShareLinks(ref);
     }
     if(!C.signupEndpoint){finish();return;}
     fetch(C.signupEndpoint,{method:'POST',headers:{'Content-Type':'application/json',apikey:C.signupKey,Prefer:'return=minimal'},body:JSON.stringify({email:email,source:skuTag})})
@@ -1246,7 +1564,7 @@ const termsHtml = `
 <h2>2. Indoor Golf Safety</h2>
 <p>Inside 75 is used with your own real golf clubs. You are solely responsible for ensuring adequate ceiling height, swing clearance, and safe surroundings before swinging any club indoors. Keep people, pets, fragile objects, and your tablet safely outside your swing arc. Use a proper golf hitting net if striking real golf balls with a wedge. 75 Golf LLC is not liable for property damage or personal injury resulting from indoor club swings.</p>
 <h2>3. Entertainment &amp; Compatibility</h2>
-<p>Inside 75 measures club motion and simulates ball flight and green roll for at-home golf play and practice. Right-handed steel-shaft putters and wedges are supported; compatible tablets are ${TABLETS}.</p>
+<p>Inside 75 measures club motion and simulates ball flight and green roll for at-home golf play and practice. Right-handed steel-shaft putters and wedges are supported; compatible tablets are ${TABLETS_TECH}.</p>
 <h2>4. Limited Hardware Warranty</h2>
 <p>Every Inside 75 Clip Kit carries a 1-year limited warranty against defects in materials and workmanship under normal home golf use. Contact <a href="mailto:${MAIL}">${MAIL}</a> for replacement or repair support.</p>
 <h2>5. Governing Law</h2>
@@ -1368,9 +1686,9 @@ const howToLd = {
   description: 'Connect your Inside 75 V2 clip to home Wi-Fi, clamp it onto your putter or wedge shaft, and play real golf greens on your tablet in five minutes.',
   totalTime: 'PT5M',
   step: [
-    { '@type': 'HowToStep', name: 'Connect to home Wi-Fi', text: 'Plug the clip into USB-C, tap Set up my clip in the Inside 75 tablet app, and enter your 2.4 GHz Wi-Fi password once.' },
-    { '@type': 'HowToStep', name: 'Clamp onto your putter or wedge', text: 'Secure the clip right above the ferrule on your steel shaft using the included 3 mm hex key and complete the 2-minute in-app fit.' },
-    { '@type': 'HowToStep', name: 'Make your real stroke', text: 'Putt on your rug or chip into a net with real balls or dry swings and watch your shot play out live on your tablet.' },
+    { '@type': 'HowToStep', name: 'Connect to home Wi-Fi', text: 'Plug the clip into USB-C, tap Set up my clip in the Inside 75 tablet app, and enter your home Wi-Fi password once.' },
+    { '@type': 'HowToStep', name: 'Clamp onto your putter or wedge', text: 'Secure the clip right above the clubhead on your steel shaft using the included hex key and complete the 2-minute in-app fit.' },
+    { '@type': 'HowToStep', name: 'Make your real stroke', text: 'Putt on your rug or chip into a net with real balls or practice swings and watch your shot play out live on your tablet.' },
   ],
 };
 const crumbs = (name, p) => ({
@@ -1429,27 +1747,27 @@ const pages = {
   'index.html': doc(head({
     title: 'Inside 75 | Play Real Short-Game Golf at Home With Your Own Putter & Wedge',
     ogTitle: 'Play real golf at home with your own putter and wedge',
-    desc: 'Clamp the sleek Inside 75 V2 wireless sensor onto your own putter and wedge. Putt, chip, and pitch inside 75 yards on real USGS LiDAR greens on your iPad or Android tablet. From $119.',
+    desc: 'Clamp the sleek Inside 75 V2 wireless sensor onto your own putter and wedge. Accurate, instant short-game golf inside 75 yards on real breaking greens on your iPad or Android tablet.',
     p: '/',
     lead: has('hero-living.webp') ? 'hero-living.webp' : 'hero-living.jpg',
     lds: [{ '@context': 'https://schema.org', '@graph': [orgLd, siteLd, appLd] }, productLd, videoLd, faqLd],
   }), homeBody),
   'kit.html': doc(head({
-    title: 'Inside 75 Clip Kit (V2) | Wireless Golf Sensor for Putter & Wedge, From $119',
-    desc: 'Order the Inside 75 V2 Clip Kit: One Clip ($119) or Two Clips for putter and wedge ($229, free US shipping). Includes free tablet app, 30-day home trial, and 1-year warranty.',
+    title: 'Inside 75 Clip Kit (V2) | Early Access From $119',
+    desc: 'Join Early Access or enter an owner code for the Inside 75 V2 Clip Kit: One Clip ($119) or Two Clips for putter and wedge ($229, free US shipping). Includes free tablet app, 30-day home trial, and 1-year warranty.',
     p: '/kit',
     lead: 'kit-two.jpg',
     lds: [productLd, crumbs('Clip Kit', '/kit')],
   }), kitBody),
   'how-it-works.html': doc(head({
     title: 'How Inside 75 Works | 5-Minute Setup for At-Home Putting & Chipping',
-    desc: 'Clamp the Inside 75 V2 sensor onto your steel-shaft putter or wedge, join 2.4 GHz home Wi-Fi once, and play real breaking greens on your tablet with real balls or dry swings.',
+    desc: 'Clamp the Inside 75 V2 sensor onto your steel-shaft putter or wedge, join your home Wi-Fi once, and play real breaking greens on your tablet with real balls or practice swings.',
     p: '/how-it-works',
     lds: [howToLd, crumbs('How It Works', '/how-it-works')],
   }), howBody),
   'compare.html': doc(head({
     title: 'Inside 75 vs Launch Monitors, Swing Sticks & Putting Mats',
-    desc: 'Compare Inside 75 ($119 to $229) against $3,000+ launch monitors, toy swing sticks, and flat putting mats. Real clubs, real USGS greens, and no room buildout required.',
+    desc: 'Compare Inside 75 ($119 to $229) against $3,000+ launch monitors, toy swing sticks, and flat putting mats. Real clubs, real breaking greens, and no room buildout required.',
     p: '/compare',
     lds: [crumbs('Compare', '/compare'), faqLd],
   }), compareBody),

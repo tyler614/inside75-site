@@ -3,7 +3,12 @@
   "contactEmail": "hello@75golf.com",
   "purchaseMode": "direct",
   "availability": "PreOrder",
-  "shippingNote": "Inside 75 V2 Clip Kit direct orders are live. Free US shipping on Two-Clip Kits.",
+  "shippingNote": "Small-batch release from Ohio. Free US shipping on Two-Clip Kits.",
+  "earlyAccess": {
+    "enabled": true,
+    "batchLabel": "Batch 2",
+    "founderCodes": ["TYLER", "OHIO75", "SCRATCH", "EARLY75"]
+  },
   "freeShippingThreshold": 150,
   "flatShipping": 9,
   "stripePaymentLinks": {

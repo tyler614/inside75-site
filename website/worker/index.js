@@ -1,20 +1,78 @@
 // Cloudflare Worker for 75golf.com:
 // 1. Serves static site assets from one/dist (with clean URLs & 404.html)
-// 2. Exposes POST /api/checkout to create a live Stripe Checkout Session once STRIPE_SECRET_KEY is configured.
+// 2. Exposes POST /api/invite/verify and POST /api/invite/mint for Early Access codes
+// 3. Exposes POST /api/checkout to create a live Stripe Checkout Session once STRIPE_SECRET_KEY is configured.
 const CATALOG = {
   two: {
     name: 'Inside 75 Clip Kit (Two Clips)',
-    description: 'Two V2 shaft sensors for your putter and wedge, 3 mm hex key, and the free tablet app.',
+    description: 'Two V2 shaft sensors for your putter and wedge, hex key, and the free tablet app.',
     unit_amount: 22900,
     image: 'https://75golf.com/assets/kit-two.jpg',
   },
   one: {
     name: 'Inside 75 Clip Kit (One Clip)',
-    description: 'One V2 shaft sensor for your putter or wedge, 3 mm hex key, and the free tablet app.',
+    description: 'One V2 shaft sensor for your putter or wedge, hex key, and the free tablet app.',
     unit_amount: 11900,
     image: 'https://75golf.com/assets/kit-one.jpg',
   },
 };
+
+const DEFAULT_FOUNDER_CODES = ['TYLER', 'OHIO75', 'SCRATCH', 'EARLY75'];
+const ALPHA = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
+
+function codeChecksum(body, salt) {
+  let h = 2166136261;
+  const s = `${body}:${salt}`;
+  for (let i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i);
+    h = Math.imul(h, 16777619) >>> 0;
+  }
+  return ALPHA[h % ALPHA.length] + ALPHA[(h >>> 5) % ALPHA.length];
+}
+
+function verifyCode(raw, env) {
+  const clean = String(raw || '').trim().toUpperCase().replace(/[^A-Z0-9-]/g, '');
+  if (!clean) return { valid: false };
+  const founders = (env.EARLY_ACCESS_CODES ? String(env.EARLY_ACCESS_CODES).split(',') : DEFAULT_FOUNDER_CODES)
+    .map(c => c.trim().toUpperCase())
+    .filter(Boolean);
+  if (founders.includes(clean)) return { valid: true, code: clean, kind: 'founder' };
+  const m = /^I75-([2-9A-HJ-NP-Z]{4})([2-9A-HJ-NP-Z]{2})$/.exec(clean);
+  if (m) {
+    const salt = env.EARLY_ACCESS_SALT || 'i75-ea-v2';
+    if (codeChecksum(m[1], salt) === m[2]) {
+      return { valid: true, code: clean, kind: 'member' };
+    }
+  }
+  return { valid: false };
+}
+
+function mintCodes(seed, count, env) {
+  const salt = env.EARLY_ACCESS_SALT || 'i75-ea-v2';
+  const out = [];
+  for (let k = 0; k < count; k++) {
+    let h = 2166136261;
+    const s = `${seed}:pass:${k}:${salt}`;
+    for (let i = 0; i < s.length; i++) {
+      h ^= s.charCodeAt(i);
+      h = Math.imul(h, 16777619) >>> 0;
+    }
+    let body = '';
+    for (let j = 0; j < 4; j++) {
+      h = Math.imul(h ^ (j + 17), 16777619) >>> 0;
+      body += ALPHA[h % ALPHA.length];
+    }
+    out.push(`I75-${body}${codeChecksum(body, salt)}`);
+  }
+  return out;
+}
+
+function json(obj, status = 200) {
+  return new Response(JSON.stringify(obj), {
+    status,
+    headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
+  });
+}
 
 function encodeForm(obj, prefix = '') {
   const parts = [];
@@ -45,12 +103,30 @@ export default {
       return Response.redirect(url.toString(), 301);
     }
 
+    if (url.pathname === '/api/invite/verify' && request.method === 'POST') {
+      try {
+        const body = await request.json();
+        const res = verifyCode(body?.code, env);
+        return json(res, res.valid ? 200 : 404);
+      } catch {
+        return json({ valid: false }, 400);
+      }
+    }
+
+    if (url.pathname === '/api/invite/mint' && request.method === 'POST') {
+      try {
+        const body = await request.json();
+        const seed = String(body?.ref || Date.now()).slice(0, 64);
+        const codes = mintCodes(seed, 3, env);
+        return json({ codes });
+      } catch {
+        return json({ codes: [] }, 400);
+      }
+    }
+
     if (url.pathname === '/api/checkout' && request.method === 'POST') {
       if (!env.STRIPE_SECRET_KEY) {
-        return new Response(JSON.stringify({ error: 'stripe_not_configured' }), {
-          status: 501,
-          headers: { 'Content-Type': 'application/json' },
-        });
+        return json({ error: 'stripe_not_configured' }, 501);
       }
       try {
         const body = await request.json();
@@ -78,10 +154,7 @@ export default {
         }
 
         if (!line_items.length) {
-          return new Response(JSON.stringify({ error: 'empty_cart' }), {
-            status: 400,
-            headers: { 'Content-Type': 'application/json' },
-          });
+          return json({ error: 'empty_cart' }, 400);
         }
 
         const freeShipping = subtotal >= 15000;
@@ -115,20 +188,11 @@ export default {
         });
         const data = await stripeRes.json();
         if (!stripeRes.ok || !data.url) {
-          return new Response(JSON.stringify({ error: data?.error?.message || 'stripe_error' }), {
-            status: 502,
-            headers: { 'Content-Type': 'application/json' },
-          });
+          return json({ error: data?.error?.message || 'stripe_error' }, 502);
         }
-        return new Response(JSON.stringify({ url: data.url }), {
-          status: 200,
-          headers: { 'Content-Type': 'application/json' },
-        });
+        return json({ url: data.url, id: data.id });
       } catch {
-        return new Response(JSON.stringify({ error: 'invalid_request' }), {
-          status: 400,
-          headers: { 'Content-Type': 'application/json' },
-        });
+        return json({ error: 'invalid_request' }, 400);
       }
     }
 
