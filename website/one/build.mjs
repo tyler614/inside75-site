@@ -146,7 +146,7 @@ const FACTS = [
   ['Club Compatibility', 'Fits your own right-handed steel-shaft putter or wedge (mounted right above the ferrule)'],
   ['Connectivity', 'Direct 2.4 GHz home Wi-Fi to your tablet (Bluetooth used for 2-minute initial setup only)'],
   ['Power & Sleep', 'USB-C rechargeable (cable not included). No power button: auto-sleeps when still, wakes when picked up.'],
-  ['Updates', 'Free wireless firmware updates directly from the Inside 75 app'],
+  ['Updates', 'Wireless firmware updates directly from the Inside 75 app'],
   ['Supported Tablets', `${TABLETS_TECH}. Phones are not supported yet.`],
   ['Company', '75 Golf LLC, Columbus, Ohio'],
 ];
@@ -782,7 +782,7 @@ ${header('home', true)}
     <p class="lead">Redesigned from the ground up with a smooth, low-profile shell that sits cleanly above the hosel and disappears once you stand over the ball.</p>
     <ul class="feat-list">
       <li><div class="fi">${I.wave}</div><div><b>Pinpoint stroke accuracy</b><span>Captures tiny differences in speed, face angle, and swing path right near the clubhead, from touchy 3-footers to 75-yard pitches.</span></div></li>
-      <li><div class="fi">${I.wifi}</div><div><b>Instant, lag-free response</b><span>Streams straight to your tablet over home Wi-Fi so the ball reacts the moment you swing, with free wireless updates built in.</span></div></li>
+      <li><div class="fi">${I.wifi}</div><div><b>Instant, lag-free response</b><span>Streams straight to your tablet over home Wi-Fi so the ball reacts the moment you swing, with wireless updates built in.</span></div></li>
       <li><div class="fi">${I.bolt}</div><div><b>No power button to remember</b><span>Sleeps automatically when your club rests in the bag and wakes the second you pick it up. Recharges with any USB-C cable.</span></div></li>
     </ul>
   </div>
@@ -994,7 +994,7 @@ ${header('home', true)}
   <div class="tier-cards">
     <div class="tier">
       <div class="tier-row"><b>Included Free</b><em>Included ($0)</em></div>
-      <p>1 complete 18-hole course, all 4 game modes (Short Game, Putting, Closest to the Pin, Practice), 1 to 4 players, Soft / Standard / Tour green speeds, and free clip firmware updates.</p>
+      <p>1 complete 18-hole course, all 4 game modes (Short Game, Putting, Closest to the Pin, Practice), 1 to 4 players, Soft / Standard / Tour green speeds, and wireless clip updates.</p>
     </div>
     <div class="tier">
       <div class="tier-row"><b>Inside 75 Plus</b><em>$49.99 / yr (optional)</em></div>
@@ -1265,7 +1265,7 @@ ${header('how', true)}
     <div><dt>Same Wi-Fi</dt><dd>Keep your tablet and clip on the same home Wi-Fi network (avoid guest networks). Most home routers work automatically; if yours lists separate 2.4 GHz and 5 GHz names, pick the 2.4 GHz one.</dd></div>
     <div><dt>iPad Local Network</dt><dd>On iPad, open Settings &gt; Inside 75 and confirm Local Network permission is enabled.</dd></div>
     <div><dt>Auto Sleep &amp; Wake</dt><dd>Unplugged, the clip rests after a few minutes of stillness. Pick up your club to wake it automatically. While plugged into USB-C, it stays awake.</dd></div>
-    <div><dt>Firmware Updates</dt><dd>The app delivers free wireless clip updates under Settings &gt; Clip software.</dd></div>
+    <div><dt>Firmware Updates</dt><dd>The app delivers wireless clip updates under Settings &gt; Clip software.</dd></div>
     <div><dt>Still Stuck?</dt><dd>Email <a href="mailto:${MAIL}">${MAIL}</a> and our team in Ohio will help get you rolling.</dd></div>
   </dl>
   <p style="margin-top:28px"><a class="btn primary" href="${page('/kit')}" data-ea-cta>${EA_ON ? 'Get Early Access &#8594;' : 'Shop the Clip Kit &#8594;'}</a></p>
@@ -1864,7 +1864,7 @@ const llmsTxt = `# Inside 75 (75golf.com)
 ## Key Facts
 - Company: 75 Golf LLC (Ohio, USA), contact hello@75golf.com
 - Website: ${SITE}
-- Hardware: Inside 75 V2 wireless shaft sensor (1,920 Hz IMU, 2.4 GHz Wi-Fi, Bluetooth for initial setup only, USB-C rechargeable, automatic sleep/wake with no power button, free OTA firmware updates)
+- Hardware: Inside 75 V2 wireless shaft sensor (1,920 Hz IMU, 2.4 GHz Wi-Fi, Bluetooth for initial setup only, USB-C rechargeable, automatic sleep/wake with no power button, OTA firmware updates)
 - Pricing:
   - Two-Clip Full Short-Game Kit: $229 USD (free US ground shipping) - one clip for putter + one for wedge, zero swapping during full 18-hole Short Game rounds
   - One-Clip Starter Kit: $119 USD ($9 flat US shipping) - plays Putting, Closest to the Pin, and Practice; swaps between clubs in ~20 seconds
