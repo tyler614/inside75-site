@@ -1,28 +1,29 @@
-# 75golf.com website
+# 75golf.com Website
 
-The Inside 75 marketing site and store: home page, kit page with cart, and the brand sample.
+Consumer storefront, interactive product showcase, checkout, and SEO/AEO site for Inside 75 (75 Golf LLC).
 
-## Build
+## Build & Local Preview
 
-```
+```bash
 cd website
-npm install
-node one/build.mjs
+node one/build.mjs --strict   # builds one/dist and runs link, schema, copy, and asset checks
+node serve.mjs                # previews one/dist at http://127.0.0.1:4175
 ```
 
-Output goes to `one/dist/` (index.html, kit.html, assets). `--strict` fails the build if media is missing or the copy has a dash or a banned word.
+## Activating Live Stripe Card Payments (Two Options)
 
-## What's here
+Out of the box, `/checkout` runs in Batch 2 Direct Order mode (capturing reservations into Supabase `site_signups` with $0 charged today). Flip on live credit card, Apple Pay, and Google Pay checkout in 60 seconds with either option:
 
-- `one/build.mjs`: generates the pages. Prices and product copy live in the `P` object.
-- `one/style.css`: brand styles. Matte white and navy, green only on the flag and the green. Archivo, Public Sans and IBM Plex Mono.
-- `one/plate.svg`: the yardage book drawing.
-- `one/config.json`: checkout, store and signup settings. Empty checkout or store links show a waitlist or "Soon".
-- `one/assets/`: photos and the hero clip used on the site. `one/_orig_photos/` holds the untouched originals.
-- `brand-sample/`: the one-page brand sample.
+1. **Zero-backend Stripe Payment Links (fastest):** Create two Stripe Payment Links (Two-Clip Kit $229 with free shipping, One-Clip Kit $119 with $9 shipping) and paste their URLs into `one/config.json` under `stripePaymentLinks.two` and `stripePaymentLinks.one`, then rebuild.
+2. **Full multi-item Stripe Checkout via Cloudflare Worker (`worker/index.js`):** Set `"checkoutApi": "/api/checkout"` in `one/config.json`, rebuild, deploy via Wrangler (`wrangler deploy`), and run `wrangler secret put STRIPE_SECRET_KEY`.
 
-## Deploying
+## Ad Pixels & Analytics
 
-75golf.com runs on the Cloudflare worker `inside75`. Upload a zip of `one/dist` as a new deployment. Only deploy when Tyler says so.
+Paste your IDs into `one/config.json` under `analytics` (`ga4`, `metaPixel`, `tiktokPixel`, `googleAdsId`). UTM parameters (`utm_source`, `utm_medium`, `utm_campaign`, `gclid`, `fbclid`, `ttclid`) and ecommerce events (`view_item`, `add_to_cart`, `begin_checkout`, `purchase`, `generate_lead`) fire automatically.
 
-The privacy page at the root of this repo is separate and is not touched by this folder.
+## Deploying to 75golf.com (Cloudflare Worker `inside75`)
+
+- **Option A (Wrangler):** `cd website && npx wrangler deploy` (using `wrangler.jsonc`, serving `one/dist` + `/api/checkout`).
+- **Option B (Dashboard static upload):** Upload `one/dist` (zipped) to the `inside75` Worker with `not_found_handling` set to `404-page`.
+
+Note: The root `index.html` in this repository serves the separate app privacy policy for GitHub Pages and is intentionally untouched.
