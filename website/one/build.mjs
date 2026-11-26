@@ -272,7 +272,7 @@ const eaModal = EA_ON ? `<div class="ea-modal-bg" id="eaModal" hidden role="dial
       <p class="msg" id="eaWaitMsg" role="status" hidden></p>
     </form>
     <form id="eaCodeForm" hidden>
-      <div class="field"><label for="eaCodeIn">Early Access code</label><input id="eaCodeIn" name="code" type="text" required autocomplete="off" placeholder="e.g. I75-ABCD12" style="text-transform:uppercase;letter-spacing:0.04em;font-weight:600"></div>
+      <div class="field"><label for="eaCodeIn">Early Access code</label><input id="eaCodeIn" name="code" type="text" required autocomplete="off" placeholder="Enter your code" style="text-transform:uppercase;letter-spacing:0.04em;font-weight:600"></div>
       <button type="submit" class="btn primary" style="width:100%">Unlock Ordering</button>
       <p class="msg" id="eaCodeMsg" role="status" hidden></p>
       <p style="font-size:13px;color:var(--ink-3);margin:12px 0 0">Every Inside 75 owner receives 5 Early Access links to share with friends so they can skip the waitlist.</p>
@@ -457,12 +457,19 @@ function eaChecksum(body){
   for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)>>>0;}
   return EA_ALPHA[h%EA_ALPHA.length]+EA_ALPHA[(h>>>5)%EA_ALPHA.length];
 }
+function eaDigitCheck(num4){
+  var h=2166136261,s=num4+':i75-ea-v2';
+  for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)>>>0;}
+  return String(h%97).padStart(2,'0');
+}
 function eaLocalVerify(raw){
   var c=String(raw||'').trim().toUpperCase().replace(/[^A-Z0-9-]/g,'');
   if(!c)return null;
   if(C.earlyAccess&&C.earlyAccess.founderCodes&&C.earlyAccess.founderCodes.indexOf(c)>=0)return c;
-  var m=/^I75-([2-9A-HJ-NP-Z]{4})([2-9A-HJ-NP-Z]{2})$/.exec(c);
-  if(m&&eaChecksum(m[1])===m[2])return c;
+  var m=/^75-([0-9]{4})([0-9]{2})$/.exec(c);
+  if(m&&eaDigitCheck(m[1])===m[2])return c;
+  var m2=/^I75-([2-9A-HJ-NP-Z]{4})([2-9A-HJ-NP-Z]{2})$/.exec(c);
+  if(m2&&eaChecksum(m2[1])===m2[2])return c;
   return null;
 }
 function eaLocalMint(seed){
@@ -470,9 +477,8 @@ function eaLocalMint(seed){
   for(var k=0;k<5;k++){
     var h=2166136261,s=String(seed)+':pass:'+k+':i75-ea-v2';
     for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)>>>0;}
-    var body='';
-    for(var j=0;j<4;j++){h=Math.imul(h^(j+17),16777619)>>>0;body+=EA_ALPHA[h%EA_ALPHA.length];}
-    out.push('I75-'+body+eaChecksum(body));
+    var num4=String(1000+(h%9000));
+    out.push('75-'+num4+eaDigitCheck(num4));
   }
   return out;
 }
@@ -490,8 +496,9 @@ window.i75verifyCode=function(raw){
     .catch(function(){return eaLocalVerify(clean);})
     .then(function(ok){return ok||eaLocalVerify(clean);});
 };
-window.i75mintPasses=function(ref){
-  return fetch('/api/invite/mint',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({ref:ref})})
+window.i75mintPasses=function(ref,meta){
+  var payload=Object.assign({ref:ref},meta||{});
+  return fetch('/api/invite/mint',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
     .then(function(r){return r.ok?r.json().then(function(d){return d&&d.codes&&d.codes.length?d.codes:eaLocalMint(ref);}):eaLocalMint(ref);})
     .catch(function(){return eaLocalMint(ref);});
 };
@@ -1416,10 +1423,10 @@ ${coreJs}
 (function(){
   var q=new URLSearchParams(location.search);
   var main=document.getElementById('chkMain'),empty=document.getElementById('chkEmpty'),done=document.getElementById('chkSuccess'),gate=document.getElementById('chkGate');
-  function showShareLinks(ref){
+  function showShareLinks(ref,meta){
     var box=document.getElementById('eaShareBox'),list=document.getElementById('eaShareList');
     if(!box||!list||!window.i75mintPasses)return;
-    window.i75mintPasses(ref).then(function(codes){
+    window.i75mintPasses(ref,meta).then(function(codes){
       if(!codes||!codes.length)return;
       list.textContent='';
       codes.forEach(function(cd){
@@ -1519,7 +1526,9 @@ ${coreJs}
       document.getElementById('doneRef').textContent=ref;
       document.getElementById('doneEmail').textContent=email;
       var dae=document.getElementById('doneAppEmail');if(dae&&email)dae.textContent=email;
-      showShareLinks(ref);
+      var kitStr=s.items.map(function(i){return i.sku+'x'+i.qty;}).join('+');
+      var stStr=document.getElementById('cState')?document.getElementById('cState').value.trim().toUpperCase():'';
+      showShareLinks(ref,{email:email,usedCode:window.i75eaCode?window.i75eaCode():'',kit:kitStr,state:stStr});
     }
     if(!C.signupEndpoint){finish();return;}
     fetch(C.signupEndpoint,{method:'POST',headers:{'Content-Type':'application/json',apikey:C.signupKey,Prefer:'return=minimal'},body:JSON.stringify({email:email,source:skuTag})})
