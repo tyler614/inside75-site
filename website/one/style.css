@@ -31,13 +31,14 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 [hidden] { display: none !important; }
-html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 84px; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 84px; overflow-x: clip; }
 body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
   font: 400 17px/1.6 "Public Sans", system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
+  max-width: 100%;
   overflow-x: clip;
 }
 img, video { max-width: 100%; display: block; }
@@ -908,12 +909,19 @@ h3 { font-size: clamp(20px, 1.9vw, 24px); line-height: 1.2; letter-spacing: -0.0
 }
 @media (max-width: 820px) {
   .nav-links { display: none; }
+  .bar .nav-actions .btn.primary { display: none; }
   .menu-btn { display: inline-flex; }
   .kits-grid { grid-template-columns: minmax(0, 1fr); }
   .hero-checks { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 600px) {
   body { font-size: 16px; }
+  .bar-in { gap: 10px; }
+  .brand-svg { height: 20px; }
+  .cartbtn { padding: 0 10px; gap: 6px; font-size: 13.5px; }
+  .hero h1 { font-size: 34px; }
+  .tel-tabs { display: flex; flex-wrap: wrap; width: 100%; }
+  .tel-tabs button { flex: 1 1 auto; padding: 0 12px; font-size: 13.5px; }
   .proof-grid, .guarantee-bar, .courses-grid, .tel-metrics, .field-grid, .fgrid { grid-template-columns: minmax(0, 1fr); }
   .hero-ctas .btn, .kit-acts .btn, .form .btn { width: 100%; }
   .spec-table div { grid-template-columns: minmax(0, 1fr); gap: 4px; }
