@@ -48,18 +48,18 @@ function pic(name, alt, { cls = '', eager = false, root = false } = {}) {
   return has(`${name}.webp`) ? `<picture><source srcset="${pre}${name}.webp" type="image/webp">${im}</picture>` : im;
 }
 
-// Inline brand lockup using the official 3-blue Inside 75 grid mark + crisp wordmark
+// Inline brand lockup using solid navy Inside 75 grid mark (white on dark surfaces) + crisp wordmark
 const BRAND_SVG = `<svg class="brand-svg" viewBox="0 0 132 28" role="img" aria-label="Inside 75">
-  <g>
-    <rect x="0" y="2" width="6.5" height="6.5" rx="1.6" fill="#2C4FC5"/>
-    <rect x="8.5" y="2" width="6.5" height="6.5" rx="1.6" fill="#6B83D6"/>
-    <rect x="17" y="2" width="6.5" height="6.5" rx="1.6" fill="#95A7E2"/>
-    <rect x="0" y="10.5" width="6.5" height="6.5" rx="1.6" fill="#2C4FC5"/>
-    <rect x="8.5" y="10.5" width="6.5" height="6.5" rx="1.6" fill="#6B83D6"/>
-    <rect x="17" y="10.5" width="6.5" height="6.5" rx="1.6" fill="#95A7E2"/>
-    <rect x="0" y="19" width="6.5" height="6.5" rx="1.6" fill="#2C4FC5"/>
-    <rect x="8.5" y="19" width="6.5" height="6.5" rx="1.6" fill="#6B83D6"/>
-    <rect x="17" y="19" width="6.5" height="6.5" rx="1.6" fill="#95A7E2"/>
+  <g class="brand-mark" fill="#0B1A33">
+    <rect x="0" y="2" width="6.5" height="6.5" rx="1.6"/>
+    <rect x="8.5" y="2" width="6.5" height="6.5" rx="1.6"/>
+    <rect x="17" y="2" width="6.5" height="6.5" rx="1.6"/>
+    <rect x="0" y="10.5" width="6.5" height="6.5" rx="1.6"/>
+    <rect x="8.5" y="10.5" width="6.5" height="6.5" rx="1.6"/>
+    <rect x="17" y="10.5" width="6.5" height="6.5" rx="1.6"/>
+    <rect x="0" y="19" width="6.5" height="6.5" rx="1.6"/>
+    <rect x="8.5" y="19" width="6.5" height="6.5" rx="1.6"/>
+    <rect x="17" y="19" width="6.5" height="6.5" rx="1.6"/>
   </g>
   <text class="brand-text" x="32" y="20.5" font-family="Archivo,system-ui,sans-serif" font-weight="700" font-size="19.5" letter-spacing="-0.03em" fill="#0B1A33">Inside 75</text>
 </svg>`;
@@ -434,7 +434,7 @@ ${header('home', true)}
     <div class="hero-frame">
       ${pic('hero-living', 'Golfer putting on a living room rug with their own blade putter wearing the sleek Inside 75 V2 clip, with an iPad ahead showing a sunlit 3D golf green', { eager: true })}
       <div class="hero-hud" aria-hidden="true">
-        <div class="hero-hud-title"><span class="live-dot"></span>Inside 75 V2 Clip + Tablet App</div>
+        <div class="hero-hud-title">Inside 75 V2 Clip + Tablet App</div>
         <div class="hero-hud-stats"><span>1,920 Hz IMU</span><span>3 to 75 yd</span><strong>Real USGS Greens</strong></div>
       </div>
     </div>

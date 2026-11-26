@@ -58,20 +58,11 @@ h3 { font-size: clamp(20px, 1.9vw, 24px); line-height: 1.2; letter-spacing: -0.0
 .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; font-weight: 500; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+  display: inline-block;
   font: 500 12px/1.2 "IBM Plex Mono", ui-monospace, monospace;
   letter-spacing: 0.09em;
   text-transform: uppercase;
   color: var(--blue);
-}
-.eyebrow::before {
-  content: "";
-  width: 7px;
-  height: 7px;
-  border-radius: 2px;
-  background: currentColor;
 }
 .lead { color: var(--ink-2); font-size: clamp(17px, 1.3vw, 19px); line-height: 1.58; max-width: 38em; margin: 0 0 28px; }
 :focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
@@ -147,7 +138,7 @@ h3 { font-size: clamp(20px, 1.9vw, 24px); line-height: 1.2; letter-spacing: -0.0
 }
 .brand-link { display: inline-flex; align-items: center; text-decoration: none; flex: none; }
 .brand-svg { height: 24px; width: auto; display: block; }
-.bar.dark .brand-svg .brand-text { fill: #FFFFFF; }
+.bar.dark .brand-svg .brand-text, .bar.dark .brand-svg .brand-mark { fill: #FFFFFF; }
 .nav-links {
   display: flex;
   align-items: center;
@@ -282,8 +273,7 @@ h3 { font-size: clamp(20px, 1.9vw, 24px); line-height: 1.2; letter-spacing: -0.0
   border-top: 1px solid rgba(255, 255, 255, 0.12);
   color: #fff;
 }
-.hero-hud-title { font: 600 13px/1.2 Archivo, sans-serif; display: flex; align-items: center; gap: 8px; }
-.live-dot { width: 8px; height: 8px; border-radius: 999px; background: var(--mint); box-shadow: 0 0 0 4px rgba(137, 207, 160, 0.25); }
+.hero-hud-title { font: 600 13px/1.2 Archivo, sans-serif; color: #fff; }
 .hero-hud-stats { display: flex; gap: 16px; font: 500 12.5px "IBM Plex Mono", monospace; color: rgba(255, 255, 255, 0.86); }
 .hero-hud-stats strong { color: var(--mint); font-weight: 500; }
 
@@ -878,7 +868,7 @@ h3 { font-size: clamp(20px, 1.9vw, 24px); line-height: 1.2; letter-spacing: -0.0
   padding: 56px 0 calc(36px + env(safe-area-inset-bottom, 0px));
   font-size: 14.5px;
 }
-.foot .brand-svg .brand-text { fill: #FFFFFF; }
+.foot .brand-svg .brand-text, .foot .brand-svg .brand-mark { fill: #FFFFFF; }
 .fgrid {
   display: grid;
   grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr));
