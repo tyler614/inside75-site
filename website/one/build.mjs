@@ -691,21 +691,21 @@ ${header('home', true)}
   </div>
   <div class="steps-grid">
     <article class="step-card">
-      <div class="step-img">${pic('mount-hands', 'Hands tightening the Inside 75 V2 sensor clip onto a chrome putter shaft with the included hex key')}<span class="step-num">STEP 01</span></div>
+      <div class="step-img">${pic('mount-hands', 'Hands tightening the Inside 75 V2 sensor clip onto a chrome putter shaft with the included hex key')}</div>
       <div class="step-body">
         <h3>Clip it onto your club</h3>
         <p>Clamp the sleek sensor right above the clubhead with the included hex key. Connect to your home Wi-Fi once and you are ready to play in under five minutes.</p>
       </div>
     </article>
     <article class="step-card">
-      <div class="step-img">${pic('lifestyle-wedge', 'Golfer in a sunlit garage studio chipping a golf ball into a net with a steel wedge fitted with the Inside 75 V2 clip, and an iPad resting safely across from the golfer stance')}<span class="step-num">STEP 02</span></div>
+      <div class="step-img">${pic('lifestyle-wedge', 'Golfer in a sunlit garage studio chipping a golf ball into a net with a steel wedge fitted with the Inside 75 V2 clip, and an iPad resting safely across from the golfer stance')}</div>
       <div class="step-body">
         <h3>Swing your own clubs, ball or no ball</h3>
         <p>Putt on your living room rug or chip into a garage net. Hit real golf balls when you have a net, or take practice swings anytime when you don't.</p>
       </div>
     </article>
     <article class="step-card">
-      <div class="step-img">${pic('course-benttree', 'Real 3D golf green and flagstick in the Inside 75 tablet app built from real elevation scans')}<span class="step-num">STEP 03</span></div>
+      <div class="step-img">${pic('course-benttree', 'Real 3D golf green and flagstick in the Inside 75 tablet app built from real elevation scans')}</div>
       <div class="step-body">
         <h3>Watch the shot react right off your face</h3>
         <p>The ball launches on screen the moment you swing, with practically zero lag. Pull a 10-footer slightly left or leave a chip short and you will see it honestly, just like outdoors.</p>
@@ -1147,7 +1147,7 @@ ${header('kit', false)}
     <div class="eyebrow">Technical Specifications</div>
     <h2>Built for feel, speed, and zero friction.</h2>
     <p class="lead">Every detail of the V2 clip is built to disappear on your club while delivering fast, responsive, pinpoint short-game feedback.</p>
-    <p><a class="btn line" href="${page('/how-it-works')}">See Step-by-Step Setup &#8594;</a></p>
+    <p><a class="btn line" href="${page('/how-it-works')}">See Setup Guide &#8594;</a></p>
   </div>
   <dl class="spec-table">
     <div><dt>In the Box</dt><dd id="kbox2">${P.two.box}</dd></div>
@@ -1201,14 +1201,14 @@ const howBody = `
 ${header('how', true)}
 <main>
 <section class="page-hero"><div class="in">
-  <div class="eyebrow">Step-by-step setup</div>
+  <div class="eyebrow">Setup guide</div>
   <h1>From the box to your first putt in 5 minutes.</h1>
   <p class="lead">Everything you need to know about clamping the V2 clip to your club, connecting to Wi-Fi once, charging, and playing real greens at home.</p>
 </div></section>
 
 <section class="sec"><div class="in hw-row">
   <div>
-    <div class="eyebrow">Step 01 · 2 Minutes</div>
+    <div class="eyebrow">First time · 2 minutes</div>
     <h2>Connect to your home Wi-Fi once.</h2>
     <p>Open the free Inside 75 app on your iPad or Android tablet, tap <strong>Set up my clip</strong>, and plug the clip into USB-C power. Your tablet finds it automatically in about 20 seconds.</p>
     <p>Pick your home Wi-Fi network and enter its password once. From then on, the clip connects automatically every time you pick up your club.</p>
@@ -1218,7 +1218,7 @@ ${header('how', true)}
 
 <section class="sec white"><div class="in hw-row flip">
   <div>
-    <div class="eyebrow">Step 02 · 2 Minutes</div>
+    <div class="eyebrow">On your club · 2 minutes</div>
     <h2>Clamp onto your club and run the quick fit.</h2>
     <p>Unplug the clip and place the two halves around your steel putter or wedge shaft just above the clubhead, with the two bolts facing the target. Snug both screws evenly with the included hex key until the clip cannot twist.</p>
     <p>The app then guides you through a quick three-step fit (a shaft roll, your normal address, and squaring the face on a flat edge) so it learns your exact club. Moving a clip to a different club later takes about 20 seconds.</p>
@@ -1228,7 +1228,7 @@ ${header('how', true)}
 
 <section class="sec"><div class="in hw-row">
   <div>
-    <div class="eyebrow">Step 03 · Play Anywhere</div>
+    <div class="eyebrow">Play anywhere</div>
     <h2>Set your tablet in front of you and swing.</h2>
     <p>Place your tablet across from your stance, well clear of your swing path, so you can glance straight ahead to watch each shot. Putt across your living room rug, chip real golf balls into a net, or take practice swings without a ball.</p>
     <p>Because the V2 sensor reads your clubhead speed, face angle, and swing path right through impact, the ball reacts immediately on screen whether you strike a real ball or take a practice swing.</p>
