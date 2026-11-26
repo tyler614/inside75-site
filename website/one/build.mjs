@@ -418,7 +418,7 @@ ${header('home', true)}
   <div>
     <div class="eyebrow">Real clubs · Real greens · At home</div>
     <h1>Play real golf at home with your own putter and wedge.</h1>
-    <p class="sub">Clamp a tiny wireless sensor onto the shaft of the clubs already in your bag. Putt on your living room rug or chip into a net, and watch every shot fly and roll out live on your iPad or Android tablet.</p>
+    <p class="sub">Clamp a tiny wireless sensor onto the shaft of the clubs already in your bag. Honest enough that scratch golfers respect the feel, simple enough to get 15 minutes of real reps on your living room rug.</p>
     <div class="hero-ctas">
       <a class="btn light" href="#kits">Shop the Clip Kit, From $${P.one.price}</a>
       <a class="btn ghost" href="#gameplay">Watch It Play</a>
@@ -482,8 +482,8 @@ ${header('home', true)}
 <section class="sec white" id="gameplay"><div class="in play-grid">
   <div>
     <div class="eyebrow">Inside the app</div>
-    <h2>Real practice. Real rounds. Zero arcade feel.</h2>
-    <p class="lead">Built for golfers who want to keep their touch sharp between tee times, without settling for a toy golf game or waiting for a four-hour weekend slot.</p>
+    <h2>Impressive enough for scratch golfers. Ready in two minutes.</h2>
+    <p class="lead">Most indoor golf gear feels like an arcade toy. Inside 75 responds right off your clubface with real green speeds and breaks, so even low-handicap and scratch golfers actually trust it between tee times.</p>
     <div class="clip-tabs" role="group" aria-label="Explore Inside 75 game modes">
       <button type="button" class="clip-tab" data-clip="reel-putting" data-meta="Real 4 ft, 10 ft &amp; 25 ft putts · Soft 9.5 / Standard 10.5 / Tour 12.0" data-tag="Live App Footage" aria-pressed="true">
         <div><b>Putting &amp; Green Reading</b><span>First-person stroke, real slope &amp; break, pace control from 3 to 40 ft</span></div><em>3 to 40 ft</em>
@@ -498,7 +498,7 @@ ${header('home', true)}
         <div><b>18-Hole Short Game Courses</b><span>Scramble up-and-down across real contoured courses at home</span></div><em>18 Holes</em>
       </button>
     </div>
-    <p style="font-size:14.5px;color:var(--ink-2)">Every session tracks <strong>clubhead speed, face angle, swing path, and Strokes Gained</strong> so 15 minutes on a Tuesday night actually shows up on your Saturday scorecard.</p>
+    <p style="font-size:14.5px;color:var(--ink-2)">Pull a 10-footer half a degree left and it burns the left edge. Every session tracks <strong>clubhead speed, face angle, swing path, and Strokes Gained</strong> so 15 minutes on a Tuesday night actually shows up on your Saturday scorecard.</p>
   </div>
   <div>
     <div class="ipad-shell">
@@ -543,9 +543,9 @@ ${header('home', true)}
 
 <section class="sec" id="telemetry"><div class="in">
   <div class="sec-head">
-    <div class="eyebrow">Real feel, zero guesswork</div>
-    <h2>Why tracking your club feels so real indoors.</h2>
-    <p class="lead">Indoor ball radars struggle with short putts and chips in tight rooms. Because Inside 75 sits directly on your club, it catches subtle face-angle and speed changes cleanly and plays them out on screen right away.</p>
+    <div class="eyebrow">Real feel, zero flattery</div>
+    <h2>Why even scratch golfers trust the feedback.</h2>
+    <p class="lead">Weighted swing toys flatter every stroke, and indoor ball radars struggle on soft chips and short putts. Because Inside 75 sits right on your club, tiny changes in speed, face angle, and path show up on screen immediately.</p>
   </div>
   <div class="tel-box">
     <div class="tel-tabs" role="group" aria-label="Select shot type">
@@ -591,8 +591,8 @@ ${header('home', true)}
     ${pic('lifestyle-friends', 'Two friends enjoying an Inside 75 putting match in a sunlit living room with a real putter, V2 clip, and iPad showing a golf green')}
     <div class="banner-copy">
       <div class="eyebrow">Stay sharp between tee times</div>
-      <h3>15 minutes on a weeknight. 18 holes with friends on Friday.</h3>
-      <p>No time to sneak out to the range three times a week? Groove your 35-yard pitch and 10-foot start line after work, then pass the putter around with up to four friends on one tablet.</p>
+      <h3>15 minutes on a weeknight. 18 holes with your foursome on Friday.</h3>
+      <p>Whether you are trying to break 80 or stay sharp as a scratch golfer with a packed week, groove your 35-yard wedge and 10-foot start line after work, then pass the putter around with up to four friends on one tablet.</p>
       <div class="pill-row">
         <span>Short Game (18 Holes)</span>
         <span>Putting</span>
@@ -1022,9 +1022,9 @@ ${header('compare', true)}
       <div class="verdict-media">${pic('clubs-pair', 'Inside 75 V2 clips mounted on a stainless blade putter and forged sand wedge')}</div>
       <div class="verdict-body">
         <div class="verdict-kicker">Inside 75 · $119 to $229</div>
-        <h3>Built for the scoring zone</h3>
+        <h3>Built for golfers who care about real feel</h3>
         <ul class="verdict-list">
-          <li>${I.check}<span>Lower scores where 60%+ of strokes happen, from 3-foot putts out to 75-yard pitches.</span></li>
+          <li>${I.check}<span>Honest, lag-free short-game feedback that even scratch golfers respect, from 3-foot putts to 75-yard pitches.</span></li>
           <li>${I.check}<span>Practice with your own real putter and wedge instead of a short weighted stick.</span></li>
           <li>${I.check}<span>Play real breaking greens in any living room with instant shot response, ball or no ball.</span></li>
           <li>${I.check}<span>Pass clubs around with up to four friends on one tablet, with zero subscription required.</span></li>
