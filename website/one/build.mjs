@@ -38,7 +38,7 @@ function dims(f) {
   }
   return [1200, 800];
 }
-const ASSET_V = 'v2g';
+const ASSET_V = 'v2h';
 const file = name => ['jpg', 'png'].map(e => `${name}.${e}`).find(has);
 function pic(name, alt, { cls = '', eager = false, root = false } = {}) {
   const f = file(name);
@@ -148,7 +148,6 @@ const FACTS = [
   ['Power & Sleep', 'USB-C rechargeable (cable not included). No power button: auto-sleeps when still, wakes when picked up.'],
   ['Updates', 'Wireless firmware updates directly from the Inside 75 app'],
   ['Supported Tablets', `${TABLETS_TECH}. Phones are not supported yet.`],
-  ['Company', '75 Golf LLC, Columbus, Ohio'],
 ];
 
 const QA = [
