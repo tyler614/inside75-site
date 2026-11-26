@@ -225,7 +225,7 @@ const footer = `<footer class="foot"><div class="in">
   <div class="fgrid">
     <div>
       ${BRAND_SVG}
-      <p style="margin-top:14px;max-width:26em">Real short-game golf at home with your own putter and wedge. Built in Ohio by golfers who wanted real greens in the living room without a $10,000 simulator.</p>
+      <p style="margin-top:14px;max-width:26em">Real short-game golf at home with your own putter and wedge. Designed and built in Ohio.</p>
       <p style="margin-top:12px"><a href="mailto:${MAIL}" style="color:#fff;font-weight:600">${MAIL}</a></p>
     </div>
     <div>
@@ -1016,15 +1016,15 @@ ${header('home', true)}
 <section class="sec" id="updates"><div class="in">
   <div class="notify-card">
     <div>
-      <div class="eyebrow">Batch drops &amp; new courses</div>
-      <h2 style="font-size:clamp(26px,3.2vw,38px)">Not ready to order today? Get course &amp; drop updates.</h2>
-      <p style="color:var(--ink-2);margin:0">Drop your email for shipping batch dates, new course releases, and left-handed support announcements. No spam, unsubscribe anytime.</p>
+      <div class="eyebrow">${EA_ON ? 'Early Access · ' + esc(EA.batchLabel || 'Batch 2') : 'Course &amp; drop updates'}</div>
+      <h2 style="font-size:clamp(26px,3.2vw,38px)">${EA_ON ? 'Want in on the next Ohio batch?' : 'Get new course &amp; drop updates.'}</h2>
+      <p style="color:var(--ink-2);margin:0">${EA_ON ? 'Join the waitlist for upcoming shipping batches, new course releases, and left-handed club announcements. No spam, unsubscribe anytime.' : 'Drop your email for new course releases, batch dates, and left-handed club announcements. No spam, unsubscribe anytime.'}</p>
     </div>
     <div>
       <form class="form" id="homeNotify" data-signup="75golf.com">
         <label for="homeNotifyE" class="sr">Email address</label>
         <input id="homeNotifyE" name="email" type="email" required autocomplete="email" placeholder="you@example.com">
-        <button type="submit" class="btn primary">Join List</button>
+        <button type="submit" class="btn primary">${EA_ON ? 'Join Waitlist' : 'Join List'}</button>
       </form>
       <p class="msg" id="homeNotifym" role="status" hidden></p>
     </div>
