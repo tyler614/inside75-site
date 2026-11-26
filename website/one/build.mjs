@@ -256,8 +256,8 @@ const footer = `<footer class="foot"><div class="in">
     </div>
   </div>
   <div class="foot-bot">
-    <span>&copy; 2026 75 Golf LLC · Ohio, USA. All rights reserved.</span>
-    <span>Right-handed steel shafts · iPad &amp; Android tablets</span>
+    <span>&copy; 2026 75 Golf LLC. All rights reserved.</span>
+    <span>Columbus, Ohio</span>
   </div>
 </div></footer>`;
 
