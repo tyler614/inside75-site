@@ -38,7 +38,7 @@ function dims(f) {
   }
   return [1200, 800];
 }
-const ASSET_V = 'v2o';
+const ASSET_V = 'v2p';
 const file = name => ['jpg', 'png'].map(e => `${name}.${e}`).find(has);
 function pic(name, alt, { cls = '', eager = false, root = false } = {}) {
   const f = file(name);
@@ -882,31 +882,31 @@ ${header('home', true)}
   <p class="swipe-hint" aria-hidden="true">Swipe setups &#8594;</p>
   <div class="steps-grid">
     <article class="step-card">
-      <div class="step-img">${pic('setup-yard', 'Golfer chipping off a portable turf mat into a tall 7x7 ft backyard hitting net with an iPad tilted right on the grass across from their stance')}</div>
+      <div class="step-img">${pic('setup-yard', 'Golfer hitting wedges off a turf mat into a backyard net with an iPad on the grass')}</div>
       <div class="step-body">
-        <h3>Backyard lawn</h3>
-        <p>Drop a hitting mat in front of a backyard net and set your tablet right on the grass by your stance.</p>
+        <h3>Backyard</h3>
+        <p>Hit real wedge shots into a backyard net and watch every shot play out on your tablet.</p>
       </div>
     </article>
     <article class="step-card">
-      <div class="step-img">${pic('setup-garage', 'Golfer chipping off a small 2x3 ft turf pad into a tall 7x7 ft hitting net in a suburban 2-car garage with an iPad tilted on the concrete floor across from their stance')}</div>
+      <div class="step-img">${pic('setup-garage', 'Golfer chipping off a turf mat into a garage hitting net with an iPad on the floor')}</div>
       <div class="step-body">
-        <h3>Garage mat &amp; net</h3>
-        <p>A 2x3 ft turf pad, full-height hitting net, and your iPad tilted right on the floor across from your stance.</p>
+        <h3>Garage</h3>
+        <p>Keep a small mat and net in the garage for year-round chipping and pitching.</p>
       </div>
     </article>
     <article class="step-card">
-      <div class="step-img">${pic('setup-basement', 'Golfer taking a ball-free putting stroke on finished basement carpet with a grounded blade putter and Inside 75 V2 clip, looking toward an iPad on an ottoman angled toward them')}</div>
+      <div class="step-img">${pic('setup-basement', 'Golfer putting indoors on basement carpet with a tablet on an ottoman')}</div>
       <div class="step-body">
-        <h3>Finished basement</h3>
-        <p>Step onto basement carpet with your own putter and tablet on an ottoman, no mat or ball needed.</p>
+        <h3>Basement</h3>
+        <p>Work on your putting stroke indoors anytime, with or without a golf ball.</p>
       </div>
     </article>
     <article class="step-card">
-      <div class="step-img">${pic('mount-hands', 'Hands tightening the Inside 75 V2 sensor clip onto a chrome putter shaft with the included hex key')}</div>
+      <div class="step-img">${pic('mount-hands', 'Hands tightening the Inside 75 V2 clip onto a putter shaft with the included hex key')}</div>
       <div class="step-body">
-        <h3>2-minute club clamp</h3>
-        <p>Snug two screws right above the ferrule with the included hex key and join home Wi-Fi once.</p>
+        <h3>2-minute install</h3>
+        <p>Tighten two screws above the hosel with the included hex key and connect to Wi-Fi once.</p>
       </div>
     </article>
   </div>
@@ -1383,20 +1383,20 @@ ${header('how', true)}
   <p class="swipe-hint" aria-hidden="true">Swipe setups &#8594;</p>
   <div class="steps-grid">
     <article class="step-card">
-      <div class="step-img">${pic('setup-garage', 'Suburban 2-car garage setup with 2x3 ft turf pad, tall 7x7 ft hitting net, and iPad tilted on the concrete floor across from the mat')}</div>
-      <div class="step-body"><h3>2-car garage</h3><p>Small 2x3 ft turf pad, full-height hitting net, and your iPad tilted right on the floor across from your stance.</p></div>
+      <div class="step-img">${pic('setup-yard', 'Golfer hitting wedges off a turf mat into a backyard net with an iPad on the grass')}</div>
+      <div class="step-body"><h3>Backyard</h3><p>Hit real wedge shots into a backyard net and watch every shot play out on your tablet.</p></div>
     </article>
     <article class="step-card">
-      <div class="step-img">${pic('setup-basement', 'Finished basement ball-free putting setup on carpet with a grounded blade putter and iPad on an ottoman')}</div>
-      <div class="step-body"><h3>Finished basement</h3><p>Step onto basement carpet with your own putter and tablet on an ottoman, no mat or ball needed.</p></div>
+      <div class="step-img">${pic('setup-garage', 'Golfer chipping off a turf mat into a garage hitting net with an iPad on the floor')}</div>
+      <div class="step-body"><h3>Garage</h3><p>Keep a small mat and net in the garage for year-round chipping and pitching.</p></div>
     </article>
     <article class="step-card">
-      <div class="step-img">${pic('setup-yard', 'Suburban backyard setup with portable turf mat on grass, tall 7x7 ft net, and iPad tilted right on the grass across from the mat')}</div>
-      <div class="step-body"><h3>Backyard lawn</h3><p>Portable hitting mat on the grass, full-height net, and your iPad tilted right on the grass by your stance.</p></div>
+      <div class="step-img">${pic('setup-basement', 'Golfer putting indoors on basement carpet with a tablet on an ottoman')}</div>
+      <div class="step-body"><h3>Basement</h3><p>Work on your putting stroke indoors anytime, with or without a golf ball.</p></div>
     </article>
     <article class="step-card">
-      <div class="step-img">${pic('lifestyle-office', 'Home office ball-free putting break on a flat rug with an iPad on a walnut desk')}</div>
-      <div class="step-body"><h3>Home office</h3><p>Grab five minutes of real putting reps right off your office rug between calls, no mat or ball needed.</p></div>
+      <div class="step-img">${pic('lifestyle-office', 'Golfer putting on a home office rug with an iPad on the desk')}</div>
+      <div class="step-body"><h3>Home office</h3><p>Take five minutes of putting reps between calls right off your office rug.</p></div>
     </article>
   </div>
 </div></section>
