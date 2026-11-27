@@ -859,7 +859,7 @@ ${header('home', true)}
     ${pic('lifestyle-friends', 'Two friends enjoying an Inside 75 putting match in a sunlit living room with a real putter, V2 clip, and iPad showing a golf green')}
     <div class="banner-copy">
       <div class="eyebrow">Stay sharp between tee times</div>
-      <h3>15 minutes on a weeknight. 18 holes with your foursome on Friday.</h3>
+      <h3>15 minutes on a weeknight. 18 holes with friends on Friday.</h3>
       <p>Groove your 35-yard wedge and 10-foot start line after work, then pass the putter around with up to four friends on one tablet.</p>
       <div class="pill-row">
         <span>Short Game (18 Holes)</span>
