@@ -38,7 +38,7 @@ function dims(f) {
   }
   return [1200, 800];
 }
-const ASSET_V = 'v2k';
+const ASSET_V = 'v2l';
 const file = name => ['jpg', 'png'].map(e => `${name}.${e}`).find(has);
 function pic(name, alt, { cls = '', eager = false, root = false } = {}) {
   const f = file(name);
@@ -99,7 +99,7 @@ const P = {
     price: 229,
     compareAt: 238,
     img: 'kit-two',
-    alt: 'Two Inside 75 V2 sensor clips in their white presentation tray with the 2 mm hex key',
+    alt: 'Two Inside 75 V2 matte-black wireless golf sensor clips side-by-side on a clean white studio background',
     sub: 'Keep one clip on your putter and one on your wedge so you play full 18-hole Short Game rounds without ever swapping clubs.',
     opt: 'Putter + Wedge · Zero swapping',
     plays: 'All 4 games, including full Short Game rounds',
@@ -118,7 +118,7 @@ const P = {
     price: 119,
     compareAt: null,
     img: 'kit-one',
-    alt: 'One Inside 75 V2 sensor clip in its white presentation tray with the 2 mm hex key',
+    alt: 'Single Inside 75 V2 matte-black wireless golf sensor clip on a clean white studio background',
     sub: 'Start with your putter or your wedge. Play Putting, Closest to the Pin, and Practice, or move the clip between clubs in about 20 seconds.',
     opt: 'Putter or Wedge · Easy to move',
     plays: 'Putting, Closest to the Pin, and Practice',
@@ -756,10 +756,10 @@ ${header('home', true)}
       </div>
       <div class="angle-pills" role="group" aria-label="Inspect V2 hardware views">
         <button type="button" data-stage="3d" data-label="V2 Hardware · Interactive 3D" aria-pressed="true">3D View</button>
+        <button type="button" data-stage="3d-exploded" data-label="V2 Inside · Custom PCB &amp; LiPo" aria-pressed="false">Inside View (3D)</button>
         <button type="button" data-stage="clubs-pair" data-label="V2 Clips · Putter + Wedge" aria-pressed="false">Putter + Wedge</button>
         <button type="button" data-stage="v2-putter" data-label="V2 Clip · On Putter Shaft" aria-pressed="false">On Putter</button>
         <button type="button" data-stage="v2-wedge" data-label="V2 Clip · On Wedge Shaft" aria-pressed="false">On Wedge</button>
-        <button type="button" data-stage="v2-back34" data-label="V2 Clip · Two-Bolt Shaft Clamp" aria-pressed="false">Back Clamp</button>
         <button type="button" data-stage="clip-charge" data-label="V2 Clip · USB-C Charging" aria-pressed="false">USB-C Charge</button>
       </div>
     </div>
@@ -1022,7 +1022,7 @@ ${header('home', true)}
       ${storeBadge('apple', cfg.appStore)}
       ${storeBadge('play', cfg.googlePlay)}
     </div>
-    <p style="font-size:13px;color:rgba(246,245,240,0.68);margin:10px 0 0">Early Access tablet builds via TestFlight (iPad) and Google Play (Android tablets).</p>
+    <p style="font-size:13px;color:rgba(246,245,240,0.72);margin:10px 0 0">iPad open beta via TestFlight · Android tablets: email <a href="mailto:${MAIL}" style="color:var(--mint)">${MAIL}</a> with your Gmail for Google Play access.</p>
   </div>
   <div class="tier-cards">
     <div class="tier">
@@ -1090,7 +1090,7 @@ ${coreJs}
     });
   });
 
-  // V2 interactive 3D & angle showcase switcher
+  // V2 interactive 3D & angle showcase switcher (Assembled 3D + Exploded Inside 3D + Studio Photos)
   var mv=document.getElementById('v2Model'),im=document.getElementById('v2Img'),sb=document.getElementById('stageBadge'),sh=document.getElementById('stageHint');
   if(mv&&sh){mv.addEventListener('pointerdown',function(){sh.hidden=true;},{once:true});}
   document.querySelectorAll('[data-stage]').forEach(function(b){
@@ -1098,8 +1098,19 @@ ${coreJs}
       document.querySelectorAll('[data-stage]').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});
       var k=b.getAttribute('data-stage');
       if(sb)sb.textContent=b.getAttribute('data-label')||'';
-      if(k==='3d'){if(mv)mv.hidden=false;if(im)im.hidden=true;if(sh)sh.hidden=false;}
-      else{if(mv)mv.hidden=true;if(sh)sh.hidden=true;if(im){im.src='assets/'+k+'.jpg?v=${ASSET_V}';im.hidden=false;}}
+      if(k==='3d'||k==='3d-exploded'){
+        if(mv){
+          var want=k==='3d-exploded'?'assets/v2-clip-exploded.glb?v=${ASSET_V}':'assets/v2-clip.glb?v=${ASSET_V}';
+          if(mv.getAttribute('src')!==want){mv.setAttribute('src',want);}
+          mv.setAttribute('camera-orbit',k==='3d-exploded'?'44deg 70deg 126%':'32deg 74deg 112%');
+          mv.hidden=false;
+        }
+        if(im)im.hidden=true;
+        if(sh)sh.hidden=false;
+      }else{
+        if(mv)mv.hidden=true;if(sh)sh.hidden=true;
+        if(im){im.src='assets/'+k+'.jpg?v=${ASSET_V}';im.hidden=false;}
+      }
     });
   });
 
@@ -1204,17 +1215,40 @@ ${header('kit', false)}
   </div>
 </div></section>
 
-<section class="sec"><div class="in hw-grid">
-  <div>
-    <div class="eyebrow">Technical Specifications</div>
-    <h2>Built for feel, speed, and zero friction.</h2>
-    <p class="lead">Every detail of the V2 clip is built to disappear on your club while delivering fast, responsive, pinpoint short-game feedback.</p>
-    <p><a class="btn line" href="${page('/how-it-works')}">See Setup Guide &#8594;</a></p>
+<section class="sec"><div class="in">
+  <div class="sec-head split">
+    <div>
+      <div class="eyebrow">Technical Specifications</div>
+      <h2>Built for feel, speed, and zero friction.</h2>
+    </div>
+    <a class="btn line" href="${page('/how-it-works')}">See Setup Guide &#8594;</a>
   </div>
-  <dl class="spec-table">
-    <div><dt>In the Box</dt><dd id="kbox2">${P.two.box}</dd></div>
-    ${FACTS.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('\n    ')}
-  </dl>
+  <div class="spec-cards">
+    <div class="spec-card">
+      <h3>Sensor &amp; Accuracy</h3>
+      <dl>
+        <div><dt>Hardware</dt><dd>Inside 75 V2 wireless club-shaft sensor</dd></div>
+        <div><dt>Sensing Rate</dt><dd>1,920 Hz motion sensing right above the clubhead</dd></div>
+        <div><dt>What It Reads</dt><dd>Clubhead speed, face angle, and swing path through impact</dd></div>
+      </dl>
+    </div>
+    <div class="spec-card">
+      <h3>Connectivity &amp; Power</h3>
+      <dl>
+        <div><dt>Connectivity</dt><dd>Direct 2.4 GHz home Wi-Fi to your tablet (Bluetooth used for 2-minute initial setup only)</dd></div>
+        <div><dt>Power &amp; Sleep</dt><dd>USB-C rechargeable (cable not included). No power button: auto-sleeps when still, wakes when picked up.</dd></div>
+        <div><dt>Updates</dt><dd>Wireless firmware updates directly from the Inside 75 app</dd></div>
+      </dl>
+    </div>
+    <div class="spec-card">
+      <h3>Compatibility &amp; Box</h3>
+      <dl>
+        <div><dt>Club Compatibility</dt><dd>Fits your own right-handed steel-shaft putter or wedge (mounted right above the ferrule)</dd></div>
+        <div><dt>Supported Tablets</dt><dd>${TABLETS_TECH}. Phones are not supported yet.</dd></div>
+        <div><dt>In the Box</dt><dd id="kbox2">${P.two.box}</dd></div>
+      </dl>
+    </div>
+  </div>
 </div></section>
 </main>
 ${footer}
@@ -1244,6 +1278,11 @@ ${coreJs}
   function pick(k){
     if(!P[k])return;cur=k;
     var r=document.querySelector('input[name=v][value='+k+']');if(r)r.checked=true;
+    if(th[0]){
+      th[0].setAttribute('data-gid',P[k].img);
+      th[0].setAttribute('aria-label',k==='two'?'Two-Clip Kit':'One-Clip Kit');
+      var tim=th[0].querySelector('img');if(tim)tim.src='assets/'+P[k].img+'.jpg?v=${ASSET_V}';
+    }
     showMedia('img',P[k].img);sync();
     try{history.replaceState(null,'','#'+k);}catch(e){}
   }
@@ -1863,9 +1902,9 @@ for (const f of ['favicon.ico', 'apple-touch-icon.png']) {
 
 const pages = {
   'index.html': doc(head({
-    title: 'Inside 75 | Play Real Short-Game Golf at Home With Your Own Putter & Wedge',
+    title: 'Inside 75 | Play Real Short-Game Golf at Home',
     ogTitle: 'Play real golf at home with your own putter and wedge',
-    desc: 'Clamp the sleek Inside 75 V2 wireless sensor onto your own putter and wedge. Accurate, instant short-game golf inside 75 yards on real breaking greens on your iPad or Android tablet.',
+    desc: 'Clamp the sleek Inside 75 V2 wireless sensor onto your own putter and wedge. Play real breaking greens on your iPad or Android tablet, ball or no ball.',
     p: '/',
     lead: has('hero-living.webp') ? 'hero-living.webp' : 'hero-living.jpg',
     modelViewer: true,
@@ -1873,7 +1912,7 @@ const pages = {
   }), homeBody),
   'kit.html': doc(head({
     title: 'Inside 75 Clip Kit (V2) | Early Access From $119',
-    desc: 'Join Early Access or enter an owner code for the Inside 75 V2 Clip Kit: One Clip ($119) or Two Clips for putter and wedge ($229, free US shipping). Includes free tablet app, 30-day home trial, and 1-year warranty.',
+    desc: 'Inside 75 V2 Clip Kit: One Clip ($119) or Two Clips ($229, free US shipping). Includes free tablet app, 30-day home trial, and 1-year warranty.',
     p: '/kit',
     lead: 'kit-two.jpg',
     modelViewer: true,
@@ -1963,6 +2002,15 @@ const llmsTxt = `# Inside 75 (75golf.com)
 - Terms of Sale: ${SITE}/terms
 `;
 fs.writeFileSync(path.join(OUT, 'llms.txt'), llmsTxt);
+
+// Cloudflare Assets cache headers: always revalidate HTML so normal refresh gets latest site, long-cache versioned assets
+const cfHeaders = `/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+`;
+fs.writeFileSync(path.join(OUT, '_headers'), cfHeaders);
 
 // ---------- QA checks ----------
 const probs = [...missing.map(m => `missing asset: ${m}`), ...linkProblems(OUT), ...pageProblems(OUT)];
