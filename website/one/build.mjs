@@ -38,7 +38,7 @@ function dims(f) {
   }
   return [1200, 800];
 }
-const ASSET_V = 'v2l';
+const ASSET_V = 'v2m';
 const file = name => ['jpg', 'png'].map(e => `${name}.${e}`).find(has);
 function pic(name, alt, { cls = '', eager = false, root = false } = {}) {
   const f = file(name);
@@ -749,7 +749,7 @@ ${header('home', true)}
   <div class="hw-stage">
     <div class="stage-card">
       <div class="stage-view">
-        <model-viewer id="v2Model" src="assets/v2-clip.glb?v=${ASSET_V}" poster="assets/clip-360.jpg?v=${ASSET_V}" alt="Interactive 3D model of the Inside 75 V2 clip sensor" camera-controls auto-rotate auto-rotate-delay="1200" rotation-per-second="26deg" shadow-intensity="0.85" shadow-softness="0.9" exposure="1.08" environment-image="neutral" camera-orbit="32deg 74deg 112%" min-camera-orbit="auto auto 72%" max-camera-orbit="auto auto 185%" touch-action="pan-y" interaction-prompt="none"></model-viewer>
+        <model-viewer id="v2Model" src="assets/v2-clip.glb?v=${ASSET_V}" poster="assets/clip-360.jpg?v=${ASSET_V}" alt="Interactive 3D model of the Inside 75 V2 clip sensor" camera-controls auto-rotate auto-rotate-delay="1200" rotation-per-second="26deg" shadow-intensity="0.85" shadow-softness="0.9" exposure="0.88" environment-image="neutral" camera-orbit="32deg 74deg 112%" min-camera-orbit="auto auto 72%" max-camera-orbit="auto auto 185%" touch-action="pan-y" interaction-prompt="none"></model-viewer>
         <img id="v2Img" src="assets/v2-putter.jpg?v=${ASSET_V}" alt="Inside 75 V2 clip mounted on a golf club" hidden>
         <span class="stage-badge" id="stageBadge">V2 Hardware · Interactive 3D</span>
         <span class="stage-hint" id="stageHint">Drag or touch to rotate in 3D</span>
@@ -1141,7 +1141,7 @@ ${coreJs}
 const pdpGallery = [
   { id: 'kit-two', type: 'img', label: 'Two-Clip Kit', alt: P.two.alt },
   { id: 'clip-360', type: '3d', label: 'Interactive 3D', alt: 'Interactive 3D model of the Inside 75 V2 clip' },
-  { id: 'lifestyle-unbox', type: 'img', label: 'Kit at Home', alt: 'Inside 75 Two-Clip presentation tray on an oak table beside an iPad, blade putter, sand wedge, and golf bag' },
+  { id: 'lifestyle-unbox', type: 'img', label: 'Kit at Home', alt: 'Two matte jet-black Inside 75 V2 clips and a 2 mm hex key on a sunlit oak table beside an iPad, blade putter, sand wedge, and golf bag' },
   { id: 'clubs-pair', type: 'img', label: 'Putter & Wedge', alt: 'Inside 75 V2 clips mounted on both a putter and a sand wedge' },
   { id: 'hero-living', type: 'img', label: 'Living Room', alt: 'Taking a ball-free putting stroke at home with the Inside 75 V2 clip and an iPad angled toward the golfer' },
   { id: 'setup-garage', type: 'img', label: 'Garage Net', alt: 'Chipping off a small turf pad into a tall 7x7 ft hitting net in a 2-car garage with an iPad tilted on the floor across from the mat' },
@@ -1159,7 +1159,7 @@ ${header('kit', false)}
     </div>
     <figure class="gmain">
       <img id="gimg" src="assets/kit-two.jpg?v=${ASSET_V}" alt="${esc(P.two.alt)}" fetchpriority="high">
-      <model-viewer id="gmodel" src="assets/v2-clip.glb?v=${ASSET_V}" poster="assets/clip-360.jpg?v=${ASSET_V}" alt="Interactive 3D model of the Inside 75 V2 clip" camera-controls auto-rotate auto-rotate-delay="1200" rotation-per-second="26deg" shadow-intensity="0.85" shadow-softness="0.9" exposure="1.08" environment-image="neutral" camera-orbit="32deg 74deg 112%" min-camera-orbit="auto auto 72%" max-camera-orbit="auto auto 185%" touch-action="pan-y" interaction-prompt="none" hidden></model-viewer>
+      <model-viewer id="gmodel" src="assets/v2-clip.glb?v=${ASSET_V}" poster="assets/clip-360.jpg?v=${ASSET_V}" alt="Interactive 3D model of the Inside 75 V2 clip" camera-controls auto-rotate auto-rotate-delay="1200" rotation-per-second="26deg" shadow-intensity="0.85" shadow-softness="0.9" exposure="0.88" environment-image="neutral" camera-orbit="32deg 74deg 112%" min-camera-orbit="auto auto 72%" max-camera-orbit="auto auto 185%" touch-action="pan-y" interaction-prompt="none" hidden></model-viewer>
     </figure>
   </div>
   <div>
