@@ -156,6 +156,7 @@ h3 { font-size: clamp(20px, 1.9vw, 24px); line-height: 1.2; letter-spacing: -0.0
 .nav-links a:hover, .nav-links a[aria-current="page"] { opacity: 1; }
 .nav-links a[aria-current="page"] { font-weight: 600; text-decoration: underline; text-underline-offset: 6px; }
 .nav-actions { display: flex; align-items: center; gap: 10px; }
+.nav-actions .btn.primary { box-shadow: none; }
 .cartbtn {
   position: relative;
   display: inline-flex;
@@ -565,8 +566,70 @@ h3 { font-size: clamp(20px, 1.9vw, 24px); line-height: 1.2; letter-spacing: -0.0
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(180deg, rgba(8, 17, 30, 0.34) 0%, rgba(8, 17, 30, 0.08) 42%, rgba(8, 17, 30, 0.72) 78%, rgba(8, 17, 30, 0.90) 100%);
+  background: linear-gradient(180deg, rgba(8, 17, 30, 0.56) 0%, rgba(8, 17, 30, 0.42) 45%, rgba(8, 17, 30, 0.78) 80%, rgba(8, 17, 30, 0.92) 100%);
   pointer-events: none;
+}
+.tel-rate {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(9, 18, 34, 0.74);
+  border: 1px solid rgba(124, 227, 161, 0.32);
+  backdrop-filter: blur(12px);
+  font: 600 12.5px/1 Archivo, "Public Sans", system-ui, sans-serif;
+  color: #fff;
+}
+.tel-rate strong { color: var(--mint); font-weight: 700; }
+.tel-rate span:last-child { color: rgba(255, 255, 255, 0.72); font-weight: 500; }
+.tel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--mint);
+  box-shadow: 0 0 10px var(--mint);
+}
+.tel-viz {
+  position: relative;
+  z-index: 2;
+  margin: clamp(12px, 2vw, 22px) 0;
+  padding: clamp(10px, 1.4vw, 16px);
+  border-radius: 14px;
+  background: rgba(9, 18, 34, 0.54);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+}
+.tel-viz svg { display: block; width: 100%; height: auto; max-height: 156px; }
+.tel-proofs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+.tel-proofs > div {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px 20px;
+}
+.tel-proofs b {
+  display: block;
+  font: 700 15.5px/1.25 Archivo, sans-serif;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+.tel-proofs span {
+  display: block;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+@media (max-width: 760px) {
+  .tel-rate { width: 100%; justify-content: center; }
+  .tel-rate span:last-child { display: none; }
+  .tel-proofs { grid-template-columns: 1fr; gap: 10px; }
+  .tel-proofs > div { padding: 14px 16px; }
 }
 .tel-top {
   position: relative;

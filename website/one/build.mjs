@@ -38,7 +38,7 @@ function dims(f) {
   }
   return [1200, 800];
 }
-const ASSET_V = 'v2n';
+const ASSET_V = 'v2o';
 const file = name => ['jpg', 'png'].map(e => `${name}.${e}`).find(has);
 function pic(name, alt, { cls = '', eager = false, root = false } = {}) {
   const f = file(name);
@@ -141,7 +141,7 @@ const FACTS = [
   ['Hardware', 'Inside 75 V2 wireless club-shaft sensor'],
   ['Sensing Rate', '1,920 Hz motion sensing right above the clubhead'],
   ['What It Reads', 'Clubhead speed, face angle, and swing path through impact'],
-  ['Club Compatibility', 'Fits your own right-handed steel-shaft putter or wedge (mounted right above the ferrule)'],
+  ['Club Compatibility', 'Fits your own steel-shaft putter or wedge, right- or left-handed (mounted right above the ferrule)'],
   ['Connectivity', 'Direct 2.4 GHz home Wi-Fi to your tablet (Bluetooth used for 2-minute initial setup only)'],
   ['Power & Sleep', 'USB-C rechargeable (cable not included). Automatic wake on pickup and auto-sleep when resting.'],
   ['Updates', 'Wireless firmware updates directly from the Inside 75 app'],
@@ -159,11 +159,11 @@ const QA = [
   ['Are the greens real or randomly generated?', 'The greens and surrounding terrain are mapped from real elevation surveys and aerial scans of real golf courses. Every putt has true slope and break, and you can switch between Soft (9.5), Standard (10.5), and Tour (12.0) green speeds.'],
   ['Is a subscription required to play?', 'No. The Inside 75 tablet app is free to download and includes one complete 18-hole course and all four game modes (Short Game, Putting, Closest to the Pin, and Practice) with no subscription. Optional Inside 75 Plus ($49.99/year) unlocks every course and long-term swing history.'],
   ['Can I play multiplayer with friends or family?', 'Yes. One to four players can share a single tablet and take turns over 3, 9, or 18 holes.'],
-  ['Does Inside 75 work for left-handed golfers?', 'Not yet. Inside 75 currently supports right-handed putters and wedges only. Left-handed support is on our roadmap.'],
+  ['Does Inside 75 work for left-handed golfers?', 'Yes. The V2 clip clamps cleanly onto standard steel-shaft putters and wedges for both right-handed and left-handed golfers.'],
   ['How long does setup take?', 'First-time setup takes about five minutes total: two minutes to connect the clip to your home Wi-Fi in the app, and two minutes to tighten the clamp with the included hex key and run the quick club fit. After that, just pick up your club and play.'],
   ['How does the clip charge and turn on?', 'Charge it with any standard USB-C cable (not included in the box); the chevron LED shows charging status. It wakes automatically the moment you pick up your club and goes to sleep on its own when resting in your bag.'],
   ['What Wi-Fi network does it require?', 'Your clip and tablet talk directly over your home Wi-Fi so shots show up with practically zero lag. Both devices just need to be on the same home Wi-Fi network (avoid guest networks).'],
-  ['What is your shipping and return policy?', 'Orders include a 30-day home trial and a 1-year hardware warranty. Two-Clip Kits ship free anywhere in the continental United States; One-Clip Kits ship for a flat $9. If you are not impressed at home, email hello@75golf.com within 30 days of delivery for a straightforward return.'],
+  ['What is your shipping and warranty policy?', 'Every Inside 75 kit is backed by a 1-year limited hardware warranty covering defects in materials and workmanship. Two-Clip Kits ship free anywhere in the continental United States; One-Clip Kits ship for a flat $9. If a clip has a hardware issue within 12 months, email hello@75golf.com and we will repair or replace it at no charge.'],
 ];
 
 const COURSES = [
@@ -238,7 +238,7 @@ const footer = `<footer class="foot"><div class="in">
       <nav aria-label="Support links">
         <a href="${home('#faq')}">Frequently Asked Questions</a>
         <a href="${page('/how-it-works')}#troubleshoot">Wi-Fi &amp; Setup Help</a>
-        <a href="${page('/shipping-returns')}">Shipping &amp; 30-Day Returns</a>
+        <a href="${page('/shipping-returns')}">Shipping &amp; Warranty</a>
         <a href="mailto:${MAIL}">Contact Support</a>
       </nav>
     </div>
@@ -247,7 +247,7 @@ const footer = `<footer class="foot"><div class="in">
       <nav aria-label="Legal links">
         <a href="${page('/privacy')}">Privacy Policy</a>
         <a href="${page('/terms')}">Terms of Sale &amp; Service</a>
-        <a href="${page('/shipping-returns')}">Warranty &amp; Returns</a>
+        <a href="${page('/shipping-returns')}">1-Year Warranty</a>
       </nav>
     </div>
   </div>
@@ -680,9 +680,9 @@ ${header('home', true)}
 <main>
 <section class="hero" id="top"><div class="in hero-grid">
   <div>
-    <div class="eyebrow">Real clubs · Real greens · At home</div>
+    <div class="eyebrow">Short-Game Golf Simulator</div>
     <h1>Play real golf at home with your own putter and wedge.</h1>
-    <p class="sub">Clamp a tiny wireless sensor onto the clubs already in your bag. Real green speeds and real break on your iPad or Android tablet, ball or no ball.</p>
+    <p class="sub">Clamp a tiny wireless sensor onto your own wedge and putter. Hit wedges in the yard or garage, putt indoors, and watch every shot play out on your tablet.</p>
     <div class="hero-ctas">
       <a class="btn light" href="#kits" data-ea-cta>${EA_ON ? 'Get Early Access, From $' + P.one.price : 'Shop Kits, From $' + P.one.price}</a>
       <a class="btn ghost" href="#gameplay">Watch It Play</a>
@@ -690,12 +690,12 @@ ${header('home', true)}
     <div class="hero-meta">
       <span>${I.check}Your own putter &amp; wedge</span>
       <span>${I.check}Real balls or practice swings</span>
-      <span>${I.check}Free tablet app · 30-day trial</span>
+      <span>${I.check}Free tablet app · 1-year warranty</span>
     </div>
   </div>
   <div class="hero-media">
     <div class="hero-frame">
-      ${pic('hero-living', 'Golfer taking a ball-free putting stroke on a sunlit living room rug with their own blade putter fitted with the Inside 75 V2 clip, glancing ahead at an iPad angled toward them showing a 3D golf green', { eager: true })}
+      ${pic('hero-backyard', 'Golfer hitting a crisp wedge pitch off a backyard turf mat into a tall 7x7 ft hitting net at golden hour with an Inside 75 V2 clip on the wedge shaft and an iPad on the grass showing the green', { eager: true })}
       <div class="hero-hud" aria-hidden="true">
         <div class="hero-hud-title">Inside 75 V2 Clip + Tablet App</div>
         <div class="hero-hud-stats"><span>Instant Response</span><span>3 to 75 yd</span><strong>Real-Slope Greens</strong></div>
@@ -713,30 +713,30 @@ ${header('home', true)}
   <div class="play-media">
     <div class="ipad-shell">
       <div class="ipad-screen">
-        <video id="gameVid" src="assets/reel-putting.mp4" poster="assets/reel-putting.jpg" data-auto muted loop playsinline preload="metadata" aria-label="Real gameplay inside the Inside 75 tablet app"></video>
+        <video id="gameVid" src="assets/reel-courses.mp4" poster="assets/reel-courses.jpg" data-auto muted loop playsinline preload="metadata" aria-label="Real gameplay inside the Inside 75 tablet app"></video>
       </div>
       <div class="ipad-bar">
-        <span id="gameMeta">Real 4 ft, 10 ft &amp; 25 ft putts · Soft 9.5 / Standard 10.5 / Tour 12.0</span>
+        <span id="gameMeta">Real elevation-mapped courses · Chip onto the green, then putt it in the cup</span>
         <strong id="gameTag">Actual Gameplay</strong>
       </div>
     </div>
   </div>
   <div class="play-controls">
     <div class="clip-tabs" role="group" aria-label="Explore Inside 75 game modes">
-      <button type="button" class="clip-tab" data-clip="reel-putting" data-meta="Real 4 ft, 10 ft &amp; 25 ft putts · Soft 9.5 / Standard 10.5 / Tour 12.0" data-tag="Actual Gameplay" data-cap="Putting &amp; Green Reading: First-person stroke with real slope, break, and pace control from 3 to 40 ft." aria-pressed="true">
-        <div><strong class="ct-short">Putting</strong><b>Putting &amp; Green Reading</b><span>First-person stroke, real slope &amp; break, pace control from 3 to 40 ft</span></div><em>3 to 40 ft</em>
+      <button type="button" class="clip-tab" data-clip="reel-courses" data-meta="Real elevation-mapped courses · Chip onto the green, then putt it in the cup" data-tag="Actual Gameplay" data-cap="18-Hole Short Game: Scramble up-and-down across real elevation-mapped courses with up to four players on one tablet." aria-pressed="true">
+        <div><strong class="ct-short">18 Holes</strong><b>18-Hole Short Game Courses</b><span>Scramble up-and-down across real contoured courses at home</span></div><em>18 Holes</em>
       </button>
       <button type="button" class="clip-tab" data-clip="reel-chipping" data-meta="Real greenside chips &amp; approach pitches · Natural bounce, check &amp; rollout" data-tag="Actual Gameplay" data-cap="Chipping &amp; Pitching: Hit your own wedges over bunkers and tight lies out to 75 yards with realistic check and rollout." aria-pressed="false">
         <div><strong class="ct-short">Chipping</strong><b>Chipping &amp; Pitching</b><span>Hit your own wedges over bunkers and tight lies out to 75 yards</span></div><em>Up to 75 yd</em>
       </button>
+      <button type="button" class="clip-tab" data-clip="reel-putting" data-meta="Real 4 ft, 10 ft &amp; 25 ft putts · Soft 9.5 / Standard 10.5 / Tour 12.0" data-tag="Actual Gameplay" data-cap="Putting &amp; Green Reading: First-person stroke with real slope, break, and pace control from 3 to 40 ft." aria-pressed="false">
+        <div><strong class="ct-short">Putting</strong><b>Putting &amp; Green Reading</b><span>First-person stroke, real slope &amp; break, pace control from 3 to 40 ft</span></div><em>3 to 40 ft</em>
+      </button>
       <button type="button" class="clip-tab" data-clip="reel-practice" data-meta="Dial in any yardage (5 to 75 yd) · Fairway, rough &amp; bunker lies · Live dispersion" data-tag="Actual Gameplay" data-cap="Dialed-In Practice: Lock in specific wedge numbers from 5 to 75 yards and track live dispersion in 15 minutes." aria-pressed="false">
         <div><strong class="ct-short">Practice</strong><b>Dialed-In Practice Mode</b><span>Lock in specific wedge numbers and putting distances in 15 minutes</span></div><em>Any Yardage</em>
       </button>
-      <button type="button" class="clip-tab" data-clip="reel-courses" data-meta="Real elevation-mapped courses · Chip onto the green, then putt it in the cup" data-tag="Actual Gameplay" data-cap="18-Hole Short Game: Scramble up-and-down across real elevation-mapped courses with up to four players on one tablet." aria-pressed="false">
-        <div><strong class="ct-short">18 Holes</strong><b>18-Hole Short Game Courses</b><span>Scramble up-and-down across real contoured courses at home</span></div><em>18 Holes</em>
-      </button>
     </div>
-    <p class="clip-mob-cap" id="gameMobCap"><strong>Putting &amp; Green Reading:</strong> First-person stroke with real slope, break, and pace control from 3 to 40 ft.</p>
+    <p class="clip-mob-cap" id="gameMobCap"><strong>18-Hole Short Game:</strong> Scramble up-and-down across real elevation-mapped courses with up to four players on one tablet.</p>
   </div>
 </div></section>
 
@@ -775,9 +775,9 @@ ${header('home', true)}
 
 <section class="sec" id="telemetry"><div class="in">
   <div class="sec-head">
-    <div class="eyebrow">1,920 Hz Club Sensing</div>
-    <h2>Measured at the clubhead. Not guessed across a room.</h2>
-    <p class="lead">Inside 75 reads clubhead speed, face angle, and swing path directly through impact, so subtle changes on soft chips and 10-foot putts show up honestly every time.</p>
+    <div class="eyebrow">1,920 readings every second</div>
+    <h2>Tracks your clubface 1,920 times a second, right at impact.</h2>
+    <p class="lead">Mounted directly above the hosel, the V2 clip tracks your clubhead speed, face angle, and swing path in real time through impact, then plays your shot straight on the tablet.</p>
   </div>
   <div class="tel-stage">
     <img id="telBg" class="tel-bg" src="assets/course-benttree.jpg?v=${ASSET_V}" alt="Sunlit breaking golf green inside the Inside 75 app" loading="lazy" decoding="async">
@@ -788,11 +788,36 @@ ${header('home', true)}
         <button type="button" data-shot="chip" aria-pressed="false">Chip</button>
         <button type="button" data-shot="pitch" aria-pressed="false">Pitch</button>
       </div>
+      <div class="tel-rate"><span class="tel-dot" aria-hidden="true"></span><strong>1,920 readings / sec</strong><span>Live clubface tracking</span></div>
+    </div>
+    <div class="tel-viz" aria-hidden="true">
+      <svg viewBox="0 0 640 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="60" y1="86" x2="585" y2="86" stroke="rgba(255,255,255,0.22)" stroke-width="1.5" stroke-dasharray="5 6"/>
+        <text x="585" y="76" text-anchor="end" fill="rgba(255,255,255,0.58)" font-family="Archivo, sans-serif" font-size="11" font-weight="600" letter-spacing="1.2">TARGET LINE</text>
+        <path id="telArc" d="M 95 96 Q 290 88 320 86 Q 360 84 468 78" stroke="rgba(124,227,161,0.55)" stroke-width="2.2" stroke-linecap="round"/>
+        <g id="telDots" fill="#7CE3A1">
+          <circle cx="115" cy="95" r="2.2" opacity="0.30"/><circle cx="145" cy="93.5" r="2.3" opacity="0.40"/>
+          <circle cx="175" cy="92" r="2.4" opacity="0.50"/><circle cx="205" cy="90.5" r="2.6" opacity="0.62"/>
+          <circle cx="235" cy="89" r="2.8" opacity="0.74"/><circle cx="265" cy="87.8" r="3.0" opacity="0.86"/>
+          <circle cx="292" cy="86.8" r="3.2" opacity="0.95"/><circle cx="348" cy="84.6" r="2.8" opacity="0.75"/>
+          <circle cx="378" cy="83.2" r="2.5" opacity="0.58"/><circle cx="408" cy="81.6" r="2.2" opacity="0.42"/>
+          <circle cx="438" cy="80" r="2.0" opacity="0.30"/>
+        </g>
+        <line id="telRay" x1="334" y1="86" x2="560" y2="91" stroke="#7CE3A1" stroke-width="2" stroke-dasharray="4 4" opacity="0.88"/>
+        <g id="telClub" transform="translate(320 86) rotate(4)">
+          <rect x="-5" y="-26" width="10" height="52" rx="4" fill="#FFFFFF" stroke="#0B1A33" stroke-width="1.5"/>
+          <rect x="-11" y="-12" width="7" height="24" rx="2.5" fill="#182233" stroke="#7CE3A1" stroke-width="1.4"/>
+        </g>
+        <circle cx="336" cy="86" r="7.5" fill="#FFFFFF" stroke="rgba(11,26,51,0.35)" stroke-width="1.5"/>
+        <text x="95" y="128" fill="rgba(255,255,255,0.72)" font-family="Archivo, sans-serif" font-size="11.5" font-weight="600">SWING PATH (1,920 SAMPLES/SEC)</text>
+        <text id="telFaceLbl" x="320" y="36" text-anchor="middle" fill="#7CE3A1" font-family="Archivo, sans-serif" font-size="12" font-weight="700">FACE AT IMPACT · 0.4° OPEN</text>
+        <text id="telRayLbl" x="456" y="114" text-anchor="middle" fill="rgba(255,255,255,0.82)" font-family="Archivo, sans-serif" font-size="11.5" font-weight="600">START LINE · 1.2° RIGHT</text>
+      </svg>
     </div>
     <div class="tel-hud">
       <div class="tel-cols">
         <div class="tel-panel">
-          <div class="tel-label">Read off your clubhead</div>
+          <div class="tel-label">Read at your clubhead · 1,920x / sec</div>
           <div class="tel-metrics">
             <div class="tel-m"><span>Club Speed</span><strong id="tm1">5.8 mph</strong></div>
             <div class="tel-m"><span>Face Angle</span><strong id="tm2">0.4° Open</strong></div>
@@ -811,7 +836,11 @@ ${header('home', true)}
       </div>
     </div>
   </div>
-  <p class="tel-note" id="telNote"><strong>Instant on-screen feedback:</strong> Pull a 10-footer half a degree left and it burns the left edge. Every session tracks clubhead speed, face angle, swing path, and Strokes Gained, ball or no ball.</p>
+  <div class="tel-proofs">
+    <div><b>1,920 readings every second</b><span>Measures clubhead motion nearly two thousand times per second right through impact.</span></div>
+    <div><b>Real-time clubface angle</b><span>Pull a 10-footer half a degree left or open a wedge face by a degree and you see it immediately.</span></div>
+    <div><b>Instant tablet response</b><span>Streams straight over home Wi-Fi so the ball reacts the moment your club comes through, ball or no ball.</span></div>
+  </div>
 </div></section>
 
 <section class="sec white" id="courses"><div class="in">
@@ -846,17 +875,17 @@ ${header('home', true)}
   <div class="sec-head split">
     <div>
       <div class="eyebrow">Real Home Setups</div>
-      <h2>Clamp on in 2 minutes. Play in any room you already have.</h2>
+      <h2>Clamp on in 2 minutes. Play indoors or out.</h2>
     </div>
     <a class="btn line" href="${page('/how-it-works')}">Full Setup Guide &#8594;</a>
   </div>
   <p class="swipe-hint" aria-hidden="true">Swipe setups &#8594;</p>
   <div class="steps-grid">
     <article class="step-card">
-      <div class="step-img">${pic('mount-hands', 'Hands tightening the Inside 75 V2 sensor clip onto a chrome putter shaft with the included hex key')}</div>
+      <div class="step-img">${pic('setup-yard', 'Golfer chipping off a portable turf mat into a tall 7x7 ft backyard hitting net with an iPad tilted right on the grass across from their stance')}</div>
       <div class="step-body">
-        <h3>2-minute club clamp</h3>
-        <p>Snug two screws right above the ferrule with the included hex key and join home Wi-Fi once.</p>
+        <h3>Backyard lawn</h3>
+        <p>Drop a hitting mat in front of a backyard net and set your tablet right on the grass by your stance.</p>
       </div>
     </article>
     <article class="step-card">
@@ -874,10 +903,10 @@ ${header('home', true)}
       </div>
     </article>
     <article class="step-card">
-      <div class="step-img">${pic('setup-yard', 'Golfer chipping off a portable turf mat into a tall 7x7 ft backyard hitting net with an iPad tilted right on the grass across from their stance')}</div>
+      <div class="step-img">${pic('mount-hands', 'Hands tightening the Inside 75 V2 sensor clip onto a chrome putter shaft with the included hex key')}</div>
       <div class="step-body">
-        <h3>Backyard lawn</h3>
-        <p>Drop a hitting mat in front of a backyard net and set your tablet right on the grass by your stance.</p>
+        <h3>2-minute club clamp</h3>
+        <p>Snug two screws right above the ferrule with the included hex key and join home Wi-Fi once.</p>
       </div>
     </article>
   </div>
@@ -886,8 +915,8 @@ ${header('home', true)}
 <section class="sec stone" id="kits"><div class="in">
   <div class="sec-head center">
     <div class="eyebrow">${EA_ON ? 'Early Access · ' + esc(EA.batchLabel || 'Batch 2') : 'Choose your kit'}</div>
-    <h2>Ready to play 18 in your living room?</h2>
-    <p class="lead">Assembled V2 hardware, 2 mm hex key, free tablet app, and a 30-day home trial. Every buyer also gets 5 Early Access links to share with friends.</p>
+    <h2>Choose your kit.</h2>
+    <p class="lead">Assembled V2 hardware, 2 mm hex key, free tablet app, and a 1-year hardware warranty. Every buyer also gets 5 Early Access links to share with friends.</p>
   </div>
   ${EA_ON ? `<div class="ea-strip" data-ea-locked>
     <div class="ea-strip-copy"><b>Have an Early Access code?</b><span>Enter a friend's code to unlock ordering today, or join the waitlist below.</span></div>
@@ -944,8 +973,8 @@ ${header('home', true)}
   </div>
   <div class="guarantee-bar">
     <div>${I.truck}<span>Free US shipping on 2-Clip Kits</span></div>
-    <div>${I.shield}<span>30-day home trial &amp; returns</span></div>
-    <div>${I.bolt}<span>1-year hardware warranty</span></div>
+    <div>${I.shield}<span>1-year hardware warranty</span></div>
+    <div>${I.bolt}<span>Free wireless firmware updates</span></div>
     <div>${I.tablet}<span>Free tablet app included</span></div>
   </div>
 </div></section>
@@ -988,24 +1017,24 @@ ${header('home', true)}
 
 <section class="sec white" id="requirements"><div class="in">
   <div class="sec-head">
-    <div class="eyebrow">No surprises before you order</div>
-    <h2>What you need, and what you can skip.</h2>
+    <div class="eyebrow">Requirements</div>
+    <h2>What you need to play.</h2>
   </div>
   <div class="needs-grid">
     <div class="skip-card">
       <div class="skip-media">${pic('clubs-pair', 'Inside 75 V2 clips mounted at true scale on a stainless blade putter and forged sand wedge')}</div>
       <div class="skip-body">
-        <div class="skip-kicker">What you can skip</div>
+        <div class="skip-kicker">Not required</div>
         <div class="skip-tags">
-          <span>${I.x}No launch monitor</span>
-          <span>${I.x}No putting mat</span>
-          <span>${I.x}No VR or swing stick</span>
-          <span>${I.x}No required subscription</span>
+          <span>${I.x}Launch monitor</span>
+          <span>${I.x}Putting mat</span>
+          <span>${I.x}VR or swing stick</span>
+          <span>${I.x}Required subscription</span>
         </div>
       </div>
     </div>
     <ul class="need-rows">
-      <li><div class="need-ico">${I.club}</div><div><b>Your own steel-shaft putter or wedge</b><span>Right-handed clubs only for now. Clamps right above the clubhead in two minutes.</span></div></li>
+      <li><div class="need-ico">${I.club}</div><div><b>Your own steel-shaft putter or wedge</b><span>Clamps right above the ferrule in two minutes. Fits standard right- and left-handed steel shafts.</span></div></li>
       <li><div class="need-ico">${I.tablet}</div><div><b>A supported tablet</b><span>Works with ${TABLETS_SIMPLE}. Phones are not supported yet.</span></div></li>
       <li><div class="need-ico">${I.wifi}</div><div><b>Home Wi-Fi</b><span>Connects once during setup so your tablet and clip pair automatically every time.</span></div></li>
       <li><div class="need-ico">${I.bolt}</div><div><b>Any USB-C cable &amp; safe swing room</b><span>Recharges with any USB-C cable (not in the box). Add a net if hitting real balls with a wedge.</span></div></li>
@@ -1051,7 +1080,7 @@ ${header('home', true)}
     <div>
       <div class="eyebrow">${EA_ON ? 'Early Access · ' + esc(EA.batchLabel || 'Batch 2') : 'Course &amp; drop updates'}</div>
       <h2 style="font-size:clamp(26px,3.2vw,38px)">${EA_ON ? 'Want in on the next batch?' : 'Get new course &amp; drop updates.'}</h2>
-      <p style="color:var(--ink-2);margin:0">${EA_ON ? 'Join the waitlist for upcoming shipping batches, new course releases, and left-handed club announcements. No spam, unsubscribe anytime.' : 'Drop your email for new course releases, batch dates, and left-handed club announcements. No spam, unsubscribe anytime.'}</p>
+      <p style="color:var(--ink-2);margin:0">${EA_ON ? 'Join the waitlist for upcoming shipping batches and new course releases. No spam, unsubscribe anytime.' : 'Drop your email for new course releases and batch dates. No spam, unsubscribe anytime.'}</p>
     </div>
     <div>
       <form class="form" id="homeNotify" data-signup="75golf.com">
@@ -1114,13 +1143,15 @@ ${coreJs}
     });
   });
 
-  // Interactive telemetry shot switcher (updates broadcast stats + real course backdrop)
+  // Interactive telemetry shot switcher (updates overhead clubface SVG + broadcast stats + backdrop)
   var SHOTS={
-    putt:['5.8 mph','0.4\u00b0 Open','0.6\u00b0 In-Out','Start Line','1.2\u00b0 Right','Green Speed','10.5 Stimp','Result','Holed · 10 ft','course-benttree'],
-    chip:['24.5 mph','1.1\u00b0 Open','1.8\u00b0 Out-In','Carry','9 yd','Rollout','6 yd','Result','2 ft 4 in','course-foxfire3'],
-    pitch:['52.0 mph','0.5\u00b0 Closed','0.8\u00b0 In-Out','Carry','58 yd','Apex','44 ft','Result','6 ft 2 in','reel-chipping']
+    putt:['5.8 mph','0.4\u00b0 Open','0.6\u00b0 In-Out','Start Line','1.2\u00b0 Right','Green Speed','10.5 Stimp','Result','Holed · 10 ft','course-benttree',4,91,'M 95 96 Q 290 88 320 86 Q 360 84 468 78','FACE AT IMPACT · 0.4\u00b0 OPEN','START LINE · 1.2\u00b0 RIGHT'],
+    chip:['24.5 mph','1.1\u00b0 Open','1.8\u00b0 Out-In','Carry','9 yd','Rollout','6 yd','Result','2 ft 4 in','course-foxfire3',9,98,'M 95 72 Q 280 82 320 86 Q 365 92 468 104','FACE AT IMPACT · 1.1\u00b0 OPEN','LAUNCH · 9 YD CARRY'],
+    pitch:['52.0 mph','0.5\u00b0 Closed','0.8\u00b0 In-Out','Carry','58 yd','Apex','44 ft','Result','6 ft 2 in','reel-chipping',-5,80,'M 95 104 Q 280 90 320 86 Q 368 82 468 72','FACE AT IMPACT · 0.5\u00b0 CLOSED','LAUNCH · 58 YD CARRY']
   };
   var tbg=document.getElementById('telBg');
+  var tClub=document.getElementById('telClub'),tRay=document.getElementById('telRay'),tArc=document.getElementById('telArc');
+  var tFL=document.getElementById('telFaceLbl'),tRL=document.getElementById('telRayLbl');
   document.querySelectorAll('[data-shot]').forEach(function(b){
     b.addEventListener('click',function(){
       document.querySelectorAll('[data-shot]').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});
@@ -1132,6 +1163,11 @@ ${coreJs}
       document.getElementById('tl5').textContent=s[5];document.getElementById('tm5').textContent=s[6];
       document.getElementById('tl6').textContent=s[7];document.getElementById('tm6').textContent=s[8];
       if(tbg&&s[9])tbg.src='assets/'+s[9]+'.jpg?v=${ASSET_V}';
+      if(tClub)tClub.setAttribute('transform','translate(320 86) rotate('+s[10]+')');
+      if(tRay)tRay.setAttribute('y2',String(s[11]));
+      if(tArc)tArc.setAttribute('d',s[12]);
+      if(tFL)tFL.textContent=s[13];
+      if(tRL)tRL.textContent=s[14];
     });
   });
 })();
@@ -1143,9 +1179,9 @@ const pdpGallery = [
   { id: 'clip-360', type: '3d', label: 'Interactive 3D', alt: 'Interactive 3D model of the Inside 75 V2 clip' },
   { id: 'lifestyle-unbox', type: 'img', label: 'Kit at Home', alt: 'Two matte jet-black Inside 75 V2 clips and a 2 mm hex key on a sunlit oak table beside an iPad, blade putter, sand wedge, and golf bag' },
   { id: 'clubs-pair', type: 'img', label: 'Putter & Wedge', alt: 'Inside 75 V2 clips mounted on both a putter and a sand wedge' },
+  { id: 'hero-backyard', type: 'img', label: 'Backyard Wedge', alt: 'Hitting a crisp wedge pitch off a backyard turf mat into a tall 7x7 ft net at golden hour with an Inside 75 V2 clip and iPad on the grass' },
   { id: 'hero-living', type: 'img', label: 'Living Room', alt: 'Taking a ball-free putting stroke at home with the Inside 75 V2 clip and an iPad angled toward the golfer' },
   { id: 'setup-garage', type: 'img', label: 'Garage Net', alt: 'Chipping off a small turf pad into a tall 7x7 ft hitting net in a 2-car garage with an iPad tilted on the floor across from the mat' },
-  { id: 'setup-basement', type: 'img', label: 'Basement Putt', alt: 'Ball-free putting on finished basement carpet with a grounded putter and an iPad propped on an ottoman' },
   { id: 'mount-hands', type: 'img', label: '2-Min Install', alt: 'Tightening the Inside 75 V2 clip onto a putter shaft with a hex key' },
 ];
 
@@ -1167,7 +1203,7 @@ ${header('kit', false)}
     <h1 style="font-size:clamp(30px,3.6vw,44px);line-height:1.05">Inside 75 Clip Kit</h1>
     <p style="color:var(--ink-2);margin:8px 0 0">Wireless shaft sensors for your own putter and wedge, playing real greens on your tablet.</p>
     <div class="pdp-price" id="bp">$${P.two.price}</div>
-    <div class="pdp-ship" id="bship">${P.two.shipping} · 30-day home trial · 1-year warranty</div>
+    <div class="pdp-ship" id="bship">${P.two.shipping} · 1-year hardware warranty · Free tablet app</div>
 
     <fieldset class="opts">
       <legend>Select Your Kit</legend>
@@ -1209,8 +1245,8 @@ ${header('kit', false)}
     <div class="faq-list" style="margin-top:18px">
       <details open><summary>What is in the box?</summary><p id="kbox">${P.two.box}</p></details>
       <details><summary>One clip or two?</summary><p>A full round of Short Game uses both your wedge and your putter. Two clips let you keep one on each club with zero swapping. One clip plays Putting, Closest to the Pin, and Practice, and moves between clubs in about 20 seconds.</p></details>
-      <details><summary>Supported clubs &amp; tablets</summary><p>Fits right-handed steel-shaft putters and wedges. Works with ${TABLETS_SIMPLE}. Phones are not supported yet. See Tech Specs below for exact hardware requirements.</p></details>
-      <details><summary>Shipping, 30-day trial &amp; warranty</summary><p>Two-Clip Kits ship free in the US ($9 flat shipping on One-Clip Kits). Every kit includes a 30-day home trial and 1-year limited hardware warranty. <a href="${page('/shipping-returns')}">Full policy</a>.</p></details>
+      <details><summary>Supported clubs &amp; tablets</summary><p>Fits standard steel-shaft putters and wedges (right- or left-handed). Works with ${TABLETS_SIMPLE}. Phones are not supported yet. See Tech Specs below for exact hardware requirements.</p></details>
+      <details><summary>Shipping &amp; 1-year warranty</summary><p>Two-Clip Kits ship free in the US ($9 flat shipping on One-Clip Kits). Every kit is backed by a 1-year limited hardware warranty against defects. <a href="${page('/shipping-returns')}">Full policy</a>.</p></details>
     </div>
   </div>
 </div></section>
@@ -1243,7 +1279,7 @@ ${header('kit', false)}
     <div class="spec-card">
       <h3>Compatibility &amp; Box</h3>
       <dl>
-        <div><dt>Club Compatibility</dt><dd>Fits your own right-handed steel-shaft putter or wedge (mounted right above the ferrule)</dd></div>
+        <div><dt>Club Compatibility</dt><dd>Fits your own steel-shaft putter or wedge, right- or left-handed (mounted right above the ferrule)</dd></div>
         <div><dt>Supported Tablets</dt><dd>${TABLETS_TECH}. Phones are not supported yet.</dd></div>
         <div><dt>In the Box</dt><dd id="kbox2">${P.two.box}</dd></div>
       </dl>
@@ -1256,7 +1292,7 @@ ${cartDrawer}
 <script>
 ${coreJs}
 (function(){
-  var P={two:{p:${P.two.price},img:'kit-two',box:${JSON.stringify(P.two.box)},ship:${JSON.stringify(P.two.shipping + ' · 30-day home trial · 1-year warranty')}},one:{p:${P.one.price},img:'kit-one',box:${JSON.stringify(P.one.box)},ship:${JSON.stringify(P.one.shipping + ' · 30-day home trial · 1-year warranty')}}};
+  var P={two:{p:${P.two.price},img:'kit-two',box:${JSON.stringify(P.two.box)},ship:${JSON.stringify(P.two.shipping + ' · 1-year hardware warranty · Free tablet app')}},one:{p:${P.one.price},img:'kit-one',box:${JSON.stringify(P.one.box)},ship:${JSON.stringify(P.one.shipping + ' · 1-year hardware warranty · Free tablet app')}}};
   var cur='two',q=1;
   var gi=document.getElementById('gimg'),gm=document.getElementById('gmodel');
   var th=[].slice.call(document.querySelectorAll('.thumbs button'));
@@ -1508,7 +1544,7 @@ ${header('checkout', false)}
     <div class="chk-card">
       <h2>Contact &amp; Shipping</h2>
       <div class="chk-note" id="modeBanner">
-        <strong>Batch 2 Direct Order:</strong> Reserve your Inside 75 V2 Kit today with <strong>$0 charged right now</strong>. You will receive your secure Stripe payment link by email the day your kit is packed to ship. 30-day home trial &amp; 1-year warranty included.
+        <strong>Batch 2 Direct Order:</strong> Reserve your Inside 75 V2 Kit today with <strong>$0 charged right now</strong>. You will receive your secure Stripe payment link by email the day your kit is packed to ship. 1-year hardware warranty included.
       </div>
       <form id="chkForm">
         <div class="field-grid">
@@ -1529,7 +1565,7 @@ ${header('checkout', false)}
         </div>
         <button type="submit" class="btn primary" id="chkSubmit" style="width:100%;margin-top:8px">Complete Order</button>
         <p class="msg" id="chkMsg" role="status" hidden></p>
-        <p style="font-size:13px;color:var(--ink-3);margin:14px 0 0;text-align:center">By ordering, you agree to our <a href="${page('/terms')}">Terms of Sale</a> and <a href="${page('/shipping-returns')}">30-Day Return Policy</a>.</p>
+        <p style="font-size:13px;color:var(--ink-3);margin:14px 0 0;text-align:center">By ordering, you agree to our <a href="${page('/terms')}">Terms of Sale</a> and <a href="${page('/shipping-returns')}">Shipping &amp; Warranty Policy</a>.</p>
       </form>
     </div>
 
@@ -1542,8 +1578,8 @@ ${header('checkout', false)}
         <div class="grand"><span>Total</span><strong class="mono" id="oTot">$0</strong></div>
       </div>
       <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--line);display:grid;gap:10px;font-size:14px;color:var(--ink-2)">
-        <div style="display:flex;gap:8px;align-items:center">${I.shield}<span>30-day home trial &amp; hassle-free returns</span></div>
-        <div style="display:flex;gap:8px;align-items:center">${I.bolt}<span>1-year limited hardware warranty</span></div>
+        <div style="display:flex;gap:8px;align-items:center">${I.shield}<span>1-year limited hardware warranty</span></div>
+        <div style="display:flex;gap:8px;align-items:center">${I.bolt}<span>Free wireless firmware updates</span></div>
         <div style="display:flex;gap:8px;align-items:center">${I.tablet}<span>Free tablet app included</span></div>
       </div>
     </div>
@@ -1721,7 +1757,7 @@ const termsHtml = `
 <h2>2. Indoor Golf Safety</h2>
 <p>Inside 75 is used with your own real golf clubs. You are solely responsible for ensuring adequate ceiling height, swing clearance, and safe surroundings before swinging any club indoors. Keep people, pets, fragile objects, and your tablet safely outside your swing arc. Use a proper golf hitting net if striking real golf balls with a wedge. 75 Golf LLC is not liable for property damage or personal injury resulting from indoor club swings.</p>
 <h2>3. Entertainment &amp; Compatibility</h2>
-<p>Inside 75 measures club motion and simulates ball flight and green roll for at-home golf play and practice. Right-handed steel-shaft putters and wedges are supported; compatible tablets are ${TABLETS_TECH}.</p>
+<p>Inside 75 measures club motion and simulates ball flight and green roll for at-home golf play and practice. Standard steel-shaft putters and wedges are supported; compatible tablets are ${TABLETS_TECH}.</p>
 <h2>4. Limited Hardware Warranty</h2>
 <p>Every Inside 75 Clip Kit carries a 1-year limited warranty against defects in materials and workmanship under normal home golf use. Contact <a href="mailto:${MAIL}">${MAIL}</a> for replacement or repair support.</p>
 <h2>5. Governing Law</h2>
@@ -1736,15 +1772,13 @@ const shippingHtml = `
   <li><strong>Tracking:</strong> Every order receives tracking by email the moment it ships.</li>
   <li><strong>International Shipping:</strong> Currently shipping within the United States only. Email <a href="mailto:${MAIL}">${MAIL}</a> to request international availability.</li>
 </ul>
-<h2>30-Day Home Trial &amp; Returns</h2>
-<p>Try Inside 75 on your own clubs in your own living room for 30 days. If it is not a fit for your game, email <a href="mailto:${MAIL}">${MAIL}</a> within 30 days of delivery with your order number to start a return.</p>
-<ul>
-  <li>Return the clip(s), screws, and 2 mm hex key in good condition in the original box.</li>
-  <li>Refunds are issued to your original payment method within 5 business days of receiving the return.</li>
-  <li>No restocking fees.</li>
-</ul>
 <h2>1-Year Hardware Warranty</h2>
-<p>If a clip fails due to a hardware or manufacturing defect within one year of delivery, email <a href="mailto:${MAIL}">${MAIL}</a> and we will repair or replace it at no charge.</p>`;
+<p>Every Inside 75 Clip Kit is backed by a 1-year limited warranty against defects in materials and workmanship under normal home golf use.</p>
+<ul>
+  <li>If a clip fails due to a hardware or manufacturing defect within 12 months of delivery, email <a href="mailto:${MAIL}">${MAIL}</a> with your order number and we will repair or replace it at no charge.</li>
+  <li>Because Early Access kits are built and shipped in small batches, opened hardware kits are non-refundable except where covered under warranty.</li>
+  <li>If you need to cancel an unshipped Early Access order or have any issue getting set up, email <a href="mailto:${MAIL}">${MAIL}</a> and we will take care of you directly.</li>
+</ul>`;
 
 const lostBody = `
 ${header('lost', false)}
@@ -1789,10 +1823,7 @@ const siteLd = {
 const returnPolicyLd = {
   '@type': 'MerchantReturnPolicy',
   applicableCountry: 'US',
-  returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
-  merchantReturnDays: 30,
-  returnMethod: 'https://schema.org/ReturnByMail',
-  returnFees: 'https://schema.org/FreeReturn',
+  returnPolicyCategory: 'https://schema.org/MerchantReturnNotPermitted',
 };
 const shipLd = free => ({
   '@type': 'OfferShippingDetails',
@@ -1912,7 +1943,7 @@ const pages = {
   }), homeBody),
   'kit.html': doc(head({
     title: 'Inside 75 Clip Kit (V2) | Early Access From $119',
-    desc: 'Inside 75 V2 Clip Kit: One Clip ($119) or Two Clips ($229, free US shipping). Includes free tablet app, 30-day home trial, and 1-year warranty.',
+    desc: 'Inside 75 V2 Clip Kit: One Clip ($119) or Two Clips ($229, free US shipping). Includes free tablet app and 1-year hardware warranty.',
     p: '/kit',
     lead: 'kit-two.jpg',
     modelViewer: true,
@@ -1932,7 +1963,7 @@ const pages = {
   }), compareBody),
   'checkout.html': doc(head({
     title: 'Checkout | Inside 75 Clip Kit',
-    desc: 'Complete your Inside 75 Clip Kit order. Free US shipping on the Two-Clip Kit, 30-day home trial, and 1-year warranty.',
+    desc: 'Complete your Inside 75 Clip Kit order. Free US shipping on the Two-Clip Kit and 1-year hardware warranty included.',
     p: '/checkout',
     noindex: true,
   }), checkoutBody),
@@ -1949,11 +1980,11 @@ const pages = {
     lds: [crumbs('Terms of Sale', '/terms')],
   }), legalPage('terms', 'Legal', 'Terms of Sale & Service', 'Order terms, indoor swing safety notice, and limited hardware warranty for 75 Golf LLC.', termsHtml)),
   'shipping-returns.html': doc(head({
-    title: 'Shipping, 30-Day Home Trial & Returns | Inside 75',
-    desc: 'Free US shipping on Two-Clip Kits, $9 flat shipping on One-Clip Kits, 30-day home trial with hassle-free returns, and 1-year hardware warranty.',
+    title: 'Shipping & 1-Year Hardware Warranty | Inside 75',
+    desc: 'Free US shipping on Two-Clip Kits, $9 flat shipping on One-Clip Kits, and 1-year limited hardware warranty.',
     p: '/shipping-returns',
-    lds: [crumbs('Shipping & Returns', '/shipping-returns')],
-  }), legalPage('shipping', 'Orders & Warranty', 'Shipping & 30-Day Returns', 'Try Inside 75 at home with your own clubs for 30 days, backed by our 1-year warranty.', shippingHtml)),
+    lds: [crumbs('Shipping & Warranty', '/shipping-returns')],
+  }), legalPage('shipping', 'Orders & Warranty', 'Shipping & 1-Year Warranty', 'US shipping rates and 1-year limited hardware warranty for Inside 75 Clip Kits.', shippingHtml)),
   '404.html': doc(head({
     title: 'Page Not Found | Inside 75',
     desc: 'The page you looked for is not at this address.',
@@ -1978,7 +2009,7 @@ fs.writeFileSync(path.join(OUT, 'robots.txt'), robots);
 
 const llmsTxt = `# Inside 75 (75golf.com)
 
-> Inside 75 is an at-home short-game golf system by 75 Golf LLC (Ohio, USA). A compact wireless sensor clips onto a golfer's own right-handed steel-shaft putter or wedge, measures club motion at 1,920 Hz, and plays every putt, chip, and pitch (up to 75 yards) live on an iPad or Android tablet across real greens mapped from USGS 3DEP LiDAR elevation data.
+> Inside 75 is an at-home short-game golf system by 75 Golf LLC (USA). A compact wireless sensor clips onto a golfer's own steel-shaft putter or wedge, measures club motion at 1,920 readings per second, and plays every putt, chip, and pitch (up to 75 yards) live on an iPad or Android tablet across real greens mapped from USGS 3DEP LiDAR elevation data.
 
 ## Key Facts
 - Company: 75 Golf LLC (Ohio, USA), contact hello@75golf.com
@@ -1989,15 +2020,15 @@ const llmsTxt = `# Inside 75 (75golf.com)
   - One-Clip Starter Kit: $119 USD ($9 flat US shipping) - plays Putting, Closest to the Pin, and Practice; swaps between clubs in ~20 seconds
 - App Pricing: Free iPad & Android tablet app included with every kit (1 full 18-hole course + all 4 game modes: Short Game, Putting, Closest to the Pin, Practice; 1 to 4 players; Soft/Standard/Tour green speeds). Optional Inside 75 Plus subscription ($49.99/yr) unlocks all courses and swing history.
 - Ball Requirement: Reads your club, not the ball. Works with real golf balls on carpet or into a net, or with dry swings (no ball at all).
-- Requirements: Right-handed steel-shaft putter or wedge, iPad with A12 chip or newer (iPadOS 16.3+) or recent 64-bit Android tablet (Vulkan 1.1), main 2.4 GHz home Wi-Fi, standard USB-C cable (not included). Phones and left-handed clubs are not supported yet.
-- Guarantee: 30-day home trial and returns, 1-year limited hardware warranty.
+- Requirements: Standard steel-shaft putter or wedge (right- or left-handed), iPad with A12 chip or newer (iPadOS 16.3+) or recent 64-bit Android tablet (Vulkan 1.1), main 2.4 GHz home Wi-Fi, standard USB-C cable (not included). Phones are not supported yet.
+- Warranty: 1-year limited hardware warranty covering defects in materials and workmanship.
 
 ## Primary Pages
 - Home: ${SITE}/
 - Shop Clip Kits: ${SITE}/kit
 - How It Works & Setup: ${SITE}/how-it-works
 - Inside 75 vs Launch Monitors, Swing Sticks & Putting Mats: ${SITE}/compare
-- Shipping & 30-Day Returns: ${SITE}/shipping-returns
+- Shipping & Warranty: ${SITE}/shipping-returns
 - Privacy Policy: ${SITE}/privacy
 - Terms of Sale: ${SITE}/terms
 `;
