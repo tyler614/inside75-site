@@ -143,7 +143,7 @@ const FACTS = [
   ['What It Reads', 'Clubhead speed, face angle, and swing path through impact'],
   ['Club Compatibility', 'Fits your own right-handed steel-shaft putter or wedge (mounted right above the ferrule)'],
   ['Connectivity', 'Direct 2.4 GHz home Wi-Fi to your tablet (Bluetooth used for 2-minute initial setup only)'],
-  ['Power & Sleep', 'USB-C rechargeable (cable not included). No power button: auto-sleeps when still, wakes when picked up.'],
+  ['Power & Sleep', 'USB-C rechargeable (cable not included). Automatic wake on pickup and auto-sleep when resting.'],
   ['Updates', 'Wireless firmware updates directly from the Inside 75 app'],
   ['Supported Tablets', `${TABLETS_TECH}. Phones are not supported yet.`],
 ];
@@ -161,7 +161,7 @@ const QA = [
   ['Can I play multiplayer with friends or family?', 'Yes. One to four players can share a single tablet and take turns over 3, 9, or 18 holes.'],
   ['Does Inside 75 work for left-handed golfers?', 'Not yet. Inside 75 currently supports right-handed putters and wedges only. Left-handed support is on our roadmap.'],
   ['How long does setup take?', 'First-time setup takes about five minutes total: two minutes to connect the clip to your home Wi-Fi in the app, and two minutes to tighten the clamp with the included hex key and run the quick club fit. After that, just pick up your club and play.'],
-  ['How does the clip charge and turn on?', 'Charge it with any standard USB-C cable (not included in the box). A subtle LED shows charging status. There is no power switch: the clip goes to sleep automatically when resting and wakes the moment you pick up your club.'],
+  ['How does the clip charge and turn on?', 'Charge it with any standard USB-C cable (not included in the box); the chevron LED shows charging status. It wakes automatically the moment you pick up your club and goes to sleep on its own when resting in your bag.'],
   ['What Wi-Fi network does it require?', 'Your clip and tablet talk directly over your home Wi-Fi so shots show up with practically zero lag. Both devices just need to be on the same home Wi-Fi network (avoid guest networks).'],
   ['What is your shipping and return policy?', 'Orders include a 30-day home trial and a 1-year hardware warranty. Two-Clip Kits ship free anywhere in the continental United States; One-Clip Kits ship for a flat $9. If you are not impressed at home, email hello@75golf.com within 30 days of delivery for a straightforward return.'],
 ];
@@ -768,7 +768,7 @@ ${header('home', true)}
     <ul class="feat-list">
       <li><div class="fi">${I.wave}</div><div><b>Pinpoint stroke accuracy</b><span>Captures tiny differences in speed, face angle, and swing path right near the clubhead, from touchy 3-footers to 75-yard pitches.</span></div></li>
       <li><div class="fi">${I.wifi}</div><div><b>Instant, lag-free response</b><span>Streams straight to your tablet over home Wi-Fi so the ball reacts the moment you swing, with wireless updates built in.</span></div></li>
-      <li><div class="fi">${I.bolt}</div><div><b>No power button to remember</b><span>Sleeps automatically when your club rests in the bag and wakes the second you pick it up. Recharges with any USB-C cable.</span></div></li>
+      <li><div class="fi">${I.bolt}</div><div><b>Pick up and play</b><span>Wakes automatically the second you grab your club, rests in the bag between sessions, and recharges with any USB-C cable.</span></div></li>
     </ul>
   </div>
 </div></section>
@@ -870,7 +870,7 @@ ${header('home', true)}
       <div class="step-img">${pic('setup-basement', 'Golfer taking a ball-free putting stroke on finished basement carpet with a grounded blade putter and Inside 75 V2 clip, looking toward an iPad on an ottoman angled toward them')}</div>
       <div class="step-body">
         <h3>Finished basement</h3>
-        <p>No mat and no ball. Take real putting reps on basement carpet with your tablet on an ottoman.</p>
+        <p>Step onto basement carpet with your own putter and tablet on an ottoman, no mat or ball needed.</p>
       </div>
     </article>
     <article class="step-card">
@@ -1236,7 +1236,7 @@ ${header('kit', false)}
       <h3>Connectivity &amp; Power</h3>
       <dl>
         <div><dt>Connectivity</dt><dd>Direct 2.4 GHz home Wi-Fi to your tablet (Bluetooth used for 2-minute initial setup only)</dd></div>
-        <div><dt>Power &amp; Sleep</dt><dd>USB-C rechargeable (cable not included). No power button: auto-sleeps when still, wakes when picked up.</dd></div>
+        <div><dt>Power &amp; Sleep</dt><dd>USB-C rechargeable (cable not included). Automatic wake on pickup and auto-sleep when resting.</dd></div>
         <div><dt>Updates</dt><dd>Wireless firmware updates directly from the Inside 75 app</dd></div>
       </dl>
     </div>
@@ -1341,7 +1341,7 @@ ${header('how', true)}
 <section class="sec white"><div class="in">
   <div class="sec-head">
     <div class="eyebrow">Real Ways Golfers Set It Up</div>
-    <h2>No simulator buildout needed. Use the space you already have.</h2>
+    <h2>Play in the space you already have. Zero simulator buildout.</h2>
     <p class="lead">Take ball-free strokes on any rug or carpet, or pair a small turf pad with a full-height net in your garage or backyard.</p>
   </div>
   <p class="swipe-hint" aria-hidden="true">Swipe setups &#8594;</p>
@@ -1352,7 +1352,7 @@ ${header('how', true)}
     </article>
     <article class="step-card">
       <div class="step-img">${pic('setup-basement', 'Finished basement ball-free putting setup on carpet with a grounded blade putter and iPad on an ottoman')}</div>
-      <div class="step-body"><h3>Finished basement</h3><p>No ball and no mat. Take real putting strokes on basement carpet with your tablet on an ottoman.</p></div>
+      <div class="step-body"><h3>Finished basement</h3><p>Step onto basement carpet with your own putter and tablet on an ottoman, no mat or ball needed.</p></div>
     </article>
     <article class="step-card">
       <div class="step-img">${pic('setup-yard', 'Suburban backyard setup with portable turf mat on grass, tall 7x7 ft net, and iPad tilted right on the grass across from the mat')}</div>
@@ -1360,7 +1360,7 @@ ${header('how', true)}
     </article>
     <article class="step-card">
       <div class="step-img">${pic('lifestyle-office', 'Home office ball-free putting break on a flat rug with an iPad on a walnut desk')}</div>
-      <div class="step-body"><h3>Home office</h3><p>Zero ball and zero mat. Grab five minutes of putting reps right off your rug between calls.</p></div>
+      <div class="step-body"><h3>Home office</h3><p>Grab five minutes of real putting reps right off your office rug between calls, no mat or ball needed.</p></div>
     </article>
   </div>
 </div></section>
@@ -1983,7 +1983,7 @@ const llmsTxt = `# Inside 75 (75golf.com)
 ## Key Facts
 - Company: 75 Golf LLC (Ohio, USA), contact hello@75golf.com
 - Website: ${SITE}
-- Hardware: Inside 75 V2 wireless shaft sensor (1,920 Hz IMU, 2.4 GHz Wi-Fi, Bluetooth for initial setup only, USB-C rechargeable, automatic sleep/wake with no power button, OTA firmware updates)
+- Hardware: Inside 75 V2 wireless shaft sensor (1,920 Hz IMU, 2.4 GHz Wi-Fi, Bluetooth for initial setup only, USB-C rechargeable, automatic wake-on-pickup and auto-sleep, OTA firmware updates)
 - Pricing:
   - Two-Clip Full Short-Game Kit: $229 USD (free US ground shipping) - one clip for putter + one for wedge, zero swapping during full 18-hole Short Game rounds
   - One-Clip Starter Kit: $119 USD ($9 flat US shipping) - plays Putting, Closest to the Pin, and Practice; swaps between clubs in ~20 seconds
